@@ -19,20 +19,20 @@ window.getJapName = function(type) {
     }
 }
 
-var nm2 = ["u", "u", "u", "u", "u", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "ai", "ay", "ei", "eo", "ia", "ie", "oi"];
-var nm3 = ["d", "ddr", "dr", "g", "gh", "k", "lb", "ldr", "lr", "lzr", "m", "mb", "mm", "mr", "n", "nd", "ndr", "nn", "r", "rd", "rg", "rr", "rs", "rv", "s", "t", "th", "v", "vr", "z", "zz"];
-var nm4 = ["cr", "d", "n", "nt", "r", "rr", "sd"];
-var nm5 = ["", "", "d", "g", "m", "n", "nth", "r", "rth", "s", "ss", "t"];
-var nm6 = ["", "", "", "", "", "", "b", "c", "ch", "d", "f", "fr", "g", "h", "l", "m", "n", "p", "q", "r", "s", "sh", "t", "v", "z"];
-var nm7 = ["u", "u", "u", "u", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "ae", "ai", "ay", "ei", "eo", "ie", "io", "oa"];
-var nm8 = ["d", "dh", "g", "gh", "k", "ldr", "ll", "m", "mm", "mr", "n", "nd", "ndr", "nn", "p", "ph", "r", "rg", "rl", "rm", "rr", "rs", "rv", "s", "ss", "t", "th", "v", "vn", "z", "zz"];
-var nm9 = ["d", "l", "n", "nt", "ph", "r", "rr", "ss"];
-var nm10 = ["", "", "", "", "", "l", "lth", "n", "nth", "r", "rth", "s", "ss", "t", "th"];
-var nm11 = ["", "", "", "", "b", "c", "ch", "d", "fr", "g", "m", "n", "p", "q", "r", "s", "t", "v", "x", "z"];
-var nm12 = ["u", "u", "u", "u", "a", "e", "i", "o", "y", "ae", "ai", "ay", "ei", "eo", "ia", "ie", "io", "oa", "oi"];
-var nm13 = ["d", "dh", "dr", "g", "gh", "k", "l", "ldr", "ll", "lr", "m", "mm", "mr", "n", "nd", "ndr", "nn", "p", "ph", "r", "rl", "rm", "rr", "rs", "rv", "s", "ss", "t", "th", "v", "vn", "vr", "z", "zz"];
-var nm14 = ["d", "l", "n", "nt", "ph", "r", "rr", "ss"];
-var nm15 = ["", "", "", "d", "g", "l", "lth", "n", "nth", "r", "rth", "s", "ss", "t", "th"];
+ nm2 = ["u", "u", "u", "u", "u", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "ai", "ay", "ei", "eo", "ia", "ie", "oi"];
+ nm3 = ["d", "ddr", "dr", "g", "gh", "k", "lb", "ldr", "lr", "lzr", "m", "mb", "mm", "mr", "n", "nd", "ndr", "nn", "r", "rd", "rg", "rr", "rs", "rv", "s", "t", "th", "v", "vr", "z", "zz"];
+ nm4 = ["cr", "d", "n", "nt", "r", "rr", "sd"];
+ nm5 = ["", "", "d", "g", "m", "n", "nth", "r", "rth", "s", "ss", "t"];
+ nm6 = ["", "", "", "", "", "", "b", "c", "ch", "d", "f", "fr", "g", "h", "l", "m", "n", "p", "q", "r", "s", "sh", "t", "v", "z"];
+ nm7 = ["u", "u", "u", "u", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "ae", "ai", "ay", "ei", "eo", "ie", "io", "oa"];
+ nm8 = ["d", "dh", "g", "gh", "k", "ldr", "ll", "m", "mm", "mr", "n", "nd", "ndr", "nn", "p", "ph", "r", "rg", "rl", "rm", "rr", "rs", "rv", "s", "ss", "t", "th", "v", "vn", "z", "zz"];
+ nm9 = ["d", "l", "n", "nt", "ph", "r", "rr", "ss"];
+ nm10 = ["", "", "", "", "", "l", "lth", "n", "nth", "r", "rth", "s", "ss", "t", "th"];
+ nm11 = ["", "", "", "", "b", "c", "ch", "d", "fr", "g", "m", "n", "p", "q", "r", "s", "t", "v", "x", "z"];
+ nm12 = ["u", "u", "u", "u", "a", "e", "i", "o", "y", "ae", "ai", "ay", "ei", "eo", "ia", "ie", "io", "oa", "oi"];
+ nm13 = ["d", "dh", "dr", "g", "gh", "k", "l", "ldr", "ll", "lr", "m", "mm", "mr", "n", "nd", "ndr", "nn", "p", "ph", "r", "rl", "rm", "rr", "rs", "rv", "s", "ss", "t", "th", "v", "vn", "vr", "z", "zz"];
+ nm14 = ["d", "l", "n", "nt", "ph", "r", "rr", "ss"];
+ nm15 = ["", "", "", "d", "g", "l", "lth", "n", "nth", "r", "rth", "s", "ss", "t", "th"];
 
 
 window.getDragonName=function(type) {
