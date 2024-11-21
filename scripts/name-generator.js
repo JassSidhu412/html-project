@@ -40,7 +40,6 @@ window.getDragonName=function(type) {
     var list = [];
     for (i = 0; i < 10; i++) {
         if (tp === 1) {
-            rnd16 = Math.random() * nm17.length | 0;
             rnd = Math.random() * nm6.length | 0;
             rnd2 = Math.random() * nm7.length | 0;
             rnd3 = Math.random() * nm8.length | 0;
@@ -63,7 +62,6 @@ window.getDragonName=function(type) {
                 names = nm6[rnd] + nm7[rnd2] + nm8[rnd3] + nm7[rnd4] + nm9[rnd6] + nm7[rnd7] + nm10[rnd5];
             }
         } else if (tp === 2) {
-            rnd16 = Math.random() * nm16.length | 0;
             rnd = Math.random() * nm11.length | 0;
             rnd2 = Math.random() * nm12.length | 0;
             rnd3 = Math.random() * nm13.length | 0;
@@ -86,7 +84,6 @@ window.getDragonName=function(type) {
                 names = nm11[rnd] + nm12[rnd2] + nm13[rnd3] + nm12[rnd4] + nm14[rnd6] + nm12[rnd7] + nm15[rnd5];
             }
         } else {
-            rnd16 = Math.random() * nm16.length | 0;
             rnd = Math.random() * nm1.length | 0;
             rnd2 = Math.random() * nm2.length | 0;
             rnd3 = Math.random() * nm3.length | 0;
