@@ -99,7 +99,7 @@ window.getDragonName=function(type) {
                 rnd5 = Math.random() * nm5.length | 0;
             }
             if (i < 7) {
-                names = nm1[rnd] + nm2[rnd2] + nm3[rnd3] + nm2[rnd4] + nm5[rnd5] + ", " + nm16[rnd16];
+                names = nm1[rnd] + nm2[rnd2] + nm3[rnd3] + nm2[rnd4] + nm5[rnd5];
             } else {
                 rnd6 = Math.random() * nm4.length | 0;
                 rnd7 = Math.random() * nm2.length | 0;
