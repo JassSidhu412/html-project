@@ -18,7 +18,7 @@ window.getJapName = function(type) {
         return japS[rnd];
     }
 }
-nm1=["","","","","b","br","c","ch","d","fr","g","gr","j","k","m","n","p","q","r","t","x","z"];
+ nm1=["","","","","b","br","c","ch","d","fr","g","gr","j","k","m","n","p","q","r","t","x","z"];
  nm2 = ["u", "u", "u", "u", "u", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "ai", "ay", "ei", "eo", "ia", "ie", "oi"];
  nm3 = ["d", "ddr", "dr", "g", "gh", "k", "lb", "ldr", "lr", "lzr", "m", "mb", "mm", "mr", "n", "nd", "ndr", "nn", "r", "rd", "rg", "rr", "rs", "rv", "s", "t", "th", "v", "vr", "z", "zz"];
  nm4 = ["cr", "d", "n", "nt", "r", "rr", "sd"];
