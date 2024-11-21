@@ -35,7 +35,7 @@ var nm14 = ["d", "l", "n", "nt", "ph", "r", "rr", "ss"];
 var nm15 = ["", "", "", "d", "g", "l", "lth", "n", "nth", "r", "rth", "s", "ss", "t", "th"];
 
 
-function getDragonName(type) {
+window.getDragonName=function(type) {
     var tp = type;
     var list = [];
     for (i = 0; i < 10; i++) {
