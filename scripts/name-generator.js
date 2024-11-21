@@ -18,3 +18,98 @@ function getJapName(type) {
         return japS[rnd];
     }
 }
+
+var nm2 = ["u", "u", "u", "u", "u", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "ai", "ay", "ei", "eo", "ia", "ie", "oi"];
+var nm3 = ["d", "ddr", "dr", "g", "gh", "k", "lb", "ldr", "lr", "lzr", "m", "mb", "mm", "mr", "n", "nd", "ndr", "nn", "r", "rd", "rg", "rr", "rs", "rv", "s", "t", "th", "v", "vr", "z", "zz"];
+var nm4 = ["cr", "d", "n", "nt", "r", "rr", "sd"];
+var nm5 = ["", "", "d", "g", "m", "n", "nth", "r", "rth", "s", "ss", "t"];
+var nm6 = ["", "", "", "", "", "", "b", "c", "ch", "d", "f", "fr", "g", "h", "l", "m", "n", "p", "q", "r", "s", "sh", "t", "v", "z"];
+var nm7 = ["u", "u", "u", "u", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "a", "e", "i", "o", "y", "ae", "ai", "ay", "ei", "eo", "ie", "io", "oa"];
+var nm8 = ["d", "dh", "g", "gh", "k", "ldr", "ll", "m", "mm", "mr", "n", "nd", "ndr", "nn", "p", "ph", "r", "rg", "rl", "rm", "rr", "rs", "rv", "s", "ss", "t", "th", "v", "vn", "z", "zz"];
+var nm9 = ["d", "l", "n", "nt", "ph", "r", "rr", "ss"];
+var nm10 = ["", "", "", "", "", "l", "lth", "n", "nth", "r", "rth", "s", "ss", "t", "th"];
+var nm11 = ["", "", "", "", "b", "c", "ch", "d", "fr", "g", "m", "n", "p", "q", "r", "s", "t", "v", "x", "z"];
+var nm12 = ["u", "u", "u", "u", "a", "e", "i", "o", "y", "ae", "ai", "ay", "ei", "eo", "ia", "ie", "io", "oa", "oi"];
+var nm13 = ["d", "dh", "dr", "g", "gh", "k", "l", "ldr", "ll", "lr", "m", "mm", "mr", "n", "nd", "ndr", "nn", "p", "ph", "r", "rl", "rm", "rr", "rs", "rv", "s", "ss", "t", "th", "v", "vn", "vr", "z", "zz"];
+var nm14 = ["d", "l", "n", "nt", "ph", "r", "rr", "ss"];
+var nm15 = ["", "", "", "d", "g", "l", "lth", "n", "nth", "r", "rth", "s", "ss", "t", "th"];
+
+
+function getDragonName(type) {
+    var tp = type;
+    var list = [];
+    for (i = 0; i < 10; i++) {
+        if (tp === 1) {
+            rnd16 = Math.random() * nm17.length | 0;
+            rnd = Math.random() * nm6.length | 0;
+            rnd2 = Math.random() * nm7.length | 0;
+            rnd3 = Math.random() * nm8.length | 0;
+            rnd4 = Math.random() * nm7.length | 0;
+            rnd5 = Math.random() * nm10.length | 0;
+            while (nm6[rnd] === nm8[rnd3]) {
+                rnd3 = Math.random() * nm8.length | 0;
+            }
+            while (nm10[rnd5] === nm8[rnd3]) {
+                rnd5 = Math.random() * nm10.length | 0;
+            }
+            if (i < 7) {
+                names = nm6[rnd] + nm7[rnd2] + nm8[rnd3] + nm7[rnd4] + nm10[rnd5];
+            } else {
+                rnd6 = Math.random() * nm9.length | 0;
+                rnd7 = Math.random() * nm7.length | 0;
+                while (nm9[rnd6] === nm8[rnd3]) {
+                    rnd6 = Math.random() * nm9.length | 0;
+                }
+                names = nm6[rnd] + nm7[rnd2] + nm8[rnd3] + nm7[rnd4] + nm9[rnd6] + nm7[rnd7] + nm10[rnd5];
+            }
+        } else if (tp === 2) {
+            rnd16 = Math.random() * nm16.length | 0;
+            rnd = Math.random() * nm11.length | 0;
+            rnd2 = Math.random() * nm12.length | 0;
+            rnd3 = Math.random() * nm13.length | 0;
+            rnd4 = Math.random() * nm12.length | 0;
+            rnd5 = Math.random() * nm15.length | 0;
+            while (nm11[rnd] === nm13[rnd3]) {
+                rnd3 = Math.random() * nm13.length | 0;
+            }
+            while (nm15[rnd5] === nm13[rnd3]) {
+                rnd5 = Math.random() * nm15.length | 0;
+            }
+            if (i < 7) {
+                names = nm11[rnd] + nm12[rnd2] + nm13[rnd3] + nm12[rnd4] + nm15[rnd5];
+            } else {
+                rnd6 = Math.random() * nm14.length | 0;
+                rnd7 = Math.random() * nm12.length | 0;
+                while (nm14[rnd6] === nm13[rnd3]) {
+                    rnd6 = Math.random() * nm14.length | 0;
+                }
+                names = nm11[rnd] + nm12[rnd2] + nm13[rnd3] + nm12[rnd4] + nm14[rnd6] + nm12[rnd7] + nm15[rnd5];
+            }
+        } else {
+            rnd16 = Math.random() * nm16.length | 0;
+            rnd = Math.random() * nm1.length | 0;
+            rnd2 = Math.random() * nm2.length | 0;
+            rnd3 = Math.random() * nm3.length | 0;
+            rnd4 = Math.random() * nm2.length | 0;
+            rnd5 = Math.random() * nm5.length | 0;
+            while (nm1[rnd] === nm3[rnd3]) {
+                rnd3 = Math.random() * nm3.length | 0;
+            }
+            while (nm5[rnd5] === nm3[rnd3]) {
+                rnd5 = Math.random() * nm5.length | 0;
+            }
+            if (i < 7) {
+                names = nm1[rnd] + nm2[rnd2] + nm3[rnd3] + nm2[rnd4] + nm5[rnd5] + ", " + nm16[rnd16];
+            } else {
+                rnd6 = Math.random() * nm4.length | 0;
+                rnd7 = Math.random() * nm2.length | 0;
+                while (nm4[rnd6] === nm3[rnd3]) {
+                    rnd6 = Math.random() * nm4.length | 0;
+                }
+                names = nm1[rnd] + nm2[rnd2] + nm3[rnd3] + nm2[rnd4] + nm4[rnd6] + nm2[rnd7] + nm5[rnd5];
+            }
+        }
+        list.push(names);
+    }
+    return list;
+}
