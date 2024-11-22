@@ -1,4 +1,4 @@
-let faceCount=0
+let faceCount=0;
 function getFace(w, h, style, hairColor, eyesColor) {
     function parseColor(color) {
         const r = parseInt(color.slice(1, 3), 16) / 255;
