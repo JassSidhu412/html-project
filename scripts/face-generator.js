@@ -1,5 +1,39 @@
 let faceCount=0;
-function getFace(w, h, style, hairColor, eyesColor) {
+let hairColors = [
+    "#000000", // Black
+    "#4B3621", // Brown
+    "#FFD700", // Blonde
+    "#FF4500", // Red
+    "#0000FF", // Blue
+    "#008000", // Green
+    "#FFC0CB", // Pink
+    "#800080", // Purple
+    "#FFFFFF", // White
+    "#808080", // Gray
+    "#C0C0C0", // Silver
+    "#FFA500", // Orange
+    "#008080", // Teal
+    "#FF99CC"  // Multicolor (example: pink-dominant)
+];
+
+let eyesColors = [
+    "#000000", // Black
+    "#4B3621", // Brown
+    "#0000FF", // Blue
+    "#008000", // Green
+    "#FF0000", // Red
+    "#FFD700", // Gold
+    "#C0C0C0", // Silver
+    "#800080", // Purple
+    "#FFC0CB", // Pink
+    "#808080", // Gray
+    "#FFFF00", // Yellow
+    "#FFA500", // Orange
+    "#008080", // Teal
+    "#FF99CC"  // Multicolor (example: pink-dominant)
+];
+
+function getFace(w, h, hair,backhair, hairColor, eyesColor) {
     function parseColor(color) {
         const r = parseInt(color.slice(1, 3), 16) / 255;
         const g = parseInt(color.slice(3, 5), 16) / 255;
@@ -12,8 +46,8 @@ function getFace(w, h, style, hairColor, eyesColor) {
     }
 
     // Parse hair and eyes colors
-    const hair = parseColor(hairColor);
-    const eyes = parseColor(eyesColor);
+    const hair = parseColor(hairColors[hairColor]);
+    const eyes = parseColor(eyesColors[eyesColor]);
 
     // Generate unique IDs for filters
     faceCount++;
@@ -41,7 +75,7 @@ function getFace(w, h, style, hairColor, eyesColor) {
                    href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/ChLayers0002.png"
                    filter="url(#${eyesFilterId})"/>
             <image id="layer1" x="0" y="0" width="512" height="512" 
-                   href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/ChLayers0001${style}.png"
+                   href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/ChLayers0001.png"
                    filter="url(#${hairFilterId})"/>
         </svg>`;
 }
