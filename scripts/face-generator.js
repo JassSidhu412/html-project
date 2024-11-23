@@ -33,7 +33,7 @@ let eyesColors = [
     "#FF99CC"  // Multicolor (example: pink-dominant)
 ];
 
-function getFace(w, h, hair,backhair, hairColor, eyesColor) {
+function getFace(w, h,gender, hair,backhair, hairColor, eyesColor) {
     function parseColor(color) {
         const r = parseInt(color.slice(1, 3), 16) / 255;
         const g = parseInt(color.slice(3, 5), 16) / 255;
