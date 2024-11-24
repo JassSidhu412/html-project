@@ -8,7 +8,7 @@ function initInputBox() {
     overlay.id = "input-box-overlay";
     overlay.className = "input-box-overlay";
     inputBox.id = "inputBox";
-    inputBox.innerHtml = `<h2 id="inputBoxTitle"></h2>
+    inputBox.innerHTML = `<h2 id="inputBoxTitle"></h2>
         <p id="inputBoxDesc"></p>
         <div id="inputBoxControls"></div>`;
     document.body.appendChild(overlay);
