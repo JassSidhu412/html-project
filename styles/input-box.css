@@ -1,0 +1,230 @@
+#inputBox {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 80%;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 2001;
+}
+
+#inputBox h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #4a90e2;
+}
+
+#inputBox p {
+    margin-bottom: 20px;
+}
+
+#inputBox label {
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-weight: 600;
+    color: #4a90e2;
+}
+
+#inputBox input,
+#inputBox select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.inputBoxInput {
+    width: 100%-16px;
+}
+
+.inputBoxSlider {
+    padding: 0px;
+}
+
+#inputBox button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4169e1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#inputBox button:hover {
+    background-color: #3a5cd0;
+}
+
+.inputBoxProgressContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.inputBoxProgressContainer label {
+    flex: 0 0 150px;
+    margin-bottom: 0;
+}
+
+.inputBoxProgressBar {
+    flex: 1;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.inputBoxProgressBarFill {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.inputBoxTableContainer {
+    margin-bottom: 10px;
+}
+
+.inputBoxTableContainer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.inputBoxTableContainer tr:nth-child(even) {
+    background-color: #f0f8ff;
+    /* f2f2f2;*/
+}
+
+.inputBoxTableContainer td {
+    padding: 8px;
+}
+
+.inputBoxTableContainer td:first-child {
+    font-weight: bold;
+}
+
+#inputBox .listContainer,
+#inputBox .switchContainer {
+    margin-bottom: 20px;
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#inputBox .listContainer button,
+#inputBox .switchContainer button {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    color: buttontext;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#inputBox .listContainer button.selected,
+#inputBox .switchContainer button.selected {
+    background-color: #4a90e2;
+    color: white;
+}
+
+#inputBox .groupContainer {
+    margin-bottom: 10px;
+    background-color: #f0f8ff;
+    color: #4a90e2;
+    cursor: pointer;
+}
+
+#inputBox .groupHeader {
+    background-color: #f0f0f0;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#inputBox .groupHeader : hover {
+    background-color: #e6f3ff;
+}
+
+#inputBox .groupContent {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#inputBox .collapsible {
+    background-color: #f0f8ff;
+    color: #4a90e2;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+#inputBox .collapsible:hover {
+    background-color: #e6f3ff;
+}
+
+#inputBox .collapsible:after {
+    content: '\002B';
+    color: #4a90e2;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+#inputBox .active:after {
+    content: "\2212";
+}
+
+#inputBox .content {
+    padding: 0px 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f9f9f9;
+    border-radius: 0 0 5px 5px;
+}
+
+.input-box-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+}
+
+/* Royal Blue Scrollbar */
+#inputBox::-webkit-scrollbar {
+    width: 12px;
+}
+
+#inputBox::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+#inputBox::-webkit-scrollbar-thumb {
+    background: #4169E1;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+#inputBox::-webkit-scrollbar-thumb:hover {
+    background: #3151ac;
+}
