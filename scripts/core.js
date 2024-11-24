@@ -34,7 +34,7 @@ async function loadAllAssets() {
     scriptTag.textContent = st;
 scriptTag.id="hello";
 
-    document.body.appendChild(scriptTag);
+    //document.body.appendChild(scriptTag);
     
     for (let stylePath of styleAssets) {
         await loadStyle(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${scriptPath}.css`);
