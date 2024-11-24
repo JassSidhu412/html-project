@@ -228,3 +228,13 @@
 #inputBox::-webkit-scrollbar-thumb:hover {
     background: #3151ac;
 }
+#inputBox .data-item {
+    display: inline-block;
+    background-color: #4169e1;
+    color: white;
+    padding: 5px 10px;
+    margin: 3px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
