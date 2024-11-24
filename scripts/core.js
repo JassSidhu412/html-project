@@ -12,7 +12,7 @@ function test() {
     alert("It works");
 }
 
-async function loadStyle(url) {
+async function loadStyles(url) {
     const response = await fetch(url);
     const styleContent = await response.text();
     const style = document.createElement('style');
