@@ -25,11 +25,12 @@ async function loadAllAssets() {
     const fullPath = "https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/dummy.js";
     const script = document.createElement('script');
     for (const scriptPath of ["face-generator", "name-generator", "input-box"]) {
-        script.textContent += await getScript(fullPath.replace('dummy', `${scriptPath}`));
+        
+        script.textContent += await getScript(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/${scriptPath}.js`));
     }
 
     document.body.appendChild(script);
     for (const stylePath of ["input-box"]) {
-        await loadStyle(fullPath.replace(`scripts/dummy.js', 'styles/${scriptPath}.css`));
+        await loadStyle('https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${scriptPath}.css`));
     }
 }
