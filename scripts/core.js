@@ -24,6 +24,6 @@ async function loadAllAssets() {
     document.body.appendChild(scriptTag);
 
     for (let stylePath of styleAssets) {
-        await loadStyle(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${scriptPath}.css`);
+        await loadStyle(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${stylePath}.css`);
     }
 }
