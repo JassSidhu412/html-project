@@ -25,4 +25,4 @@ async function loadAllAssets() {
         await loadStyle(fullPath.replace('scripts/dummy.js', 'styles/' + scriptPath + '.css'));
     }
 }
-await loadAllAssets();
+loadAllAssets();
