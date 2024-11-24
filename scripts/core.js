@@ -1,3 +1,6 @@
+let scriptAssets = ["face-generator", "name-generator", "input-box"];
+let styleAssets = ["input-box"];
+
 function getScripts() {
     return [
         'https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/face-generator.js',
@@ -22,18 +25,18 @@ async function getScript(url) {
     return scriptContent;
 }
 async function loadAllAssets() {
-    const script = document.createElement('script');
+    const scriptTag = document.createElement('script');
     let st ='';
-    let scripts=["face-generator", "name-generator", "input-box"];
-    for (let scriptPath of scripts) {
+    for (let scriptPath of scriptAssets) {
         
         st += await getScript(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/${scriptPath}.js`);
     }
-    script.textContent += st;
+    scriptTag.textContent = st;
+scriptTag.id="hello";
 
-    document.body.appendChild(script);
-    let styles =["input-box"];
-    for (let stylePath of styles) {
+    document.body.appendChild(scriptTag);
+    
+    for (let stylePath of styleAssets) {
         await loadStyle(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${scriptPath}.css`);
     }
 }
