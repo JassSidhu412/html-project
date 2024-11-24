@@ -1,0 +1,10 @@
+{
+  "scripts": [
+    "https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/face-generator.js",
+    "https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/name-generator.js",
+    "https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/input-box.js"
+  ],
+  "styles": [
+    "https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/input-box.css"
+  ]
+}
