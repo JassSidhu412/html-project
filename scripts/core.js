@@ -26,7 +26,7 @@ async function loadAllAssets() {
     const script = document.createElement('script');
     for (const scriptPath of ["face-generator", "name-generator", "input-box"]) {
         
-        script.textContent += await getScript(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/${scriptPath}.js`));
+        script.textContent += await getScript(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/${scriptPath}.js`);
     }
 
     document.body.appendChild(script);
