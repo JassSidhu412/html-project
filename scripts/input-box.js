@@ -8,17 +8,11 @@ function initInputBox() {
     overlay.id = "input-box-overlay";
     overlay.className = "input-box-overlay";
     inputBox.id = "inputBox";
-    inputBox.innerHTML = `<h2 id="inputBoxTitle"></h2>
+    inputBox.innerHtml = `<h2 id="inputBoxTitle"></h2>
         <p id="inputBoxDesc"></p>
         <div id="inputBoxControls"></div>`
     document.body.appendChild(overlay);
     document.body.appendChild(inputBox);
-    /*`<div id="input-box-overlay" class="input-box-overlay"></div>
-     <div id="inputBox">
-         <h2 id="inputBoxTitle"></h2>
-         <p id="inputBoxDesc"></p>
-         <div id="inputBoxControls"></div>
-     </div>`;*/
 }
 initInputBox();
 
@@ -145,15 +139,6 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     const el = document.getElementById(control.id);
                     el.children[num].classList.add('selected');
                     break;
-                case 'group':
-                    const groupContent = control.controls.map((subControl) => `<div>${renderControl(subControl)}</div>`).join('');
-                    inputBoxControls.innerHTML += `
-                                <button style="margin-bottom:0px" class="collapsible" onclick="toggleGroup(this);">${control.label}</button>
-                                <div style="margin-bottom:10px" class="content">
-                                    ${groupContent}
-                                </div>
-                            `;
-                    break;
             }
         });
 
@@ -204,30 +189,6 @@ function ShowInputBox(title, desc, allowClose, controls) {
     /* window.setTimeout(function() {
           inputBox.scrollTop=0;
       }, 1000); */
-}
-
-function renderControl(control) {
-    switch (control.type) {
-        case 'text':
-        case 'number':
-            return `
-                        <label for="${control.id}">${control.label}</label>
-                        <input type="${control.type}" id="${control.id}" name="${control.id}" 
-                            value="${control.default || ''}" 
-                            ${control.min !== undefined ? `min="${control.min}"` : ''}
-                            ${control.max !== undefined ? `max="${control.max}"` : ''}
-                            onchange="validateNumberInput(this)">
-                    `;
-        case 'select':
-            const options = control.options.map((option) => `<option value="${option}">${option}</option>`).join('');
-            return `
-                        <label for="${control.id}">${control.label}</label>
-                        <select id="${control.id}" name="${control.id}">
-                            ${options}
-                        </select>
-                    `;
-            // Add cases for other control types as needed
-    }
 }
 
 function updateProgressBar(id, value, max, reverse = false) {
@@ -287,19 +248,9 @@ function toggleSwitchSelection(switchId, option) {
     inputBoxResult[switchId] = option;
 }
 
-function toggleGroup(element) {
-    {
-        // console.log("f");
-        element.classList.toggle('active');
-        const content = element.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = `${content.scrollHeight}px`;
-        }
-    }
+function getNpcText(str) {
+    return str;
 }
-
 async function addCharacter() {
     const result = await ShowInputBox(
         'Add Character',
@@ -468,79 +419,5 @@ async function battle() {
         ],
     );
     console.log('Battle Results:', result);
-    addLog(JSON.stringify(result));
-}
-async function inventory() {
-    const result = await ShowInputBox(
-        'Inventory',
-        'Manage your inventory',
-        true,
-        [{
-                type: 'group',
-                id: 'weapons',
-                label: 'Weapons',
-                controls: [{
-                        type: 'number',
-                        id: 'swords',
-                        label: 'Swords',
-                        min: 0,
-                        max: 100,
-                        default: 10,
-                    },
-                    {
-                        type: 'number',
-                        id: 'bows',
-                        label: 'Bows',
-                        min: 0,
-                        max: 50,
-                        default: 5,
-                    },
-                ],
-            },
-            {
-                type: 'group',
-                id: 'armor',
-                label: 'Armor',
-                controls: [{
-                        type: 'number',
-                        id: 'helmets',
-                        label: 'Helmets',
-                        min: 0,
-                        max: 50,
-                        default: 10,
-                    },
-                    {
-                        type: 'number',
-                        id: 'shields',
-                        label: 'Shields',
-                        min: 0,
-                        max: 50,
-                        default: 10,
-                    },
-
-                ],
-            },
-            {
-                type: 'list',
-                id: 'skills',
-                label: 'Select Skills',
-                options: ['Swordsmanship', 'Archery', 'Tactics', 'Leadership', 'Stealth'],
-                maxSelect: 3,
-            },
-            {
-                type: 'switch',
-                id: 'class',
-                label: 'Choose Class',
-                default: 1,
-                options: ['Warrior', 'Archer', 'Mage', 'Rogue'],
-            },
-            {
-                type: 'button',
-                id: 'save',
-                label: 'Save Inventory',
-            },
-        ],
-    );
-    console.log('Inventory Result:', result);
     addLog(JSON.stringify(result));
 }
