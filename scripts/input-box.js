@@ -152,7 +152,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     s += `<span class="data-item">${item}</span>`;
                 }
                 return `${s}</td>`;
-            } else if (typeof data === 'object' && data !== null) return `<td><div style="background-color:#f1f1f1"><div style="background-color:#2196F3;height:24px;width:${data.value/data.max*100}%"></div></div></td>`;//`<td><progress value="${data.value}" max="${data.max}"/></td>`;
+            } else if (typeof data === 'object' && data !== null) return `<td><div class="progress"><div class="prgressBar" style="width:${data.value/data.max*100}%"></div></div></td>`;//`<td><progress value="${data.value}" max="${data.max}"/></td>`;
             return `<td>${data}</td>`;
         }
 
