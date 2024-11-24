@@ -4,7 +4,7 @@ async function fetchFile(url) {
 }
 async function loadAllAssets() {
     let scriptAssets = ["face-generator", "name-generator", "input-box"];
-    let styleAssets = ["input-box"];
+    let styleAssets = ["style","input-box"];
 
     for (let scriptPath of scriptAssets) {
         const script = document.createElement('script');
