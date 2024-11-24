@@ -19,10 +19,10 @@ async function loadAllAssets() {
     const fullPath = "https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/dummy.js";
 
     for (const scriptPath of ["face-generator", "name-generator","input-box"]) {
-        await loadScript(fullPath.replace('dummy', scriptPath));
+        await loadScript(fullPath.replace('dummy', `${scriptPath}`));
     }
     for (const stylePath of ["input-box"]) {
-        await loadStyle(fullPath.replace('scripts/dummy.js', 'styles/' + scriptPath + '.css'));
+        await loadStyle(fullPath.replace(`scripts/dummy.js', 'styles/${scriptPath}.css`));
     }
 }
 
