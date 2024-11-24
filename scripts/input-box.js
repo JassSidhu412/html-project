@@ -152,7 +152,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     s += `<span class="data-item">${item}</span>`;
                 }
                 return `${s}</td>`;
-            }
+            } else if (typeof data === 'object' && data !== null) return `<td><progress value="${data.value}" max="${data.max}"/></td>`;
             return `<td>${data}</td>`;
         }
 
@@ -184,11 +184,6 @@ function ShowInputBox(title, desc, allowClose, controls) {
             closeInputBox();
         };
     });
-
-    // inputBox.stop().animate({ scrollTop: 0 }, 500);
-    /* window.setTimeout(function() {
-          inputBox.scrollTop=0;
-      }, 1000); */
 }
 
 function updateProgressBar(id, value, max, reverse = false) {
