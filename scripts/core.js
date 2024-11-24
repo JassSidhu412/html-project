@@ -25,7 +25,7 @@ async function getScript(url) {
     return scriptContent;
 }
 async function loadAllAssets() {
-    const scriptTag = document.createElement('script');
+    const scriptTag = document.createElement('div');
     let st ='';
     for (let scriptPath of scriptAssets) {
         
@@ -34,7 +34,7 @@ async function loadAllAssets() {
     scriptTag.textContent = st;
 scriptTag.id="hello";
 
-    //document.body.appendChild(scriptTag);
+    document.body.appendChild(scriptTag);
     
     for (let stylePath of styleAssets) {
         await loadStyle(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${scriptPath}.css`);
