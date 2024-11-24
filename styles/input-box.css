@@ -238,3 +238,13 @@
     font-size: 0.9em;
     transition: all 0.3s ease;
 }
+#inputBox .tableProgress {
+    background-color: #d9d9d9;
+    border-radius: 5px;
+}
+
+#inputBox .tableProgressBar {
+    background-color: #2196F3;
+    height: 20px;
+    border-radius: 5px;
+}
