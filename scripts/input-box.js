@@ -345,6 +345,7 @@ async function battle() {
                     ['Katana', '1000'],
                     ['Bows', '500'],
                     ['Catapults', '50'],
+                    ['Losts', {value:50,max:70}],
                     ['Types', ['Katana', 'Sphear', 'Skills', 'Shields', 'Bows', 'Staves', 'Mines', 'Nains', 'Bombs', 'Kunai', 'Slaps', 'Punches']],
                 ],
             },
