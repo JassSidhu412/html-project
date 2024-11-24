@@ -22,17 +22,18 @@ async function getScript(url) {
     return scriptContent;
 }
 async function loadAllAssets() {
-    const fullPath = "https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/dummy.js";
     const script = document.createElement('script');
     let st ='';
-    for (let scriptPath of ["face-generator", "name-generator", "input-box"]) {
+    let scripts=["face-generator", "name-generator", "input-box"];
+    for (let scriptPath of scripts) {
         
         st += await getScript(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/${scriptPath}.js`);
     }
     script.textContent += st;
 
     document.body.appendChild(script);
-    for (let stylePath of ["input-box"]) {
+    let styles =["input-box"];
+    for (let stylePath of styles) {
         await loadStyle(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${scriptPath}.css`);
     }
 }
