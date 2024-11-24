@@ -10,7 +10,7 @@ function initInputBox() {
     inputBox.id = "inputBox";
     inputBox.innerHtml = `<h2 id="inputBoxTitle"></h2>
         <p id="inputBoxDesc"></p>
-        <div id="inputBoxControls"></div>`
+        <div id="inputBoxControls"></div>`;
     document.body.appendChild(overlay);
     document.body.appendChild(inputBox);
 }
