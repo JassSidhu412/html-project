@@ -12,17 +12,11 @@ async function fetchFile(url) {
 async function loadAllAssets() {
     let scriptAssets = ["face-generator", "name-generator", "input-box"];
     let styleAssets = ["input-box"];
-    const scriptTag = document.createElement('script');
-    let st = '';
     for (let scriptPath of scriptAssets) {
-
-        st += await fetchFile(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/${scriptPath}.js`);
+        const script = document.createElement('script');
+        script.textContent = await fetchFile(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/${scriptPath}.js`);
+        document.body.appendChild(script);
     }
-    scriptTag.textContent = st;
-    scriptTag.id = "hello";
-
-    document.body.appendChild(scriptTag);
-
     for (let stylePath of styleAssets) {
         await loadStyle(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${stylePath}.css`);
     }
