@@ -18,7 +18,7 @@ async function loadStyle(url) {
 async function loadAllAssets() {
     const fullPath = "https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/dummy.js";
 
-    for (const scriptPath of ["face-generator", "name-generator"]) {
+    for (const scriptPath of ["face-generator", "name-generator","input-box"]) {
         await loadScript(fullpath.replace('dummy', scriptPath));
     }
     for (const stylePath of ["input-box"]) {
