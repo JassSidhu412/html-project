@@ -2,14 +2,14 @@ let inputBoxResult = {};
 let allowCloseGlobal = false;
 
 function initInputBox() {
-  document.body.textContent += `<div id="input-box-overlay" class="input-box-overlay"></div>
+  document.body.innerHtml += `<div id="input-box-overlay" class="input-box-overlay"></div>
     <div id="inputBox">
         <h2 id="inputBoxTitle"></h2>
         <p id="inputBoxDesc"></p>
         <div id="inputBoxControls"></div>
     </div>`;
 }
-//initInputBox();
+initInputBox();
 function ShowInputBox(title, desc, allowClose, controls) {
   return new Promise((resolve) => {
     const inputBox = document.getElementById('inputBox');
