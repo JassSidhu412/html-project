@@ -12,14 +12,14 @@ function initSVG() {
     femaleBackHairCount = Math.floor(getWidth(getImagePath('character/female.backhair')) / 512);
     maleHairCount = Math.floor(getWidth(getImagePath('character/male.hair')) / 512);
     let all = [
-        getPattren(getWidth(getImagePath('character/female.face')), 512, 0, 'female-face-img'),
-        getPattren(getWidth(getImagePath('character/female.eyes')), 512, 0, 'female-eyes-img'),
-        getPattren(getWidth(getImagePath('character/male.face')), 512, 0, 'male-face-img'),
-        getPattren(getWidth(getImagePath('character/male.eyes')), 512, 0, 'male-eyes-img')
+        getPattren(getImagePath('character/female.face'), 512, 0, 'female-face-img'),
+        getPattren(getImagePath('character/female.eyes'), 512, 0, 'female-eyes-img'),
+        getPattren(getImagePath('character/male.face'), 512, 0, 'male-face-img'),
+        getPattren(getImagePath('character/male.eyes'), 512, 0, 'male-eyes-img')
     ];
-    for (let i = 0; i < femaleHairCount; i++) all.push(getPattren(getWidth(getImagePath('character/female.hair')), 512, i, 'female-hair-img' + i));
-    for (let i = 0; i < femaleBackHairCount; i++) all.push(getPattren(getWidth(getImagePath('character/female.backhair')), 512, i, 'female-backhair-img' + i));
-    for (let i = 0; i < maleHairCount; i++) all.push(getPattren(getWidth(getImagePath('character/male.hair')), 512, i, 'male-hair-img' + i));
+    for (let i = 0; i < femaleHairCount; i++) all.push(getPattren(getImagePath('character/female.hair'), 512, i, 'female-hair-img' + i));
+    for (let i = 0; i < femaleBackHairCount; i++) all.push(getPattren(getImagePath('character/female.backhair'), 512, i, 'female-backhair-img' + i));
+    for (let i = 0; i < maleHairCount; i++) all.push(getPattren(getImagePath('character/male.hair'), 512, i, 'male-hair-img' + i));
     svg.innerHTML = `<defs>${all.join()}</defs>`;
     document.body.appendChild(svg);
 }
