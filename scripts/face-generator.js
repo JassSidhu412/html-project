@@ -69,7 +69,7 @@ function getImagePath(name) {
 function getPattren(url, size, index, id) {
     let sz = size * index;
     return `<pattern id="${id}" patternUnits="userSpaceOnUse" height="${size}" width="${size}">
-          <image x="-${sz}" y="0" height="${size}"  xlink:href="${url}"></image>
+          <image x="-${sz}" y="0" height="${size}" width="${size}" xlink:href="${url}"></image>
         </pattern>`;
 }
 
