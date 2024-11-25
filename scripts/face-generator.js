@@ -79,7 +79,6 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                                                          0 0 0 1 0"/>
                 </filter>
             </defs>
-            <rect id="${"tempCover"+faceCount}" width="512" height="512" fill="#FFFFFF" />
             <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"
                        filter="url(#${hairFilterId})"/>
@@ -91,7 +90,6 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"
                        filter="url(#${hairFilterId})"/>
-                       <script>document.getElementById("tempCover"+faceCount).remove();;</script>
             </svg>`;
     /*<rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
             <rect width="512" height="512" fill="url(#${gender}-eyes-img)" filter="url(#${eyesFilterId})"/>
