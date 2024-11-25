@@ -81,6 +81,16 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
             </defs>
             <g style="display:none">
                 <image x="0" y="0" width="512" height="512" 
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"/>
+                <image x="0" y="0" width="512" height="512" 
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.eyes.png"
+                       filter="url(#${eyesFilterId})"/>
+                <image x="0" y="0" width="512" height="512" 
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.face.png"/>
+                <image x="0" y="0" width="512" height="512" 
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"/>
+            </g>
+            <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"
                        filter="url(#${hairFilterId})"/>
                 <image x="0" y="0" width="512" height="512" 
@@ -91,10 +101,6 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"
                        filter="url(#${hairFilterId})"/>
-                       <script onload="alert(this);"></script>
-                       <style onload="displayParent(this);"></style>
-            </g>
-            <script onload="alert(this.previousSibling);"></script>
             </svg>`;
     /*<rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
             <rect width="512" height="512" fill="url(#${gender}-eyes-img)" filter="url(#${eyesFilterId})"/>
