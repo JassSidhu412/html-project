@@ -20,7 +20,7 @@ function initSVG() {
     for (let i = 0; i < femaleHairCount; i++) all.push(getPattren(getImagePath('character/female.hair'), 512, i, 'female-hair-img' + i));
     for (let i = 0; i < femaleBackHairCount; i++) all.push(getPattren(getImagePath('character/female.backhair'), 512, i, 'female-backhair-img' + i));
     for (let i = 0; i < maleHairCount; i++) all.push(getPattren(getImagePath('character/male.hair'), 512, i, 'male-hair-img' + i));
-    svg.innerHTML = `<defs>${all.join()}</defs>`;
+    svg.innerHTML = `<defs>${all.join('')}</defs>`;
     document.body.appendChild(svg);
 }
 
@@ -29,11 +29,9 @@ function getWidth(url) {
     var img = new Image();
     img.src = url;
     img.style.position = "absolute";
-    img.style.left = -9999; // Image width must not exceed 9999 pixels
+    img.style.left = -9999; 
     document.body.appendChild(img);
-    let imgHeight = img.naturalHeight;
     let imgWidth = img.naturalWidth;
-    //alert("image height = " + imgHeight + ", image width = " + imgWidth);
     document.body.removeChild(img);
     return imgWidth;
 }
