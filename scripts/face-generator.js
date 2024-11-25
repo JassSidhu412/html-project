@@ -79,7 +79,7 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                                                          0 0 0 1 0"/>
                 </filter>
             </defs>
-            
+            <g style="display:none">
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"
                        filter="url(#${hairFilterId})"/>
@@ -91,6 +91,8 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"
                        filter="url(#${hairFilterId})"/>
+                       <g onload="this.parentElement.style.display='flex';"></g>
+            </g>
             </svg>`;
     /*<rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
             <rect width="512" height="512" fill="url(#${gender}-eyes-img)" filter="url(#${eyesFilterId})"/>
