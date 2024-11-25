@@ -81,7 +81,7 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
             </defs>
             
                 <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair}.png"
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"
                        filter="url(#${hairFilterId})"/>
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.eyes.png"
@@ -89,7 +89,7 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.face.png"/>
                 <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair}.png"
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"
                        filter="url(#${hairFilterId})"/>
             </svg>`;
     /*<rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
