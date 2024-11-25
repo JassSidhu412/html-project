@@ -57,7 +57,7 @@ function getWidths(url) {
 // Usage
 function getWidth(url) {
   let w=0;
-getWidths(url).then(width => w= width));
+getWidths(url).then(width => w= width);
   return w;
 }
 
