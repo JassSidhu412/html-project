@@ -91,7 +91,7 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"
                        filter="url(#${hairFilterId})"/>
-                       <g onload="this.parentElement.style.display='flex';"></g>
+                       <g onload="displayParent(this)"></g>
             </g>
             </svg>`;
     /*<rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
@@ -99,5 +99,8 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
             <rect width="512" height="512" fill="url(#${gender}-face-img)" />
             <rect width="512" height="512" fill="url(#${gender}-hair-img0)" filter="url(#${hairFilterId})"/>
            </svg>`;*/
+}
+function displayParent(element){
+    element.parentElement.style.display='flex';
 }
 //initSVG();
