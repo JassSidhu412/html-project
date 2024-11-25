@@ -79,17 +79,6 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                                                          0 0 0 1 0"/>
                 </filter>
             </defs>
-            <g style="display:none">
-                <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"/>
-                <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.eyes.png"
-                       filter="url(#${eyesFilterId})"/>
-                <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.face.png"/>
-                <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"/>
-            </g>
             <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"
                        filter="url(#${hairFilterId})"/>
