@@ -24,7 +24,7 @@ function initSVG() {
     document.body.appendChild(svg);
 }
 
-
+/*
 function getWidth(url) {
     var img = new Image();
     img.src = url;
@@ -34,6 +34,31 @@ function getWidth(url) {
     let imgWidth = img.naturalWidth;
     document.body.removeChild(img);
     return imgWidth;
+}
+*/
+function getWidths(url) {
+    return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.onload = function() {
+            let imgWidth = img.naturalWidth;
+            document.body.removeChild(img);
+            resolve(imgWidth);
+        };
+        img.onerror = function(error) {
+            reject(error);
+        };
+        img.src = url;
+        img.style.position = "absolute";
+        img.style.left = -9999;
+        document.body.appendChild(img);
+    });
+}
+
+// Usage
+function getWidth(url) {
+  let w=0;
+getWidths(url).then(width => w= width));
+  return w;
 }
 
 function getImagePath(name) {
