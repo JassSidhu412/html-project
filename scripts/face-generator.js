@@ -1,11 +1,10 @@
 let faceCount = 0;
 let hairColors = ['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"];
-
 let eyesColors = ["#000000", "#4B3621", "#0000FF", "#008000", "#FF0000", "#FFD700", "#C0C0C0", "#800080", "#FFC0CB", "#808080", "#FFFF00", "#FFA500", "#008080"];
-let femaleHairCount = 1;
-let femaleBackHairCount = 1;
-let maleHairCount = 1;
-
+let femaleHairCount = 5;
+let femaleBackHairCount = 6;
+let maleHairCount = 2;
+/*
 async function initSVG() {
     let svg = document.createElement('svg');
     femaleHairCount = Math.floor(await getWidth(getImagePath('character/female.hair')) / 512);
@@ -23,36 +22,6 @@ async function initSVG() {
     svg.innerHTML = `<defs>${all.join('')}</defs>`;
     document.body.appendChild(svg);
 }
-
-/*
-function getWidth(url) {
-    var img = new Image();
-    img.src = url;
-    img.style.position = "absolute";
-    img.style.left = -9999; 
-    document.body.appendChild(img);
-    let imgWidth = img.naturalWidth;
-    document.body.removeChild(img);
-    return imgWidth;
-}
-*
-function getWidths(url) {
-    return new Promise((resolve, reject) => {
-        var img = new Image();
-        img.onload = function() {
-            let imgWidth = img.naturalWidth;
-            document.body.removeChild(img);
-            resolve(imgWidth);
-        };
-        img.onerror = function(error) {
-            reject(error);
-        };
-        img.src = url;
-        img.style.position = "absolute";
-        img.style.left = -9999;
-        document.body.appendChild(img);
-    });
-}*/
 async function getWidth(imageUrl) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -72,7 +41,7 @@ function getPattren(url, size, index, id) {
           <image x="-${sz}" y="0" height="${size}" width="${size}" xlink:href="${url}"></image>
         </pattern>`;
 }
-
+*/
 function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
     function parseColor(color) {
         const r = parseInt(color.slice(1, 3), 16) / 255;
@@ -86,8 +55,8 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
     }
     const hair = parseColor(hairColors[hairColor]);
     const eyes = parseColor(eyesColors[eyesColor]);
-    const hairStyle = 512 * frontHair;
-    const backHairStyle = 512 * backHair;
+    //const hairStyle = 512 * frontHair;
+    //const backHairStyle = 512 * backHair;
 
     // Generate unique IDs for filters
     faceCount++;
@@ -110,14 +79,9 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                                                          0 0 0 1 0"/>
                 </filter>
             </defs>
-            <rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
-            <rect width="512" height="512" fill="url(#${gender}-eyes-img)" filter="url(#${eyesFilterId})"/>
-            <rect width="512" height="512" fill="url(#${gender}-face-img)" />
-            <rect width="512" height="512" fill="url(#${gender}-hair-img0)" filter="url(#${hairFilterId})"/>
-           </svg>`;
-    /* 
+            
                 <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.png"
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair}.png"
                        filter="url(#${hairFilterId})"/>
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.eyes.png"
@@ -125,8 +89,13 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                 <image x="0" y="0" width="512" height="512" 
                        href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.face.png"/>
                 <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.png"
+                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair}.png"
                        filter="url(#${hairFilterId})"/>
-            </svg>`;*/
+            </svg>`;
+    /*<rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
+            <rect width="512" height="512" fill="url(#${gender}-eyes-img)" filter="url(#${eyesFilterId})"/>
+            <rect width="512" height="512" fill="url(#${gender}-face-img)" />
+            <rect width="512" height="512" fill="url(#${gender}-hair-img0)" filter="url(#${hairFilterId})"/>
+           </svg>`;*/
 }
-initSVG();
+//initSVG();
