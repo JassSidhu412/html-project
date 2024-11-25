@@ -367,7 +367,7 @@ async function battle() {
                         value: 20,
                         max: 70
                     }],
-                    ['Types', ['Katana', 'Sphear', {text:'Skills',color:'green'}, 'Shields', 'Bows', {text:'Staves',style:"background-color:'pink'"}, 'Mines', 'Nains', 'Bombs', 'Kunai', 'Slaps', 'Punches']],
+                    ['Types', ['Katana', 'Sphear', {text:'Skills',color:'green'}, 'Shields', 'Bows', {text:'Staves',style:"background-color:pink"}, 'Mines', 'Nains', 'Bombs', 'Kunai', 'Slaps', 'Punches']],
                 ],
             },
             {
