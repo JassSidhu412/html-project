@@ -12,18 +12,18 @@ function initSVG() {
     femaleBackHairCount = Math.floor(getWidth(getImagePath('character/female.backhair')) / 512);
     maleHairCount = Math.floor(getWidth(getImagePath('character/male.hair')) / 512);
     let all = [
-        getPattren(getWidth(getImagePath('character/female.face'), 512, 0, 'female-face-img')),
-        getPattren(getWidth(getImagePath('character/female.eyes'), 512, 0, 'female-eyes-img')),
-        getPattren(getWidth(getImagePath('character/male.face'), 512, 0, 'male-face-img')),
-        getPattren(getWidth(getImagePath('character/male.eyes'), 512, 0, 'male-eyes-img'))
+        getPattren(getWidth(getImagePath('character/female.face')), 512, 0, 'female-face-img'),
+        getPattren(getWidth(getImagePath('character/female.eyes')), 512, 0, 'female-eyes-img'),
+        getPattren(getWidth(getImagePath('character/male.face')), 512, 0, 'male-face-img'),
+        getPattren(getWidth(getImagePath('character/male.eyes')), 512, 0, 'male-eyes-img')
     ];
-    for (let i = 0; i < femaleHairCount; i++) all.push(getWidth(getImagePath('character/female.hair', 512, i), 'female-hair-img' + i));
-    for (let i = 0; i < femaleBackHairCount; i++) all.push(getWidth(getImagePath('character/female.backhair'), 512, i));
-    for (let i = 0; i < maleHairCount; i++) all.push(getWidth(getImagePath('character/male.hair'), 512, i));
+    for (let i = 0; i < femaleHairCount; i++) all.push(getPattren(getWidth(getImagePath('character/female.hair')), 512, i, 'female-hair-img' + i));
+    for (let i = 0; i < femaleBackHairCount; i++) all.push(getPattren(getWidth(getImagePath('character/female.backhair')), 512, i, 'female-backhair-img' + i));
+    for (let i = 0; i < maleHairCount; i++) all.push(getPattren(getWidth(getImagePath('character/male.hair')), 512, i, 'male-hair-img' + i));
     svg.innerHTML = `<defs>${all.join()}</defs>`;
     document.body.appendChild(svg);
 }
-initSVG();
+
 
 function getWidth(url) {
     var img = new Image();
@@ -31,8 +31,8 @@ function getWidth(url) {
     img.style.position = "absolute";
     img.style.left = -9999; // Image width must not exceed 9999 pixels
     document.body.appendChild(img);
-    var imgHeight = img.height;
-    var imgWidth = img.width;
+    let imgHeight = img.naturalHeight;
+    let imgWidth = img.naturalWidth;
     //alert("image height = " + imgHeight + ", image width = " + imgWidth);
     document.body.removeChild(img);
     return imgWidth;
@@ -105,3 +105,4 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
                        filter="url(#${hairFilterId})"/>
             </svg>`;*/
 }
+initSVG();
