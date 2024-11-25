@@ -149,10 +149,13 @@ function ShowInputBox(title, desc, allowClose, controls) {
             if (Array.isArray(data)) {
                 let s = '<td>';
                 for (item of data) {
-                    s += `<span class="data-item">${item}</span>`;
+                    if (typeof item === 'object' && item !== null)
+                        s += `<span class="data-item" style="background-color:${item.color??=''};${item.style??=''}">${item.text}</span>`;
+                    else
+                        s += `<span class="data-item">${item}</span>`;
                 }
                 return `${s}</td>`;
-            } else if (typeof data === 'object' && data !== null) return `<td><div class="tableProgress"><div class="tableProgressBar" style="width:${data.value/data.max*100}%"></div></div></td>`;//`<td><progress value="${data.value}" max="${data.max}"/></td>`;
+            } else if (typeof data === 'object' && data !== null) return `<td><div class="tableProgress"><div class="tableProgressBar" style="width:${data.value/data.max*100}%;background-color:${data.color??=''}"></div></div></td>`; //`<td><progress value="${data.value}" max="${data.max}"/></td>`;
             return `<td>${data}</td>`;
         }
 
@@ -345,9 +348,16 @@ async function battle() {
                     ['Katana', '1000'],
                     ['Bows', '500'],
                     ['Catapults', '50'],
-                    ['Lost', {value:50,max:70}],
-                    ['Found', {value:20,max:70}],
-                    ['Types', ['Katana', 'Sphear', 'Skills', 'Shields', 'Bows', 'Staves', 'Mines', 'Nains', 'Bombs', 'Kunai', 'Slaps', 'Punches']],
+                    ['Lost', {
+                        value: 50,
+                        max: 70,
+                        color:'red'
+                    }],
+                    ['Found', {
+                        value: 20,
+                        max: 70
+                    }],
+                    ['Types', ['Katana', 'Sphear', {text:'Skills',color:'green'}, 'Shields', 'Bows', {text:'Staves',style:"background-color:'pink'"}, 'Mines', 'Nains', 'Bombs', 'Kunai', 'Slaps', 'Punches']],
                 ],
             },
             {
