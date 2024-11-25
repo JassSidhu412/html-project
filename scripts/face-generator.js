@@ -21,8 +21,10 @@ function initSVG() {
     for (let i = 0; i < femaleBackHairCount; i++) all.push(getWidth(getImagePath('character/female.backhair'), 512, i));
     for (let i = 0; i < maleHairCount; i++) all.push(getWidth(getImagePath('character/male.hair'), 512, i));
     svg.innerHTML = `<defs>${all.join()}</defs>`;
+    document.body.appendChild(svg);
 }
 initSVG();
+
 function getWidth(url) {
     var img = new Image();
     img.src = url;
