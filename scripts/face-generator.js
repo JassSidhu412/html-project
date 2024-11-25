@@ -62,13 +62,6 @@ async function getWidth(imageUrl) {
     });
 }
 
-// Usage
-function getWidth(url) {
-    let w = 0;
-    getWidths(url).then(width => w = width);
-    return w;
-}
-
 function getImagePath(name) {
     return `https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/${name}.png`;
 }
