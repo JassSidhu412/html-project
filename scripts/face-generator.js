@@ -22,7 +22,7 @@ function initSVG() {
     for (let i = 0; i < maleHairCount; i++) all.push(getWidth(getImagePath('character/male.hair'), 512, i));
     svg.innerHTML = `<defs>${all.join()}</defs>`;
 }
-
+initSVG();
 function getWidth(url) {
     var img = new Image();
     img.src = url;
