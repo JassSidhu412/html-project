@@ -150,10 +150,10 @@ function ShowInputBox(title, desc, allowClose, controls) {
             if (Array.isArray(data)) {
                 let s = '<td>';
                 for (item of data) {
-                    if (typeof item === 'object' && item !== null)
+                    if (typeof item === 'object' && item !== null){
                         let bg=';';
-                    if(item.color) bg=`background-color:${item.color??=''};`;
-                        s += `<span class="data-item" style="${bg}${item.style??=''}">${item.text}</span>`;
+                        if(item.color) bg=`background-color:${item.color??=''};`;
+                        s += `<span class="data-item" style="${bg}${item.style??=''}">${item.text}</span>`;}
                     else
                         s += `<span class="data-item">${item}</span>`;
                 }
