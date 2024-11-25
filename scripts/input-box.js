@@ -83,8 +83,6 @@ function ShowInputBox(title, desc, allowClose, controls) {
                             `;
                     break;
                 case 'table':
-                    // const isArray = Array.isArray(row[1]);
-                    console.log(control.data);
                     const rows = control.data.map((row) => (row[1] === undefined || (Array.isArray(row[1]) && row[1].length === 0) ? '' : `
                                 <tr>
                                     <td>${row[0]}</td>
@@ -139,6 +137,9 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     const el = document.getElementById(control.id);
                     el.children[num].classList.add('selected');
                     break;
+                case 'custom':
+                    inputBoxControls.innerHTML += `<div id="${control.id}">${getNpcText(control.html)}</div>`;
+                    break;
             }
         });
 
@@ -150,7 +151,9 @@ function ShowInputBox(title, desc, allowClose, controls) {
                 let s = '<td>';
                 for (item of data) {
                     if (typeof item === 'object' && item !== null)
-                        s += `<span class="data-item" style="background-color:${item.color??=''};${item.style??=''}">${item.text}</span>`;
+                        let bg=';';
+                    if(item.color) bg=`background-color:${item.color??=''};`;
+                        s += `<span class="data-item" style="${bg}${item.style??=''}">${item.text}</span>`;
                     else
                         s += `<span class="data-item">${item}</span>`;
                 }
@@ -255,6 +258,11 @@ async function addCharacter() {
         'Fill Details',
         true,
         [{
+                type: 'custom',
+                id: 'face',
+                html: emDiv.innerHTML
+            },
+         {
                 type: 'text',
                 id: 'name',
                 label: 'Name',
@@ -321,13 +329,15 @@ async function goTo() {
             },
         ],
     );
-    console.log('Go To Result:', result);
     addLog(result);
 }
 async function Pop(title, desc, log) {
     const result = await ShowInputBox(title, desc, true, []);
 
     addLog(log);
+}
+function addLog(log){
+    console.log(log);
 }
 async function battle() {
     const result = await ShowInputBox(
