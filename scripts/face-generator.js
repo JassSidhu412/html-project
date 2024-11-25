@@ -6,11 +6,11 @@ let femaleHairCount = 1;
 let femaleBackHairCount = 1;
 let maleHairCount = 1;
 
-function initSVG() {
+async function initSVG() {
     let svg = document.createElement('svg');
-    femaleHairCount = Math.floor(getWidth(getImagePath('character/female.hair')) / 512);
-    femaleBackHairCount = Math.floor(getWidth(getImagePath('character/female.backhair')) / 512);
-    maleHairCount = Math.floor(getWidth(getImagePath('character/male.hair')) / 512);
+    femaleHairCount = Math.floor(await getWidth(getImagePath('character/female.hair')) / 512);
+    femaleBackHairCount = Math.floor(await getWidth(getImagePath('character/female.backhair')) / 512);
+    maleHairCount = Math.floor(await getWidth(getImagePath('character/male.hair')) / 512);
     let all = [
         getPattren(getImagePath('character/female.face'), 512, 0, 'female-face-img'),
         getPattren(getImagePath('character/female.eyes'), 512, 0, 'female-eyes-img'),
@@ -35,7 +35,7 @@ function getWidth(url) {
     document.body.removeChild(img);
     return imgWidth;
 }
-*/
+*
 function getWidths(url) {
     return new Promise((resolve, reject) => {
         var img = new Image();
@@ -52,13 +52,21 @@ function getWidths(url) {
         img.style.left = -9999;
         document.body.appendChild(img);
     });
+}*/
+async function getWidth(imageUrl) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img.width);
+        img.onerror = (err) => reject(`Error loading image: ${err}`);
+        img.src = imageUrl;
+    });
 }
 
 // Usage
 function getWidth(url) {
-  let w=0;
-getWidths(url).then(width => w= width);
-  return w;
+    let w = 0;
+    getWidths(url).then(width => w = width);
+    return w;
 }
 
 function getImagePath(name) {
