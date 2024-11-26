@@ -45,7 +45,7 @@ function getPattren(url, size, index, id) {
 */
 FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
 	let style =`style="display: block; margin: auto;"`;
-    FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+` onload="alert('hello svg');">`);
+    FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+` id="face${faceCount}">`);
 	
     FaceGen.current=faceCount;
     FaceGen.gender=gender;
