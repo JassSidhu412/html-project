@@ -47,6 +47,22 @@ FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor)
 	let style =`style="display: block; margin: auto;"`;
     FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+`">`);
     FaceGen.current=faceCount;
+	FaceGen.frontHair=frontHair;
+	FaceGen.backHair=backHair;
+	FaceGen.hairColor=hairColor;
+	FaceGen.eyesColor=eyesColor;
+    FaceGen.gender=gender;
+    return FaceGen.html;
+}
+FaceGen.Recreate=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
+	let style =`style="display: block; margin: auto;"`;
+    faceCount=FaceGen.current-1;
+	FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+`">`);
+    
+	FaceGen.frontHair=frontHair;
+	FaceGen.backHair=backHair;
+	FaceGen.hairColor=hairColor;
+	FaceGen.eyesColor=eyesColor;
     FaceGen.gender=gender;
     return FaceGen.html;
 }
