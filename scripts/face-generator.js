@@ -45,13 +45,14 @@ function getPattren(url, size, index, id) {
 */
 FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
 	let style =`style="display: block; margin: auto;"`;
-    FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('<svg ',`<svg onload="FaceGen.Init();" `);
+    FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+` onload="FaceGen.Init();">`);
 	
     FaceGen.current=faceCount;
     FaceGen.gender=gender;
     return FaceGen.html;
 }
 FaceGen.Init=function(){
+	alert("hello");
 	FaceGen.svg=document.getElementById('face'+FaceGen.current);
     FaceGen.svg.style.display='block';
 	FaceGen.svg.style.margin='auto';
