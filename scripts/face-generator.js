@@ -63,7 +63,7 @@ FaceGen.ChangeHair=function(hair){
     document.getElementById('hair'+FaceGen.current).setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`);
 }
 FaceGen.ChangeBackHair=function(backHair){
-    document.getElementById('backHair'+FaceGen.current).setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`);
+    document.getElementById('backHair'+FaceGen.current).setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.backhair.${backHair+1}.png`);
 }
 FaceGen.ChangeHairColor=function(color){
 	if(typeof(color)=='number') color = hairColors[color];
