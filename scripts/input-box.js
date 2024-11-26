@@ -60,8 +60,10 @@ function ShowInputBox(title, desc, allowClose, controls) {
                             `;
                     break;
                 case 'label':
+                    let val='';
+                    if (control.value) val=`: <span style="font-weight: normal;">${control.value}</span>`;
                     inputBoxControls.innerHTML += `
-                                <label>${getNpcText(control.label)}: <span style="font-weight: normal;">${control.default}</span></label>
+                                <label>${getNpcText(control.text)}${val}</label>
                             `;
                     break;
                 case 'progress':
@@ -347,8 +349,8 @@ async function battle() {
         [{
                 type: 'label',
                 id: 'AName',
-                label: 'Army From',
-                default: 'Village of Destruction',
+                text: 'Army From',
+                value: 'Village of Destruction',
             },
             {
                 type: 'table',
