@@ -69,13 +69,13 @@ FaceGen.ChangeHairColor=function(color){
 	if(typeof(color)=='number') color = hairColors[color];
 	let values=getMatrixValue(color);
     document.getElementById('hairMat'+FaceGen.current).setAttribute('values',values);
-	document.getElementById('hair'+FaceGen.current)
+	document.getElementById('face'+FaceGen.current).id='face'+FaceGen.current;
 }
 FaceGen.ChangeEyesColor=function(color){
 	if(typeof(color)=='number') color = eyesColors[color];
 	let values=getMatrixValue(color);
     document.getElementById('eyesMat'+FaceGen.current).setAttribute('values',values);
-	document.getElementById('face'+FaceGen.current)
+	document.getElementById('face'+FaceGen.current).id='face'+FaceGen.current;
 }
 function getMatrixValue(color){
 	const c = parseColor(color);
