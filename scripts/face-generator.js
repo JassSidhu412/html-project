@@ -48,6 +48,7 @@ FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor)
     FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+`">`);
 	
     FaceGen.current=faceCount;
+	alert(FaceGen.current);
     FaceGen.gender=gender;
     return FaceGen.html;
 }
