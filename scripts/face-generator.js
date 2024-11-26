@@ -52,10 +52,7 @@ FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor)
     return FaceGen.html;
 }
 FaceGen.Init=function(){
-	alert("hello");
 	FaceGen.svg=document.getElementById('face'+FaceGen.current);
-    FaceGen.svg.style.display='block';
-	FaceGen.svg.style.margin='auto';
     FaceGen.backHairElement = document.getElementById('backHair'+FaceGen.current);
     FaceGen.hairElement = document.getElementById('hair'+FaceGen.current);
     FaceGen.hairFilterElement = document.getElementById('hairFilter'+FaceGen.current);
