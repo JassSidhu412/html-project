@@ -44,12 +44,13 @@ function getPattren(url, size, index, id) {
 }
 */
 FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
-    FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor)+"<script>FaceGen.svg=document.currentScript.previousSibling;FaceGen.Init();</script>";
+    FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor)+"<script>FaceGen.Init();</script>";
     FaceGen.current=faceCount;
     FaceGen.gender=gender;
     return FaceGen.html;
 }
 FaceGen.Init=function(){
+	FaceGen.svg=document.getElementById('face'+FaceGen.current);
     FaceGen.svg.style.display='block';
 	FaceGen.svg.style.margin='auto';
     FaceGen.backHairElement = document.getElementById('backHair'+FaceGen.current);
@@ -60,7 +61,7 @@ FaceGen.Init=function(){
 FaceGen.ChangeHair=function(hair){
     FaceGen.hairElement.href=`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`;
 }
-FaceGen.ChangeBackHair=function(hair){
+FaceGen.ChangeBackHair=function(backHair){
     FaceGen.backHairElement.href=`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`;
 }
 function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
@@ -85,7 +86,7 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
     const eyesFilterId = `eyesFilter${faceCount}`;
 
 
-    return `<svg width="${w}" height="${h}" viewBox="0 0 512 512">
+    return `<svg id="face${faceCount}" width="${w}" height="${h}" viewBox="0 0 512 512">
             <defs>
                 <filter id="${hairFilterId}">
                     <feColorMatrix type="matrix" values="${hair.r} 0 0 0 0
