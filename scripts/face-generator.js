@@ -46,9 +46,7 @@ function getPattren(url, size, index, id) {
 FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
 	let style =`style="display: block; margin: auto;"`;
     FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+`">`);
-	
     FaceGen.current=faceCount;
-	alert(FaceGen.current);
     FaceGen.gender=gender;
     return FaceGen.html;
 }
@@ -56,6 +54,8 @@ FaceGen.Init=function(){
 	FaceGen.svg=document.getElementById('face'+FaceGen.current);
     FaceGen.backHairElement = document.getElementById('backHair'+FaceGen.current);
     FaceGen.hairElement = document.getElementById('hair'+FaceGen.current);
+	FaceGen.hairMatrix = document.getElementById('hairMat'+FaceGen.current);
+	FaceGen.eyesMatrix = document.getElementById('eyesMat'+FaceGen.current);
     FaceGen.hairFilterElement = document.getElementById('hairFilter'+FaceGen.current);
     FaceGen.eyesFilterElement = document.getElementById('eyesFilter'+FaceGen.current);
 }
@@ -63,7 +63,13 @@ FaceGen.ChangeHair=function(hair){
     FaceGen.hairElement.setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`);
 }
 FaceGen.ChangeBackHair=function(backHair){
-    FaceGen.backHairElement.setAttribute(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`);
+    FaceGen.backHairElement.setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`);
+}
+FaceGen.ChangeHairColor=function(values){
+    FaceGen.hairMatrix.setAttribute('values',values);
+}
+FaceGen.ChangeEyesColor=function(values){
+    FaceGen.eyesMatrix.setAttribute('values',values);
 }
 function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
     function parseColor(color) {
@@ -90,13 +96,13 @@ function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
     return `<svg id="face${faceCount}" width="${w}" height="${h}" viewBox="0 0 512 512">
             <defs>
                 <filter id="${hairFilterId}">
-                    <feColorMatrix type="matrix" values="${hair.r} 0 0 0 0
+                    <feColorMatrix id="hairMat${faceCount}" type="matrix" values="${hair.r} 0 0 0 0
                                                          0 ${hair.g} 0 0 0
                                                          0 0 ${hair.b} 0 0
                                                          0 0 0 1 0"/>
                 </filter>
                 <filter id="${eyesFilterId}">
-                    <feColorMatrix type="matrix" values="${eyes.r} 0 0 0 0
+                    <feColorMatrix id="eyesMat${faceCount}" type="matrix" values="${eyes.r} 0 0 0 0
                                                          0 ${eyes.g} 0 0 0
                                                          0 0 ${eyes.b} 0 0
                                                          0 0 0 1 0"/>
