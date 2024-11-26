@@ -59,10 +59,10 @@ FaceGen.Init=function(){
     FaceGen.eyesFilterElement = document.getElementById('eyesFilter'+FaceGen.current);
 }
 FaceGen.ChangeHair=function(hair){
-    FaceGen.hairElement.href=`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`;
+    FaceGen.hairElement.setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`);
 }
 FaceGen.ChangeBackHair=function(backHair){
-    FaceGen.backHairElement.href=`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`;
+    FaceGen.backHairElement.setAttribute(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`);
 }
 function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
     function parseColor(color) {
