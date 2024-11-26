@@ -60,28 +60,33 @@ FaceGen.Init=function(){
     FaceGen.eyesFilterElement = document.getElementById('eyesFilter'+FaceGen.current);
 }
 FaceGen.ChangeHair=function(hair){
-    FaceGen.hairElement.setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`);
+    document.getElementById('hair'+FaceGen.current).setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`);
 }
 FaceGen.ChangeBackHair=function(backHair){
-    FaceGen.backHairElement.setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`);
+    document.getElementById('backHair'+FaceGen.current).setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${backHair+1}.png`);
 }
-FaceGen.ChangeHairColor=function(values){
-    FaceGen.hairMatrix.setAttribute('values',values);
+FaceGen.ChangeHairColor=function(color){
+	if(typeof(color)=='number') color = hairColors[color];
+	let values=getMatrixValue(color);
+    document.getElementById('hairMat'+FaceGen.current).setAttribute('values',values);
 }
-FaceGen.ChangeEyesColor=function(values){
-    FaceGen.eyesMatrix.setAttribute('values',values);
+FaceGen.ChangeEyesColor=function(color){
+	if(typeof(color)=='number') color = eyesColors[color];
+	let values=getMatrixValue(color);
+    document.getElementById('eyesMat'+FaceGen.current).setAttribute('values',values);
 }
-function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
-    function parseColor(color) {
+function getMatrixValue(color){
+	const c = parseColor(color);
+return `${c.r} 0 0 0 0 0 ${c.g} 0 0 0 0 0 ${c.b} 0 0 0 0 0 1 0`
+}
+function parseColor(color) {
         const r = parseInt(color.slice(1, 3), 16) / 255;
         const g = parseInt(color.slice(3, 5), 16) / 255;
         const b = parseInt(color.slice(5, 7), 16) / 255;
-        return {
-            r,
-            g,
-            b
-        };
+        return {            r,            g,            b        };
     }
+function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
+    
     const hair = parseColor(hairColors[hairColor]);
     const eyes = parseColor(eyesColors[eyesColor]);
     //const hairStyle = 512 * frontHair;
