@@ -141,6 +141,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     break;
                 case 'custom':
                     inputBoxControls.innerHTML += `<div id="${control.id}">${getNpcText(control.html)}</div>`;
+                    if (typeof(control.callback)==='function') control.callback();
                     break;
             }
         });
