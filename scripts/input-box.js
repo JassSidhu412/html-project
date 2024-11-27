@@ -140,7 +140,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     el.children[num].classList.add('selected');
                     break;
                 case 'custom':
-                    inputBoxControls.innerHTML += `<div id="${control.id}">${getNpcText(control.html)}</div>`;
+                    inputBoxControls.innerHTML += `<div id="${control.id}" style="margin-bottom: 10px;">${getNpcText(control.html)}</div>`;
                     if (typeof(control.callback)==='function') control.callback();
                     break;
             }
