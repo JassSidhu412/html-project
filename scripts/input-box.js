@@ -122,7 +122,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                 case 'switch':
                     if (!control.default) control.default = 0;
                     const switchItems = control.options.map((option) => `
-                                <button onclick="toggleSwitchSelection('${control.id}', '${option}')">${option}</button>
+                                <button onclick="toggleSwitchSelection('${control.id}', '${option}',${control.action})">${option}</button>
                             `).join('');
                     inputBoxControls.innerHTML += `
                                 <div class="switchContainer">
@@ -240,11 +240,11 @@ function toggleListSelection(listId, option, maxSelect) {
     inputBoxResult[listId] = Array.from(container.querySelectorAll('button.selected')).map((btn) => btn.textContent);
 }
 
-function toggleSwitchSelection(switchId, option) {
+function toggleSwitchSelection(switchId, option,action) {
     const button = event.target;
     const container = document.getElementById(switchId);
     const buttons = container.querySelectorAll('button');
-
+    if(typeof(action)==='function') action();
     buttons.forEach((btn) => btn.classList.remove('selected'));
     button.classList.add('selected');
 
