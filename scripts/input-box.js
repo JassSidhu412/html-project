@@ -244,7 +244,7 @@ function toggleSwitchSelection(switchId, option,action) {
     const button = event.target;
     const container = document.getElementById(switchId);
     const buttons = container.querySelectorAll('button');
-    if(typeof(action)==='function') action();
+    if(typeof(action)==='function') action(option);
     buttons.forEach((btn) => btn.classList.remove('selected'));
     button.classList.add('selected');
 
