@@ -279,3 +279,21 @@
         .scroll-area button.selected {
             border: 2px solid #3b82f6;
         }
+.scroll-area::-webkit-scrollbar {
+    width: 12px;
+}
+
+.scroll-area::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+    background: #4169E1;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+scroll-area.::-webkit-scrollbar-thumb:hover {
+    background: #3151ac;
+}
