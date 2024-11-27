@@ -22,6 +22,8 @@ let IconGen = {
         let background = '';
         if (def != '') def = '<def>' + def + '</def>';
         if (bg) background = `<rect width="512" height="512" fill="${bg}" />`;
-        return `<svg id="${id}" width="${size}" height="${size}" style="${style ??= ''}" viewBox="0 0 512 512">${def+imgs+background}</svg>`;
+        let Id='';
+        if(id) Id=`id="${id}" `;
+        return `<svg ${Id}width="${size}" height="${size}" style="${style ??= ''}" viewBox="0 0 512 512">${def+imgs+background}</svg>`;
     }
 }
