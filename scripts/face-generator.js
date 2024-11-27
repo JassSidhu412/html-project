@@ -4,45 +4,45 @@ let eyesColors = ["#000000", "#4B3621", "#0000FF", "#008000", "#FF0000", "#FFD70
 let femaleHairCount = 5;
 let femaleBackHairCount = 6;
 let maleHairCount = 2;
-let FaceGen={};
-/*
-async function initSVG() {
-    let svg = document.createElement('svg');
-    femaleHairCount = Math.floor(await getWidth(getImagePath('character/female.hair')) / 512);
-    femaleBackHairCount = Math.floor(await getWidth(getImagePath('character/female.backhair')) / 512);
-    maleHairCount = Math.floor(await getWidth(getImagePath('character/male.hair')) / 512);
-    let all = [
-        getPattren(getImagePath('character/female.face'), 512, 0, 'female-face-img'),
-        getPattren(getImagePath('character/female.eyes'), 512, 0, 'female-eyes-img'),
-        getPattren(getImagePath('character/male.face'), 512, 0, 'male-face-img'),
-        getPattren(getImagePath('character/male.eyes'), 512, 0, 'male-eyes-img')
-    ];
-    for (let i = 0; i < femaleHairCount; i++) all.push(getPattren(getImagePath('character/female.hair'), 512, i, 'female-hair-img' + i));
-    for (let i = 0; i < femaleBackHairCount; i++) all.push(getPattren(getImagePath('character/female.backhair'), 512, i, 'female-backhair-img' + i));
-    for (let i = 0; i < maleHairCount; i++) all.push(getPattren(getImagePath('character/male.hair'), 512, i, 'male-hair-img' + i));
-    svg.innerHTML = `<defs>${all.join('')}</defs>`;
-    document.body.appendChild(svg);
-}
-async function getWidth(imageUrl) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img.width);
-        img.onerror = (err) => reject(`Error loading image: ${err}`);
-        img.src = imageUrl;
-    });
-}
+let FaceGen = {
+    hairColors: ['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"],
+    eyesColors: ["#000000", "#4B3621", "#0000FF", "#008000", "#FF0000", "#FFD700", "#C0C0C0", "#800080", "#FFC0CB", "#808080", "#FFFF00", "#FFA500", "#008080"],
+    male: {
+        hairCount: 2,
+        backHairCount: 1,
+        hair: 0,
+        backHair: 0,
+        hairColor: 0,
+        eyesColor: 0
+    },
+    female: {
+        hairCount: 5,
+        backHairCount: 6,
+        currentHair: 0,
+        currentBackHair: 0,
+        hairColor: 0,
+        eyesColor: 0
+    },
 
-function getImagePath(name) {
-    return `https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/${name}.png`;
-}
+    create: function(size, gender, values) {
+        let list = [];
+        if (gender == 'famale') list.push({
+            url: `character/${gender}.backhair.${values[1]+1}.png`,
+            overlay: values[2]
+        });
+        list.push({
+            url: `character/${gender}.eyes.png`,
+            overlay: values[3]
+        });
+        list.push(`character/${gender}.face.png`);
+        list.push({
+            url: `character/${gender}.hair.${values[0]+1}.png`,
+            overlay: values[2]
+        });
 
-function getPattren(url, size, index, id) {
-    let sz = size * index;
-    return `<pattern id="${id}" patternUnits="userSpaceOnUse" height="${size}" width="${size}">
-          <image x="-${sz}" y="0" height="${size}" width="${size}" xlink:href="${url}"></image>
-        </pattern>`;
-}
-*/
+        return IconGen.create(size, null, list, `display:block;margin:auto;`);
+    }
+};
 FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
 	let style =`style="display: block; margin: auto;"`;
     FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+`">`);
