@@ -3,7 +3,7 @@ async function fetchFile(url) {
     return await response.text();
 }
 async function loadAllAssets() {
-    let scriptAssets = ["face-generator", "name-generator", "input-box"];
+    let scriptAssets = ['image-lib',"face-generator", "name-generator", "input-box"];
     let styleAssets = ["style","input-box"];
 
     for (let scriptPath of scriptAssets) {
