@@ -121,7 +121,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     break;
                 case 'switch':
                     if (!control.default) control.default = 0;
-                    const switchItems = control.options.map((option) =>getSwichOption()).join('');
+                    const switchItems = control.options.map((option) =>getSwitchOption(control,option)).join('');
                     inputBoxControls.innerHTML += `
                                 <div class="switchContainer">
                                     <label>${control.label}</label>
