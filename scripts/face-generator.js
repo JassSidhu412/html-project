@@ -48,6 +48,9 @@ FaceGen.createControls = function() {
     FaceGen.createControl('hairColor', 'male', 1, 2);
     FaceGen.createControl('eyesColor', 'male', 2, 3);
     FaceGen.createControl('hair', 'female', 3, 0);
+    FaceGen.createControl('backHair', 'female', 4, 1);
+    FaceGen.createControl('hairColor', 'female', 5, 2);
+    FaceGen.createControl('eyesColor', 'female', 6, 3);
 }
 FaceGen.createControl = function(type, gender, index, typeInt) {
     let StyleArea = document.getElementById(`style-area-div-${index}`);
