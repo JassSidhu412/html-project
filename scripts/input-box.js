@@ -121,9 +121,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     break;
                 case 'switch':
                     if (!control.default) control.default = 0;
-                    const switchItems = control.options.map((option) => `
-                                <button onclick="toggleSwitchSelection('${control.id}', '${option}',${control.action})">${option}</button>
-                            `).join('');
+                    const switchItems = control.options.map((option) =>getSwichOption()).join('');
                     inputBoxControls.innerHTML += `
                                 <div class="switchContainer">
                                     <label>${control.label}</label>
@@ -133,9 +131,10 @@ function ShowInputBox(title, desc, allowClose, controls) {
                                 </div>
                             `;
                     let num = 0;
+                    
                     if (control.default < control.options.length || control.default > 0) num = control.default;
 
-                    toggleSwitchSelection(control.id, control.options[num],control.action);
+                    toggleSwitchSelection(control.id, control.options[num]);
                     const el = document.getElementById(control.id);
                     el.children[num].classList.add('selected');
                     break;
@@ -239,7 +238,17 @@ function toggleListSelection(listId, option, maxSelect) {
     // Update inputBoxResult
     inputBoxResult[listId] = Array.from(container.querySelectorAll('button.selected')).map((btn) => btn.textContent);
 }
-
+function getSwitchOption(control,option){
+    let id='';
+    let style='';
+    let text =option;
+    if(typeof(option)=='object'){
+        if(option.id) id = ` id="${option.id}"`;
+        if(option.style) style = ` style="${option.style}"`;
+        text = option.text;
+    }
+    return  `<button onclick="toggleSwitchSelection('${control.id}', '${id}',${control.action})">${text}</button>`;
+}
 function toggleSwitchSelection(switchId, option,action) {
     const button = event.target;
     const container = document.getElementById(switchId);
