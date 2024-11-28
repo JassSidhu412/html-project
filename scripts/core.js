@@ -8,7 +8,7 @@ function parseColor(color) {
     const b = parseInt(color.slice(5, 7), 16) / 255;
     return {r, g, b};
 }
-function getUniqueID(color) {
+function getUniqueID() {
     let i=0;
     while(document.getElementById('id-'+i)){
         i++;
