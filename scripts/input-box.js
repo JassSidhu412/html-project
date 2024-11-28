@@ -242,12 +242,13 @@ function getSwitchOption(control,option){
     let id='';
     let style='';
     let text =option;
+    let Id=option;
     if(typeof(option)=='object'){
-        if(option.id) id = ` id="${option.id}"`;
+        if(option.id){ id = ` id="${option.id}"`;Id=option.id}
         if(option.style) style = ` style="${option.style}"`;
         text = option.text;
     }
-    return  `<button${id+style} onclick="toggleSwitchSelection('${control.id}', '${id}',${control.action})">${text}</button>`;
+    return  `<button${id+style} onclick="toggleSwitchSelection('${control.id}', '${Id}',${control.action})">${text}</button>`;
 }
 function toggleSwitchSelection(switchId, option,action) {
     const button = event.target;
