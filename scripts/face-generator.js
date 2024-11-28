@@ -87,7 +87,7 @@ FaceGen.getCurrentSVG = function() {
 FaceGen.showSection = function(type) {
     let Styles = FaceGen.getStyleAreas();
     let num = 4;
-    if(FaceGen.gender == 'female') document.getElementById('Back-Hair-Option').style.display='inline-block';
+    if(FaceGen.gender == 'female') document.getElementById('back-hair-option').style.display='inline-block';
     else document.getElementById('back-hair-option').style.display='none';
     if (type === 'hair-option')
         if (FaceGen.gender == 'female') num = 3;
