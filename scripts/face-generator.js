@@ -75,6 +75,7 @@ FaceGen.changeGender = function(s) {
     FaceGen.gender = s.split('-')[0];
     document.getElementById('face').innerHTML = FaceGen.getCurrentSVG();
     changeSwitch('style','hair-option');
+    FaceGen.showSection('hair-option');
     //FaceGen.createControls();
     //document.getElementById('hair-option').onclick();
     //if(FaceGen.gender=='male') FaceGen.showSection(0);
