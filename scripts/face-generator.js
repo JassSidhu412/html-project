@@ -1,9 +1,3 @@
-let faceCount = 0;
-let hairColors = ['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"];
-let eyesColors = ["#000000", "#4B3621", "#0000FF", "#008000", "#FF0000", "#FFD700", "#C0C0C0", "#800080", "#FFC0CB", "#808080", "#FFFF00", "#FFA500", "#008080"];
-let femaleHairCount = 5;
-let femaleBackHairCount = 6;
-let maleHairCount = 2;
 let FaceGen = {
     hairColors: ['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"],
     eyesColors: ["#000000", "#4B3621", "#0000FF", "#008000", "#FF0000", "#FFD700", "#C0C0C0", "#800080", "#FFC0CB", "#808080", "#FFFF00", "#FFA500", "#008080"],
@@ -13,7 +7,10 @@ let FaceGen = {
         hair: 0,
         backHair: 0,
         hairColor: 0,
-        eyesColor: 0
+        eyesColor: 0,
+        count: [2, 1, hairColors.length, eyesColors.length],
+        current: [0, 0, 0, 0]
+
     },
     female: {
         hairCount: 5,
@@ -21,8 +18,12 @@ let FaceGen = {
         currentHair: 0,
         currentBackHair: 0,
         hairColor: 0,
-        eyesColor: 0
+        eyesColor: 0,
+        count: [5, 6, hairColors.length, eyesColors.length],
+        current: [0, 0, 0, 0]
     },
+    gender: 'male',
+
 
     create: function(size, gender, values) {
         let list = [];
@@ -41,115 +42,97 @@ let FaceGen = {
         });
 
         return IconGen.create(size, null, list, `display:block;margin:auto;`);
+    },
+    createControls: function() {
+        createControl('hair', 'male', 0, 0);
+        createControl('hairColor', 'male', 1, 2);
+        createControl('eyesColor', 'male', 2, 3);
+        createControl('hair', 'female', 3, 0);
+
+    },
+    createControl: function(type, gender, index, typeInt) {
+        let StyleArea = document.getElementById(`style-area-div-${index}`);
+        StyleArea.innerHTML = '';
+        for (let i = 0; i < FaceGen[gender].count[typeInt]; i++) {
+            let button = document.createElement('button');
+            button.style = `flex-shrink: 0;width: 60px;height: 60px;padding: 5px;border: 1px solid #ccc;border-radius: 5px;background-color: white;cursor: pointer;transition: all 0.3s;display: flex;align-items: center;justify-content: center;`;
+            let values = FaceGen[gender].current.slice();
+            values[typeInt] = i;
+            if (FaceGen[gender].current[typeInt] == i) button.style.border = '2px solid #3b82f6';
+            button.innerHTML = FaceGen.create(50, gender, values);
+            button.setAttribute('onclick', `FaceGen.change('${gender}','${typeInt}',${i});`);
+            StyleArea.appendChild(button);
+        }
+    },
+    change: function(gender, type, i) {
+        FaceGen[gender].current[type] = i;
+        document.getElementById('face').innerHTML = FaceGen.create(300, gender, FaceGen[gender].current);
+        FaceGen.createControls();
+    },
+    changeGender: function(s) {
+        FaceGen.gender = s.toLowerCase();
+        document.getElementById('face').innerHTML = getCurrentSVG();
+        createControls();
+    },
+    getCurrentSVG: function() {
+        return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
+    },
+    showSection: function(type) {
+        let Styles = getStyleAreas();
+        let num = 4;
+        if (type === 'Hair')
+            if (FaceGen.gender == 'female') num = 3;
+            else num = 0;
+        else if (type === 'Hair Color')
+            if (FaceGen.gender == 'female') num = 5;
+            else num = 1;
+        else if (type === 'Eye Color')
+            if (FaceGen.gender == 'female') num = 6;
+            else num = 2;
+        for (let i = 0; i < 7; i++) {
+            if (num != i) Styles[i].style.display = 'none';
+            else Styles[i].style.display = 'flex';
+        }
+    },
+    getInputControls: function() {
+        return {
+            type: 'custom',
+            id: 'face',
+            html: FaceGen.getCurrentSVG()
+        }, {
+            type: 'switch',
+            id: 'style',
+            label: 'Style',
+            options: ['Hair', 'Back Hair', 'Hair Color', 'Eye Color'],
+            action: FaceGen.showSection
+        }, {
+            type: 'custom',
+            id: 'faceButtons',
+            html: getScrollAreaDivs(),
+            callback: function() {
+                FaceGen.createControls();
+                FaceGen.showSection()
+            }
+        }, {
+            type: 'switch',
+            id: 'gender',
+            label: 'Gender',
+            options: ['Male', 'Female'],
+            action: FaceGen.changeGender
+        };
+    },
+    getStyleAreas: function() {
+        let list = [];
+        for (let i = 0; i < 7; i++) {
+            list.push(document.getElementById(`style-area-div-${i}`));
+        }
+        return list;
+    },
+    getScrollAreaDivs: function() {
+        let s = '';
+        for (let i = 0; i < 7; i++) {
+            s += `<div class="scroll-area" id="style-area-div-${i}"></div>`;
+        }
+        return s;
     }
 };
-FaceGen.Create=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
-	let style =`style="display: block; margin: auto;"`;
-    FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+`">`);
-    FaceGen.current=faceCount;
-	FaceGen.frontHair=frontHair;
-	FaceGen.backHair=backHair;
-	FaceGen.hairColor=hairColor;
-	FaceGen.eyesColor=eyesColor;
-    FaceGen.gender=gender;
-    return FaceGen.html;
-}
-FaceGen.Recreate=function(w, h, gender, frontHair, backHair, hairColor, eyesColor){
-	let style =`style="display: block; margin: auto;"`;
-    faceCount=FaceGen.current-1;
-	FaceGen.html=getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor).replace('>',style+`">`);
-    
-	FaceGen.frontHair=frontHair;
-	FaceGen.backHair=backHair;
-	FaceGen.hairColor=hairColor;
-	FaceGen.eyesColor=eyesColor;
-    FaceGen.gender=gender;
-    return FaceGen.html;
-}
-FaceGen.Init=function(){
-	FaceGen.svg=document.getElementById('face'+FaceGen.current);
-    FaceGen.backHairElement = document.getElementById('backHair'+FaceGen.current);
-    FaceGen.hairElement = document.getElementById('hair'+FaceGen.current);
-	FaceGen.hairMatrix = document.getElementById('hairMat'+FaceGen.current);
-	FaceGen.eyesMatrix = document.getElementById('eyesMat'+FaceGen.current);
-    FaceGen.hairFilterElement = document.getElementById('hairFilter'+FaceGen.current);
-    FaceGen.eyesFilterElement = document.getElementById('eyesFilter'+FaceGen.current);
-}
-FaceGen.ChangeHair=function(hair){
-    document.getElementById('hair'+FaceGen.current).setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.hair.${hair+1}.png`);
-}
-FaceGen.ChangeBackHair=function(backHair){
-    document.getElementById('backHair'+FaceGen.current).setAttribute('href',`https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${FaceGen.gender}.backhair.${backHair+1}.png`);
-}
-FaceGen.ChangeHairColor=function(color){
-	if(typeof(color)=='number') color = hairColors[color];
-	let values=getMatrixValue(color);
-    document.getElementById('hairMat'+FaceGen.current).setAttribute('values',values);
-	document.getElementById('face'+FaceGen.current).id='face'+FaceGen.current;
-}
-FaceGen.ChangeEyesColor=function(color){
-	if(typeof(color)=='number') color = eyesColors[color];
-	let values=getMatrixValue(color);
-    document.getElementById('eyesMat'+FaceGen.current).setAttribute('values',values);
-	document.getElementById('face'+FaceGen.current).id='face'+FaceGen.current;
-}
-function getMatrixValue(color){
-	const c = parseColor(color);
-return `${c.r} 0 0 0 0 0 ${c.g} 0 0 0 0 0 ${c.b} 0 0 0 0 0 1 0`
-}
-function parseColor(color) {
-        const r = parseInt(color.slice(1, 3), 16) / 255;
-        const g = parseInt(color.slice(3, 5), 16) / 255;
-        const b = parseInt(color.slice(5, 7), 16) / 255;
-        return {            r,            g,            b        };
-    }
-function getFace(w, h, gender, frontHair, backHair, hairColor, eyesColor) {
-    
-    const hair = parseColor(hairColors[hairColor]);
-    const eyes = parseColor(eyesColors[eyesColor]);
-    //const hairStyle = 512 * frontHair;
-    //const backHairStyle = 512 * backHair;
-
-    // Generate unique IDs for filters
-    faceCount++;
-    const hairFilterId = `hairFilter${faceCount}`;
-    const eyesFilterId = `eyesFilter${faceCount}`;
-
-
-    return `<svg id="face${faceCount}" width="${w}" height="${h}" viewBox="0 0 512 512">
-            <defs>
-                <filter id="${hairFilterId}">
-                    <feColorMatrix id="hairMat${faceCount}" type="matrix" values="${hair.r} 0 0 0 0
-                                                         0 ${hair.g} 0 0 0
-                                                         0 0 ${hair.b} 0 0
-                                                         0 0 0 1 0"/>
-                </filter>
-                <filter id="${eyesFilterId}">
-                    <feColorMatrix id="eyesMat${faceCount}" type="matrix" values="${eyes.r} 0 0 0 0
-                                                         0 ${eyes.g} 0 0 0
-                                                         0 0 ${eyes.b} 0 0
-                                                         0 0 0 1 0"/>
-                </filter>
-            </defs>
-            <image id="${'backHair'+faceCount}" x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.backhair.${backHair+1}.png"
-                       filter="url(#${hairFilterId})"/>
-                <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.eyes.png"
-                       filter="url(#${eyesFilterId})"/>
-                <image x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.face.png"/>
-                <image id="${'hair'+faceCount}" x="0" y="0" width="512" height="512" 
-                       href="https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/character/${gender}.hair.${frontHair+1}.png"
-                       filter="url(#${hairFilterId})"/>
-            </svg>`;
-    /*<rect width="512" height="512" fill="url(#${gender}-backhair-img0)" filter="url(#${hairFilterId})"/>
-            <rect width="512" height="512" fill="url(#${gender}-eyes-img)" filter="url(#${eyesFilterId})"/>
-            <rect width="512" height="512" fill="url(#${gender}-face-img)" />
-            <rect width="512" height="512" fill="url(#${gender}-hair-img0)" filter="url(#${hairFilterId})"/>
-           </svg>`;*/
-}
-function displayParent(element){
-    element.parentElement.style.display='flex';
-}
-//initSVG();
