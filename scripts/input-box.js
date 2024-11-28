@@ -247,7 +247,7 @@ function getSwitchOption(control,option){
         if(option.style) style = ` style="${option.style}"`;
         text = option.text;
     }
-    return  `<button onclick="toggleSwitchSelection('${control.id}', '${id}',${control.action})">${text}</button>`;
+    return  `<button${id+style} onclick="toggleSwitchSelection('${control.id}', '${id}',${control.action})">${text}</button>`;
 }
 function toggleSwitchSelection(switchId, option,action) {
     const button = event.target;
