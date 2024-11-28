@@ -117,6 +117,7 @@ FaceGen.getInputControls = function() {
         id: 'faceButtons',
         html: FaceGen.getScrollAreaDivs(),
         callback: function() {
+            FaceGen.createControls();
             FaceGen.changeGender(FaceGen.gender);
         }
     }, {
