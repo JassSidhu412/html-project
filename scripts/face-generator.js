@@ -8,7 +8,7 @@ let FaceGen = {
         backHair: 0,
         hairColor: 0,
         eyesColor: 0,
-        count: [2, 1, hairColors.length, eyesColors.length],
+        count: [2, 1, FaceGen.hairColors.length, FaceGen.eyesColors.length],
         current: [0, 0, 0, 0]
 
     },
@@ -19,7 +19,7 @@ let FaceGen = {
         currentBackHair: 0,
         hairColor: 0,
         eyesColor: 0,
-        count: [5, 6, hairColors.length, eyesColors.length],
+        count: [5, 6, FaceGen.hairColors.length, FaceGen.eyesColors.length],
         current: [0, 0, 0, 0]
     },
     gender: 'male',
@@ -44,10 +44,10 @@ let FaceGen = {
         return IconGen.create(size, null, list, `display:block;margin:auto;`);
     },
     createControls: function() {
-        createControl('hair', 'male', 0, 0);
-        createControl('hairColor', 'male', 1, 2);
-        createControl('eyesColor', 'male', 2, 3);
-        createControl('hair', 'female', 3, 0);
+        FaceGen.createControl('hair', 'male', 0, 0);
+        FaceGen.createControl('hairColor', 'male', 1, 2);
+        FaceGen.createControl('eyesColor', 'male', 2, 3);
+        FaceGen.createControl('hair', 'female', 3, 0);
 
     },
     createControl: function(type, gender, index, typeInt) {
@@ -71,14 +71,14 @@ let FaceGen = {
     },
     changeGender: function(s) {
         FaceGen.gender = s.toLowerCase();
-        document.getElementById('face').innerHTML = getCurrentSVG();
-        createControls();
+        document.getElementById('face').innerHTML = FaceGen.getCurrentSVG();
+        FaceGen.createControls();
     },
     getCurrentSVG: function() {
         return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
     },
     showSection: function(type) {
-        let Styles = getStyleAreas();
+        let Styles = FaceGen.getStyleAreas();
         let num = 4;
         if (type === 'Hair')
             if (FaceGen.gender == 'female') num = 3;
@@ -108,7 +108,7 @@ let FaceGen = {
         }, {
             type: 'custom',
             id: 'faceButtons',
-            html: getScrollAreaDivs(),
+            html: FaceGen.getScrollAreaDivs(),
             callback: function() {
                 FaceGen.createControls();
                 FaceGen.showSection()
