@@ -23,9 +23,9 @@ let FaceGen = {
         current: [0, 0, 0, 0]
     },
     gender: 'male',
+};
 
-
-    create: function(size, gender, values) {
+FaceGen.create= function(size, gender, values) {
         let list = [];
         if (gender == 'famale') list.push({
             url: `character/${gender}.backhair.${values[1]+1}.png`,
@@ -42,15 +42,14 @@ let FaceGen = {
         });
 
         return IconGen.create(size, null, list, `display:block;margin:auto;`);
-    },
-    createControls: function() {
+    }
+   FaceGen.createControls= function() {
         FaceGen.createControl('hair', 'male', 0, 0);
         FaceGen.createControl('hairColor', 'male', 1, 2);
         FaceGen.createControl('eyesColor', 'male', 2, 3);
         FaceGen.createControl('hair', 'female', 3, 0);
-
-    },
-    createControl: function(type, gender, index, typeInt) {
+    }
+  FaceGen.createControl= function(type, gender, index, typeInt) {
         let StyleArea = document.getElementById(`style-area-div-${index}`);
         StyleArea.innerHTML = '';
         for (let i = 0; i < FaceGen[gender].count[typeInt]; i++) {
@@ -63,21 +62,21 @@ let FaceGen = {
             button.setAttribute('onclick', `FaceGen.change('${gender}','${typeInt}',${i});`);
             StyleArea.appendChild(button);
         }
-    },
-    change: function(gender, type, i) {
+    }
+  FaceGen.change= function(gender, type, i) {
         FaceGen[gender].current[type] = i;
         document.getElementById('face').innerHTML = FaceGen.create(300, gender, FaceGen[gender].current);
         FaceGen.createControls();
-    },
-    changeGender: function(s) {
+    }
+    FaceGen.changeGender= function(s) {
         FaceGen.gender = s.toLowerCase();
         document.getElementById('face').innerHTML = FaceGen.getCurrentSVG();
         FaceGen.createControls();
-    },
-    getCurrentSVG: function() {
+    }
+   FaceGen.getCurrentSVG= function() {
         return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
-    },
-    showSection: function(type) {
+    }
+    FaceGen.showSection: function(type) {
         let Styles = FaceGen.getStyleAreas();
         let num = 4;
         if (type === 'Hair')
@@ -93,8 +92,8 @@ let FaceGen = {
             if (num != i) Styles[i].style.display = 'none';
             else Styles[i].style.display = 'flex';
         }
-    },
-    getInputControls: function() {
+    }
+   FaceGen.getInputControls function() {
         return {
             type: 'custom',
             id: 'face',
@@ -120,19 +119,19 @@ let FaceGen = {
             options: ['Male', 'Female'],
             action: FaceGen.changeGender
         };
-    },
-    getStyleAreas: function() {
+    }
+    FaceGen.getStyleAreas= function() {
         let list = [];
         for (let i = 0; i < 7; i++) {
             list.push(document.getElementById(`style-area-div-${i}`));
         }
         return list;
-    },
-    getScrollAreaDivs: function() {
+    }
+    FaceGen.getScrollAreaDivs= function() {
         let s = '';
         for (let i = 0; i < 7; i++) {
             s += `<div class="scroll-area" id="style-area-div-${i}"></div>`;
         }
         return s;
     }
-};
+
