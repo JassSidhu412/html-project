@@ -67,4 +67,3 @@ IconGen.createAnim = function(w, h, fps, images, end) {
 
             return svg;
         }
-}
