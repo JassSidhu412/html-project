@@ -248,10 +248,10 @@ function getSwitchOption(control,option){
         if(option.style) style = ` style="${option.style}"`;
         text = option.text;
     }
-    return  `<button${id+style} onclick="toggleSwitchSelection('${control.id}', '${Id}',${control.action})">${text}</button>`;
+    return  `<button${id+style} onclick="toggleSwitchSelection('${control.id}',this, '${Id}',${control.action})">${text}</button>`;
 }
-function toggleSwitchSelection(switchId, option,action) {
-    const button = event.target;
+function toggleSwitchSelection(switchId,button, option,action) {
+    //const button = event.target;
     const container = document.getElementById(switchId);
     const buttons = container.querySelectorAll('button');
     if(typeof(action)==='function') action(option);
