@@ -262,6 +262,8 @@ function toggleSwitchSelection(switchId, option,action) {
     inputBoxResult[switchId] = option;
 }
 function changeSwitch(switchId,option,button){
+    if(typeof(button)=='string') button = document.getElementById(button)
+    if(!button) button = document.getElementById(option);
     const container = document.getElementById(switchId);
     const buttons = container.querySelectorAll('button');
     buttons.forEach((btn) => btn.classList.remove('selected'));
