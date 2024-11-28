@@ -1,7 +1,8 @@
 let IconGen = {
     dir: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/',
-    overlayId: 0,
-    create: function(size, id, images, style, bg) {
+    overlayId: 0
+};
+   IconGen.create= function(size, id, images, style, bg) {
         let def = '';
         let imgs = '';
         for (let image of images) {
@@ -26,4 +27,3 @@ let IconGen = {
         if(id) Id=`id="${id}" `;
         return `<svg ${Id}width="${size}" height="${size}" style="${style ??= ''}" viewBox="0 0 512 512">${def+imgs+background}</svg>`;
     }
-}
