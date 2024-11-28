@@ -29,16 +29,16 @@ FaceGen.create = function(size, gender, values) {
     let list = [];
     if (gender == 'famale') list.push({
         url: `character/${gender}.backhair.${values[1]+1}.png`,
-        overlay: values[2]
+        overlay: FaceGen.hairColors[values[2]]
     });
     list.push({
         url: `character/${gender}.eyes.png`,
-        overlay: values[3]
+        overlay: FaceGen.eyesColors[values[3]]
     });
     list.push(`character/${gender}.face.png`);
     list.push({
         url: `character/${gender}.hair.${values[0]+1}.png`,
-        overlay: values[2]
+        overlay: FaceGen.hairColors[values[2]]
     });
 
     return IconGen.create(size, null, list, `display:block;margin:auto;`);
