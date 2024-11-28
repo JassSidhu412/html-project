@@ -75,6 +75,8 @@ FaceGen.changeGender = function(s) {
     FaceGen.gender = s.toLowerCase();
     document.getElementById('face').innerHTML = FaceGen.getCurrentSVG();
     FaceGen.createControls();
+    if(FaceGen.gender=='male')FaceGen.showSection(0);
+    else FaceGen.showSection(3);
 }
 FaceGen.getCurrentSVG = function() {
     return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
