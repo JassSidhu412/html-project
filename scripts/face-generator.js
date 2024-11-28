@@ -27,7 +27,7 @@ FaceGen.gender = 'male';
 
 FaceGen.create = function(size, gender, values) {
     let list = [];
-    if (gender == 'famale') list.push({
+    if (gender == 'female') list.push({
         url: `character/${gender}.backhair.${values[1]+1}.png`,
         overlay: FaceGen.hairColors[values[2]]
     });
