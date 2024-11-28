@@ -74,10 +74,11 @@ FaceGen.change = function(gender, type, i) {
 FaceGen.changeGender = function(s) {
     FaceGen.gender = s.split('-')[0];
     document.getElementById('face').innerHTML = FaceGen.getCurrentSVG();
+    changeSwitch('style','hair-option');
     //FaceGen.createControls();
-    document.getElementById('hair-option').onclick();
-    if(FaceGen.gender=='male') FaceGen.showSection(0);
-    else FaceGen.showSection(3);
+    //document.getElementById('hair-option').onclick();
+    //if(FaceGen.gender=='male') FaceGen.showSection(0);
+    //else FaceGen.showSection(3);
 }
 FaceGen.getCurrentSVG = function() {
     return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
