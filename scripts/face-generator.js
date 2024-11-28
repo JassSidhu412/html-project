@@ -94,7 +94,7 @@ FaceGen.showSection = function(type) {
     }
 }
 FaceGen.getInputControls = function() {
-    return {
+    return [{
         type: 'custom',
         id: 'face',
         html: FaceGen.getCurrentSVG()
@@ -118,7 +118,7 @@ FaceGen.getInputControls = function() {
         label: 'Gender',
         options: ['Male', 'Female'],
         action: FaceGen.changeGender
-    };
+    }];
 }
 FaceGen.getStyleAreas = function() {
     let list = [];
