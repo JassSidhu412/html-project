@@ -17,7 +17,6 @@ let IconGen = {
                 </filter>`;
                     imgs += `<image width="512" height="512" href="${img}" filter="url(#overlay${IconGen.overlayId})"/>`;
                 } else imgs += `<image width="512" height="512" href="${img}"/>`;
-                imgs += `<image width="512" height="512" href="${IconGen.dir + image.url}"/>`;
             }
         }
         let background = '';
