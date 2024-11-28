@@ -135,7 +135,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
                     let num = 0;
                     if (control.default < control.options.length || control.default > 0) num = control.default;
 
-                    toggleSwitchSelection(control.id, control.options[num]);
+                    toggleSwitchSelection(control.id, control.options[num],control.action);
                     const el = document.getElementById(control.id);
                     el.children[num].classList.add('selected');
                     break;
