@@ -120,7 +120,8 @@ FaceGen.getInputControls = function() {
         html: FaceGen.getScrollAreaDivs(),
         callback: function() {
             FaceGen.createControls();
-            FaceGen.changeGender(FaceGen.gender);
+            changeSwitch('gender',FaceGen.gender+'-option');
+            //FaceGen.changeGender(FaceGen.gender);
         }
     }, {
         type: 'switch',
