@@ -6,7 +6,7 @@ const ListView = {
     open: function(title, items) {
         this.createListView();
         listTitle.textContent = title;
-        renderItems(items);
+        this.renderItems(items);
         listView.classList.add('open');
     },
     close: function() {
@@ -18,7 +18,7 @@ const ListView = {
         if (history.length > 0) {
             const prevState = history.pop();
             this.open(prevState.title, prevState.items);
-            updateBackButton();
+            this.updateBackButton();
         }
     },
     createListView: function() {
@@ -49,38 +49,36 @@ const ListView = {
             document.body.removeChild(listView);
             listView = null;
         }
-    }
-};
-
-function updateBackButton() {
-    if (history.length > 0) {
-        closeButton.style.display = 'none';
-        backButton.style.display = 'flex';
-    } else {
-        closeButton.style.display = 'flex';
-        backButton.style.display = 'none';
-    }
-}
-
-function renderItems(items) {
-    listItems.innerHTML = '';
-    items.forEach(item => {
-        if (item.separator) {
-            const separator = document.createElement('div');
-            separator.className = 'separator';
-            separator.textContent = item.separator;
-            listItems.appendChild(separator);
-            return;
+    },
+    updateBackButton: function() {
+        if (history.length > 0) {
+            closeButton.style.display = 'none';
+            backButton.style.display = 'flex';
+        } else {
+            closeButton.style.display = 'flex';
+            backButton.style.display = 'none';
         }
+    },
 
-        const hide = typeof item.hide === 'function' ? item.hide() : item.hide;
-        if (hide) return;
+    renderItems: function(items) {
+        listItems.innerHTML = '';
+        items.forEach(item => {
+            if (item.separator) {
+                const separator = document.createElement('div');
+                separator.className = 'separator';
+                separator.textContent = item.separator;
+                listItems.appendChild(separator);
+                return;
+            }
 
-        const disable = typeof item.disable === 'function' ? item.disable() : item.disable;
+            const hide = typeof item.hide === 'function' ? item.hide() : item.hide;
+            if (hide) return;
 
-        const listItem = document.createElement('div');
-        listItem.className = 'listItem' + (disable ? ' disabled' : '');
-        listItem.innerHTML = `
+            const disable = typeof item.disable === 'function' ? item.disable() : item.disable;
+
+            const listItem = document.createElement('div');
+            listItem.className = 'listItem' + (disable ? ' disabled' : '');
+            listItem.innerHTML = `
                     <span class="itemIcon">${item.icon}</span>
                     <div class="itemContent">
                         <div class="itemTitle">${item.title}</div>
@@ -88,21 +86,22 @@ function renderItems(items) {
                     </div>
                     <span class="itemAction">${item.list ? '→' : item.do ? '⋮' : ''}</span>
                 `;
-        if (!disable) {
-            listItem.addEventListener('click', () => {
-                if (item.do) {
-                    item.do();
-                } else if (item.list) {
-                    history.push({
-                        title: listTitle.textContent,
-                        items: items
-                    });
-                    updateBackButton();
-                    const newItems = typeof item.list === 'function' ? item.list() : item.list;
-                    ListView.open(item.title, newItems);
-                }
-            });
-        }
-        listItems.appendChild(listItem);
-    });
-}
+            if (!disable) {
+                listItem.addEventListener('click', () => {
+                    if (item.do) {
+                        item.do();
+                    } else if (item.list) {
+                        history.push({
+                            title: listTitle.textContent,
+                            items: items
+                        });
+                        this.updateBackButton();
+                        const newItems = typeof item.list === 'function' ? item.list() : item.list;
+                        ListView.open(item.title, newItems);
+                    }
+                });
+            }
+            listItems.appendChild(listItem);
+        });
+    }
+};
