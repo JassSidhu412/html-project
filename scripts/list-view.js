@@ -28,7 +28,7 @@ const ListView = {
             listView.innerHTML = `
                         <div id="listViewHeader">
                             <button id="listViewCloseButton" style="font-size:32px;">×</button>
-                            <button id="listViewBackButton" style="display: none;"><div class="triangle-left"></div></button>
+                            <button id="listViewBackButton" style="display: none;"><div class="triangle-left" style="border-left-color:#eee;"></div></button>
                             <span id="listViewTitle"></span>
                         </div>
                         <div id="listViewItems"></div>
@@ -84,7 +84,7 @@ const ListView = {
                         <div class="itemTitle">${item.title}</div>
                         <div class="itemDesc">${item.desc}</div>
                     </div>
-                    <span class="itemAction">${item.list ? '<div class="triangle-right"></div>' : item.do ? '⋮' : ''}</span>
+                    <span class="itemAction">${item.list ? '<div class="triangle-right" style="border-left-color:#4a90e2;"></div>' : item.do ? '⋮' : ''}</span>
                 `;//→
             if (!disable) {
                 listItem.addEventListener('click', () => {
