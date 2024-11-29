@@ -8,12 +8,10 @@ function parseColor(color) {
     const b = parseInt(color.slice(5, 7), 16) / 255;
     return {r, g, b};
 }
+let uniqueIdCounter=0;
 function getUniqueID() {
-    let i=0;
-    while(document.getElementById('id-'+i)){
-        i++;
-    }
-    return 'id-'+i;
+    uniqueIdCounter++;
+    return 'id-'+uniqueIdCounter;
 }
 async function loadAllAssets() {
     let scriptAssets = ['image-lib',"face-generator", "name-generator", "input-box","list-view"];
