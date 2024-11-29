@@ -103,21 +103,21 @@
     font-size: 14px;
     text-transform: uppercase;
 }
-#listView::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 12px;
 }
 
-#listView::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: #ffffff;
     border-radius: 10px;
 }
 
-#listView::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: #4169E1;
     border-radius: 10px;
     border: 3px solid #ffffff;
 }
 
-#listView::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #3151ac;
 }
