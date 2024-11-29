@@ -16,8 +16,8 @@ function getUniqueID() {
     return 'id-'+i;
 }
 async function loadAllAssets() {
-    let scriptAssets = ['image-lib',"face-generator", "name-generator", "input-box"];
-    let styleAssets = ["style","input-box"];
+    let scriptAssets = ['image-lib',"face-generator", "name-generator", "input-box","list-view"];
+    let styleAssets = ["style","input-box","list-view"];
 
     for (let scriptPath of scriptAssets) {
         const script = document.createElement('script');
