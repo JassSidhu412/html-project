@@ -5,7 +5,7 @@ let history = [];
 const ListView = {
     open: function(title, items) {
         this.createListView();
-        listTitle.textContent = title;
+        listViewTitle.textContent = title;
         this.renderItems(items);
         listView.classList.add('open');
     },
@@ -26,19 +26,19 @@ const ListView = {
             listView = document.createElement('div');
             listView.id = 'listView';
             listView.innerHTML = `
-                        <div id="listHeader">
-                            <button id="closeButton">✕</button>
-                            <button id="backButton" style="display: none;">←</button>
-                            <span id="listTitle"></span>
+                        <div id="listViewHeader">
+                            <button id="listViewCloseButton">✕</button>
+                            <button id="listViewBackButton" style="display: none;">←</button>
+                            <span id="listViewTitle"></span>
                         </div>
-                        <div id="listItems"></div>
+                        <div id="listViewItems"></div>
                     `;
             document.body.appendChild(listView);
 
-            closeButton = document.getElementById('closeButton');
-            backButton = document.getElementById('backButton');
-            listTitle = document.getElementById('listTitle');
-            listItems = document.getElementById('listItems');
+            closeButton = document.getElementById('listViewCloseButton');
+            backButton = document.getElementById('listViewBackButton');
+            listTitle = document.getElementById('listViewTitle');
+            listItems = document.getElementById('listViewItems');
 
             closeButton.addEventListener('click', () => ListView.close());
             backButton.addEventListener('click', () => ListView.goBack());
