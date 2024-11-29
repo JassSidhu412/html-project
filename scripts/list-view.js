@@ -20,7 +20,7 @@ const ListView = {
             this.open(prevState.title, prevState.items);
             updateBackButton();
         }
-    }
+    },
     createListView: function() {
         if (!listView) {
             listView = document.createElement('div');
