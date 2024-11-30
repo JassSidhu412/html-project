@@ -1,9 +1,12 @@
-let FaceGen = {
-    hairColors: ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'],
-    //[  '#169EFF', '#167BFF', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF','#F092FF', '#D592FF', '#9000FF', '#3DA303', '#205900', '#1F1F1F',  '#555555',  '#ACACAC',  '#FAFAFA',  '#00FFB2'],//['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"],
+let ChosenColors= ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'];
+   /* //[  '#169EFF', '#167BFF', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF','#F092FF', '#D592FF', '#9000FF', '#3DA303', '#205900', '#1F1F1F',  '#555555',  '#ACACAC',  '#FAFAFA',  '#00FFB2'],//['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"],
     eyesColors: ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'],
     //['#131313', '#616161', '#C5C5C5', '#EBEBEB', '#7A5544', '#793D21', '#CB2626', '#CB2686', '#CB26C3', '#8E26CB', '#5226CB', '#2691CB', '#26BDCB', '#26CB9C', '#26CB60', '#00A1FF', '#34CB26', '#8ECB26', '#429F00', '#C5CB26', '#CB9926', '#CB7026', '#FD9F24', '#E8DC00', '#FDD524', '#EEC2FF'],
     //["#000000", "#4B3621", "#0000FF", "#008000", "#FF0000", "#FFD700", "#C0C0C0", "#800080", "#FFC0CB", "#808080", "#FFFF00", "#FFA500", "#008080"]
+*/
+let FaceGen = {
+    hairColors:ChosenColors,
+	eyesColors:ChosenColors,
     male: {
         hairCount: 2,
         backHairCount: 1,
@@ -11,7 +14,7 @@ let FaceGen = {
         backHair: 0,
         hairColor: 0,
         eyesColor: 0,
-        count: [2, 1, this.hairColors.length, this.eyesColors.length],
+        count: [2, 1, ChosenColors.length, ChosenColors.length],
         current: [0, 0, 0, 0]
 
     },
@@ -22,7 +25,7 @@ let FaceGen = {
         currentBackHair: 0,
         hairColor: 0,
         eyesColor: 0,
-        count: [5, 6, this.hairColors.length, this.eyesColors.length],
+        count: [5, 6, ChosenColors.length, ChosenColors.length],
         current: [0, 0, 0, 0]
     },
     gender: 'male',
@@ -44,7 +47,7 @@ let FaceGen = {
 
         return IconGen.create(size, null, list, `display:block;margin:auto;`);
     },
-    createControls = function() {
+    createControls : function() {
         this.createControl('hair', 'male', 0, 0);
         this.createControl('hairColor', 'male', 1, 2);
         this.createControl('eyesColor', 'male', 2, 3);
