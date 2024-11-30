@@ -83,6 +83,7 @@ FaceGen.changeGender = function(s) {
 }
 FaceGen.getCurrentSVG = function() {
     inputBoxResult.values = FaceGen[FaceGen.gender].current.slice();
+    console.log(inputBoxResult.values);
     inputBoxResult.gender = FaceGen.gender;
     return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
 }
