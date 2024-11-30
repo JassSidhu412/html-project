@@ -259,7 +259,7 @@ function toggleSwitchSelection(switchId, option,action) {
     button.classList.add('selected');
 
     // Update inputBoxResult
-    inputBoxResult[switchId] = option;
+    inputBoxResult[switchId] = typeof option == 'string' ? option :option.id;
 }
 function changeSwitch(switchId,option,button){
     if(typeof(button)=='string') button = document.getElementById(button)
@@ -268,7 +268,7 @@ function changeSwitch(switchId,option,button){
     const buttons = container.querySelectorAll('button');
     buttons.forEach((btn) => btn.classList.remove('selected'));
     button.classList.add('selected');
-    inputBoxResult[switchId] = option;
+    inputBoxResult[switchId] = typeof option == 'string' ? option :option.id;
 }
 
 function getNpcText(str) {
