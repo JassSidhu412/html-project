@@ -33,28 +33,28 @@ let FaceGen = {
         let list = [];
         if (gender == 'female') list.push({
             url: `character/${gender}.backhair.${values[1]+1}.png`,
-            overlay: this.hairColors[values[2]]
+            overlay: FaceGen.hairColors[values[2]]
         });
         list.push({
             url: `character/${gender}.eyes.png`,
-            overlay: this.eyesColors[values[3]]
+            overlay: FaceGen.eyesColors[values[3]]
         });
         list.push(`character/${gender}.face.png`);
         list.push({
             url: `character/${gender}.hair.${values[0]+1}.png`,
-            overlay: this.hairColors[values[2]]
+            overlay: FaceGen.hairColors[values[2]]
         });
 
         return IconGen.create(size, null, list, `display:block;margin:auto;`);
     },
     createControls : function() {
-        this.createControl('hair', 'male', 0, 0);
-        this.createControl('hairColor', 'male', 1, 2);
-        this.createControl('eyesColor', 'male', 2, 3);
-        this.createControl('hair', 'female', 3, 0);
-        this.createControl('backHair', 'female', 4, 1);
-        this.createControl('hairColor', 'female', 5, 2);
-        this.createControl('eyesColor', 'female', 6, 3);
+        FaceGen.createControl('hair', 'male', 0, 0);
+        FaceGen.createControl('hairColor', 'male', 1, 2);
+        FaceGen.createControl('eyesColor', 'male', 2, 3);
+        FaceGen.createControl('hair', 'female', 3, 0);
+        FaceGen.createControl('backHair', 'female', 4, 1);
+        FaceGen.createControl('hairColor', 'female', 5, 2);
+        FaceGen.createControl('eyesColor', 'female', 6, 3);
     },
     createControl: function(type, gender, index, typeInt) {
         let StyleArea = document.getElementById(`style-area-div-${index}`);
@@ -65,46 +65,46 @@ let FaceGen = {
             let values = this[gender].current.slice();
             values[typeInt] = i;
             if (this[gender].current[typeInt] == i) button.style.border = '2px solid #3b82f6';
-            button.innerHTML = this.create(50, gender, values);
+            button.innerHTML = FaceGen.create(50, gender, values);
             button.setAttribute('onclick', `FaceGen.change('${gender}','${typeInt}',${i});`);
             StyleArea.appendChild(button);
         }
     },
     change: function(gender, type, i) {
         this[gender].current[type] = i;
-        InputBox.Result.values = this[this.gender].current.slice();
-        InputBox.Result.gender = this.gender;
-        document.getElementById('face').innerHTML = this.create(300, gender, this[gender].current);
-        this.createControls();
+        InputBox.Result.values = this[FaceGen.gender].current.slice();
+        InputBox.Result.gender = FaceGen.gender;
+        document.getElementById('face').innerHTML = FaceGen.create(300, gender, this[gender].current);
+        FaceGen.createControls();
     },
     changeGender: function(s) {
-        this.gender = s.split('-')[0];
-        document.getElementById('face').innerHTML = this.getCurrentSVG();
+        FaceGen.gender = s.split('-')[0];
+        document.getElementById('face').innerHTML = FaceGen.getCurrentSVG();
         InputBox.changeSwitch('style', 'hair-option');
-        this.showSection('hair-option');
+        FaceGen.showSection('hair-option');
         //FaceGen.createControls();
         //document.getElementById('hair-option').onclick();
         //if(FaceGen.gender=='male') FaceGen.showSection(0);
         //else FaceGen.showSection(3);
     },
     getCurrentSVG: function() {
-        InputBox.Result.values = this[this.gender].current.slice();
-        InputBox.Result.gender = this.gender;
-        return this.create(300, this.gender, this[this.gender].current);
+        InputBox.Result.values = this[FaceGen.gender].current.slice();
+        InputBox.Result.gender = FaceGen.gender;
+        return FaceGen.create(300, FaceGen.gender, this[FaceGen.gender].current);
     },
     showSection: function(type) {
-        let Styles = this.getStyleAreas();
+        let Styles = FaceGen.getStyleAreas();
         let num = 4;
-        if (this.gender == 'female') document.getElementById('back-hair-option').style.display = 'inline-block';
+        if (FaceGen.gender == 'female') document.getElementById('back-hair-option').style.display = 'inline-block';
         else document.getElementById('back-hair-option').style.display = 'none';
         if (type === 'hair-option')
-            if (this.gender == 'female') num = 3;
+            if (FaceGen.gender == 'female') num = 3;
             else num = 0;
         else if (type === 'Hair Color')
-            if (this.gender == 'female') num = 5;
+            if (FaceGen.gender == 'female') num = 5;
             else num = 1;
         else if (type === 'Eye Color')
-            if (this.gender == 'female') num = 6;
+            if (FaceGen.gender == 'female') num = 6;
             else num = 2;
         for (let i = 0; i < 7; i++) {
             if (num != i) Styles[i].style.display = 'none';
