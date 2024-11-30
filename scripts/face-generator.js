@@ -68,6 +68,8 @@ FaceGen.createControl = function(type, gender, index, typeInt) {
 }
 FaceGen.change = function(gender, type, i) {
     FaceGen[gender].current[type] = i;
+    inputBoxResult.values = FaceGen[FaceGen.gender].current.slice();
+    inputBoxResult.gender = FaceGen.gender;
     document.getElementById('face').innerHTML = FaceGen.create(300, gender, FaceGen[gender].current);
     FaceGen.createControls();
 }
@@ -83,7 +85,6 @@ FaceGen.changeGender = function(s) {
 }
 FaceGen.getCurrentSVG = function() {
     inputBoxResult.values = FaceGen[FaceGen.gender].current.slice();
-    console.log(inputBoxResult.values);
     inputBoxResult.gender = FaceGen.gender;
     return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
 }
