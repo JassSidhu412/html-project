@@ -100,7 +100,7 @@
         }
         #listView .listViewProgressBar {
             flex-grow: 1;
-            height: 6px;
+            height: 8px;
             background-color: #e0e0e0;
             border-radius: 3px;
             overflow: hidden;
