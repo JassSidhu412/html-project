@@ -88,8 +88,8 @@ const ListView = {
                     descContent = `
                         <div class="itemDesc">
                             <span class="itemDescText">${item.desc.text}</span>
-                            <div class="progressBar">
-                                <div class="progress" style="width: ${percentage}%"></div>
+                            <div class="listViewProgressBar">
+                                <div class="listViewProgress" style="width: ${percentage}%"></div>
                             </div>
                         </div>
                     `;
