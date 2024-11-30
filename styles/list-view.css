@@ -98,24 +98,24 @@
             text-overflow: ellipsis;
             margin-right: 10px;
         }
-        #listView .progressBar {
+        #listView .listViewProgress {
             flex-grow: 1;
             height: 6px;
             background-color: #e0e0e0;
             border-radius: 3px;
             overflow: hidden;
         }
-        #listView .progressBar .progress {
+        #listView .listViewProgress .listViewProgressBar {
             height: 100%;
             background-color: #4a90e2;
             transition: width 0.3s ease;
         }
-#listView .listViewProgress {
+#listView .listViewProgress0 {
     background-color: #d9d9d9;
     border-radius: 5px;
 }
 
-#listView .listViewProgressBar {
+#listView .listViewProgressBar0 {
     background-color: #2196F3;
     height: 20px;
     border-radius: 5px;
