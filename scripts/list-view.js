@@ -5,7 +5,7 @@ let history = [];
 const ListView = {
     open: function(title, items) {
         this.createListView();
-        listViewTitle.textContent = title;
+        listViewTitle.textContent = this.getText(title);
         this.renderItems(items);
         listView.classList.add('open');
     },
@@ -20,6 +20,9 @@ const ListView = {
             this.open(prevState.title, prevState.items);
             this.updateBackButton();
         }
+    },
+    getText: function(text){
+        return text;
     },
     createListView: function() {
         if (!listView) {
@@ -66,7 +69,7 @@ const ListView = {
             if (item.separator) {
                 const separator = document.createElement('div');
                 separator.className = 'separator';
-                separator.textContent = item.separator;
+                separator.textContent = this.getText(item.separator);
                 listItems.appendChild(separator);
                 return;
             }
@@ -87,19 +90,19 @@ const ListView = {
                     const percentage = (item.desc.value / max) * 100;
                     descContent = `
                         <div class="itemDesc">
-                            <span class="itemDescText">${item.desc.text}</span>
+                            <span class="itemDescText">${this.getText(item.desc.text)}</span>
                             <div class="listViewProgressBar">
                                 <div class="listViewProgress" style="width: ${percentage}%"></div>
                             </div>
                         </div>
                     `;
                 } else {
-                    descContent = `<div class="itemDesc">${item.desc}</div>`;
+                    descContent = `<div class="itemDesc">${this.getText(item.desc)}</div>`;
                 }
             listItem.innerHTML = `
                     <span class="itemIcon">${item.icon}</span>
                     <div class="itemContent">
-                        <div class="itemTitle">${item.title}</div>
+                        <div class="itemTitle">${this.getText(item.title)}</div>
                         ${descContent}
                     </div>
                     <span class="itemAction">${item.list ? '<div class="triangle-right" style="border-left-color:#4a90e2;"></div>' : item.do ? '⋮' : ''}</span>
