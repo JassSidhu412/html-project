@@ -115,7 +115,7 @@ let FaceGen = {
         return [{
             type: 'custom',
             id: 'face',
-            html: this.getCurrentSVG()
+            html: FaceGen.getCurrentSVG()
         }, {
             type: 'switch',
             id: 'style',
@@ -127,15 +127,15 @@ let FaceGen = {
                 id: 'back-hair-option',
                 text: 'Back Hair'
             }, 'Hair Color', 'Eye Color'],
-            action: this.showSection
+            action: FaceGen.showSection
         }, {
             type: 'custom',
             id: 'faceButtons',
-            html: this.getScrollAreaDivs(),
+            html: FaceGen.getScrollAreaDivs(),
             callback: function() {
-                this.createControls();
+                FaceGen.createControls();
                 //changeSwitch('gender',FaceGen.gender+'-option');
-                this.changeGender(this.gender);
+                FaceGen.changeGender(FaceGen.gender);
             }
         }, {
             type: 'switch',
@@ -148,8 +148,8 @@ let FaceGen = {
                 text: 'Female',
                 id: 'female-option'
             }],
-            default: this.gender == 'male' ? 0 : 1,
-            action: this.changeGender
+            default: FaceGen.gender == 'male' ? 0 : 1,
+            action: FaceGen.changeGender
         }];
     },
     getStyleAreas: function() {
