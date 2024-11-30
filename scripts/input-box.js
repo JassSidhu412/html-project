@@ -5,14 +5,14 @@ let InputBox = {
     overlay: document.createElement('div'),
 
     init: function() {
-        this.overlay.id = "input-box-overlay";
-        this.overlay.className = "input-box-overlay";
-        this.inputBox.id = "inputBox";
-        this.inputBox.innerHTML = `<h2 id="inputBoxTitle"></h2>
+        InputBox.overlay.id = "input-box-overlay";
+        InputBox.overlay.className = "input-box-overlay";
+        InputBox.inputBox.id = "inputBox";
+        InputBox.inputBox.innerHTML = `<h2 id="inputBoxTitle"></h2>
         <p id="inputBoxDesc"></p>
         <div id="inputBoxControls"></div>`;
-        document.body.appendChild(this.overlay);
-        document.body.appendChild(this.inputBox);
+        document.body.appendChild(InputBox.overlay);
+        document.body.appendChild(InputBox.inputBox);
     },
 
 
@@ -23,11 +23,11 @@ let InputBox = {
             const inputBoxDesc = document.getElementById('inputBoxDesc');
             const inputBoxControls = document.getElementById('inputBoxControls');
 
-            inputBoxTitle.textContent = this.getText(title);
-            inputBoxDesc.textContent = this.getText(desc);
+            inputBoxTitle.textContent = InputBox.getText(title);
+            inputBoxDesc.textContent = InputBox.getText(desc);
             inputBoxControls.innerHTML = '';
-            this.Result = {};
-            this.allowCloseGlobal = allowClose;
+            InputBox.Result = {};
+            InputBox.allowCloseGlobal = allowClose;
 
             if (controls == undefined) controls = [];
             if (allowClose === undefined) allowClose = true;
@@ -37,7 +37,7 @@ let InputBox = {
                     case 'text':
                     case 'number':
                         inputBoxControls.innerHTML += `
-                                <label for="${control.id}">${this.getText(control.label)}</label>
+                                <label for="${control.id}">${InputBox.getText(control.label)}</label>
                                 <input type="${control.type}" id="${control.id}" name="${control.id}" 
                                     value="${control.type === 'number' && (control.default === undefined || control.default === 0) ? 0 : control.default || ''}"
                                     ${control.min !== undefined ? `min="${control.min}"` : ''}
@@ -48,7 +48,7 @@ let InputBox = {
                     case 'select':
                         const options = control.options.map((option) => `<option value="${option}">${option}</option>`).join('');
                         inputBoxControls.innerHTML += `
-                                <label for="${control.id}">${this.getText(control.label)}</label>
+                                <label for="${control.id}">${InputBox.getText(control.label)}</label>
                                 <select id="${control.id}" name="${control.id}">
                                     ${options}
                                 </select>
@@ -56,30 +56,30 @@ let InputBox = {
                         break;
                     case 'button':
                         inputBoxControls.innerHTML += `
-                                <button onclick="handleButtonClick('${control.id}')">${this.getText(control.label)}</button>
+                                <button onclick="handleButtonClick('${control.id}')">${InputBox.getText(control.label)}</button>
                             `;
                         break;
                     case 'label':
                         let val = '';
                         if (control.value) val = `: <span style="font-weight: normal;">${control.value}</span>`;
                         inputBoxControls.innerHTML += `
-                                <label>${this.getText(control.text)}${val}</label>
+                                <label>${InputBox.getText(control.text)}${val}</label>
                             `;
                         break;
                     case 'progress':
                         inputBoxControls.innerHTML += `
                                 <div class="inputBoxProgressContainer">
-                                    <label for="${control.id}">${this.getText(control.label)}</label>
+                                    <label for="${control.id}">${InputBox.getText(control.label)}</label>
                                     <div id="${control.id}" class="inputBoxProgressBar">
                                         <div class="inputBoxProgressBarFill"></div>
                                     </div>
                                 </div>
                             `;
-                        this.updateProgressBar(control.id, control.value, control.max, control.reverse);
+                        InputBox.updateProgressBar(control.id, control.value, control.max, control.reverse);
                         break;
                     case 'slider':
                         inputBoxControls.innerHTML += `
-                                <label for="${control.id}">${this.getText(control.label)}</label>
+                                <label for="${control.id}">${InputBox.getText(control.label)}</label>
                                 <input style="padding : 0px;" type="range" id="${control.id}" name="${control.id}" 
                                     min="${control.min}" max="${control.max}" value="${control.default}">
                             `;
@@ -121,7 +121,7 @@ let InputBox = {
                         break;
                     case 'switch':
                         if (!control.default) control.default = 0;
-                        const switchItems = control.options.map((option) => this.getSwitchOption(control, option)).join('');
+                        const switchItems = control.options.map((option) => InputBox.getSwitchOption(control, option)).join('');
                         inputBoxControls.innerHTML += `
                                 <div class="switchContainer">
                                     <label>${control.label}</label>
@@ -134,19 +134,19 @@ let InputBox = {
 
                         if (control.default < control.options.length || control.default > 0) num = control.default;
 
-                        this.toggleSwitchSelection(control.id, control.options[num]);
+                        InputBox.toggleSwitchSelection(control.id, control.options[num]);
                         const el = document.getElementById(control.id);
                         el.children[num].classList.add('selected');
                         break;
                     case 'custom':
-                        inputBoxControls.innerHTML += `<div id="${control.id}" style="margin-bottom: 10px;">${this.getText(control.html)}</div>`;
+                        inputBoxControls.innerHTML += `<div id="${control.id}" style="margin-bottom: 10px;">${InputBox.getText(control.html)}</div>`;
                         if (typeof(control.callback) === 'function') control.callback();
                         break;
                 }
             });
 
-            this.inputBox.style.display = 'block';
-            this.overlay.style.display = 'block';
+            InputBox.inputBox.style.display = 'block';
+            InputBox.overlay.style.display = 'block';
 
             function getTd(data) {
                 if (Array.isArray(data)) {
@@ -165,14 +165,14 @@ let InputBox = {
             }
 
             function closeInputBox() {
-                this.inputBox.scrollTop = 0;
-                this.inputBox.style.display = 'none';
-                this.overlay.style.display = 'none';
+                InputBox.inputBox.scrollTop = 0;
+                InputBox.inputBox.style.display = 'none';
+                InputBox.overlay.style.display = 'none';
                 if (typeof onClose == 'function') onClose();
-                resolve(this.Result);
+                resolve(InputBox.Result);
             }
 
-            this.overlay.onclick = () => {
+            InputBox.overlay.onclick = () => {
                 if (allowClose) {
                     const buttons = inputBoxControls.querySelectorAll('button');
                     if (buttons.length > 0) {
@@ -184,10 +184,10 @@ let InputBox = {
             };
 
             window.handleButtonClick = (buttonId) => {
-                this.Result.button = buttonId;
+                InputBox.Result.button = buttonId;
                 const inputs = inputBoxControls.querySelectorAll('input, select');
                 inputs.forEach((input) => {
-                    this.Result[input.name] = input.value;
+                    InputBox.Result[input.name] = input.value;
                 });
 
                 closeInputBox();
@@ -236,8 +236,8 @@ let InputBox = {
             alert(`You can only select up to ${maxSelect} items.`);
         }
 
-        // Update this.Result
-        this.Result[listId] = Array.from(container.querySelectorAll('button.selected')).map((btn) => btn.textContent);
+        // Update InputBox.Result
+        InputBox.Result[listId] = Array.from(container.querySelectorAll('button.selected')).map((btn) => btn.textContent);
     },
 
     getSwitchOption: function(control, option) {
@@ -264,8 +264,8 @@ let InputBox = {
         buttons.forEach((btn) => btn.classList.remove('selected'));
         button.classList.add('selected');
 
-        // Update this.Result
-        this.Result[switchId] = typeof option == 'string' ? option : option.id;
+        // Update InputBox.Result
+        InputBox.Result[switchId] = typeof option == 'string' ? option : option.id;
     },
 
     changeSwitch: function(switchId, option, button) {
@@ -275,7 +275,7 @@ let InputBox = {
         const buttons = container.querySelectorAll('button');
         buttons.forEach((btn) => btn.classList.remove('selected'));
         button.classList.add('selected');
-        this.Result[switchId] = typeof option == 'string' ? option : option.id;
+        InputBox.Result[switchId] = typeof option == 'string' ? option : option.id;
     },
 
     getText: function(text) {
