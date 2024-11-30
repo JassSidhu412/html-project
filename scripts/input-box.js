@@ -167,7 +167,7 @@ let InputBox = {
             function closeInputBox() {
                 this.inputBox.scrollTop = 0;
                 this.inputBox.style.display = 'none';
-                overlay.style.display = 'none';
+                this.overlay.style.display = 'none';
                 if (typeof onClose == 'function') onClose();
                 resolve(this.Result);
             }
