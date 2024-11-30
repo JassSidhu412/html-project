@@ -16,7 +16,7 @@ function initInputBox() {
 }
 initInputBox();
 
-function ShowInputBox(title, desc, allowClose, controls) {
+function ShowInputBox(title, desc, allowClose, controls,onClose) {
     return new Promise((resolve) => {
 
         const inputBoxTitle = document.getElementById('inputBoxTitle');
@@ -168,6 +168,7 @@ function ShowInputBox(title, desc, allowClose, controls) {
             inputBox.scrollTop = 0;
             inputBox.style.display = 'none';
             overlay.style.display = 'none';
+            if(typeof onClose == 'function') onClose();
             resolve(inputBoxResult);
         }
 
