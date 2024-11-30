@@ -2,6 +2,9 @@ async function fetchFile(url) {
     const response = await fetch(url);
     return await response.text();
 }
+window.onbeforeunload = function () {
+   return 'Want to leave?';
+}
 function parseColor(color) {
     const r = parseInt(color.slice(1, 3), 16) / 255;
     const g = parseInt(color.slice(3, 5), 16) / 255;
