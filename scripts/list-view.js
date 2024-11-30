@@ -78,11 +78,14 @@ const ListView = {
 
             const listItem = document.createElement('div');
             listItem.className = 'listItem' + (disable ? ' disabled' : '');
+            let descHTML;
+            if (typeof item.desc === 'object' && item.desc !== null) descHTML = `<div class="listViewProgress"><div class="listViewProgressBar" style="width:${item.desc.value/item.desc.max*100}%;background-color:${item.desc.color??=''}"></div></div>`;
+            else descHTML = `<div class="itemDesc">${item.desc}</div>`;
             listItem.innerHTML = `
                     <span class="itemIcon">${item.icon}</span>
                     <div class="itemContent">
                         <div class="itemTitle">${item.title}</div>
-                        <div class="itemDesc">${item.desc}</div>
+                        
                     </div>
                     <span class="itemAction">${item.list ? '<div class="triangle-right" style="border-left-color:#4a90e2;"></div>' : item.do ? '⋮' : ''}</span>
                 `;//→
