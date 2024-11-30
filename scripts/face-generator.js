@@ -127,7 +127,7 @@ FaceGen.getInputControls = function() {
         }
     }, {
         type: 'switch',
-        id: 'gender',
+        id: 'gender-option',
         label: 'Gender',
         options: [{text:'Male',id:'male-option'}, {text:'Female',id:'female-option'}],
         default: FaceGen.gender == 'male'? 0 : 1,
