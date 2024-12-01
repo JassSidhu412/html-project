@@ -23,3 +23,21 @@ body {
     border-bottom: 6px solid transparent;
 
 }
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4169E1;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3151ac;
+}
