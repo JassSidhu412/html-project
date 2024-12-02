@@ -4,7 +4,7 @@ function createHomeWindow() {
     homeWindow.innerHTML = `
                 <div class="container">
                     <div class="top-bar">
-                        <button class="menu-button">☰</button>
+                        <button class="menu-button" onclick="showMenu()">☰</button>
                         <div class="game-title">Life Simulator</div>
                         <div style="width: 24px;"></div>
                     </div>
