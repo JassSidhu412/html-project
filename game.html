@@ -62,6 +62,7 @@
             // Simulate new events every 5 seconds
             setInterval(() => {
                 const randomEntry = logEntries[Math.floor(Math.random() * logEntries.length)];
+                android.speak(randomEntry);
                 addLogEntry(randomEntry);
             }, 5000);
 
@@ -160,8 +161,8 @@
 
         function showPlayerInfo() {
             try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
-            try{android.speak("hello");}catch(err){addLogEntry("Error " + err);}
-            addLogEntry("List: "+Object.getOwnPropertyNames(android));
+            //try{android.speak("hello");}catch(err){addLogEntry("Error " + err);}
+            //addLogEntry("List: "+Object.getOwnPropertyNames(android));
             InputBox.show(playerName, "", true, [{
                 type: 'table',
                 data: [
