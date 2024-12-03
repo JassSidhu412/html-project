@@ -172,7 +172,7 @@ let InputBox = {
                 resolve(InputBox.Result);
             }
 
-            InputBox.overlay.onclick = () => {
+            InputBox.close =function(){
                 if (allowClose) {
                     const buttons = inputBoxControls.querySelectorAll('button');
                     if (buttons.length > 0) {
@@ -181,6 +181,7 @@ let InputBox = {
                         closeInputBox();
                     }
                 }
+                InputBox.overlay.onclick = () => {InputBox.close}
             };
 
             window.handleButtonClick = (buttonId) => {
@@ -194,6 +195,7 @@ let InputBox = {
             };
         });
     },
+    
 
     updateProgressBar: function(id, value, max, reverse = false) {
         const progressBar = document.getElementById(id);
