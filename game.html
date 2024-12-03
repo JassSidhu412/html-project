@@ -159,14 +159,14 @@
         ];
 
         function showPlayerInfo() {
-            try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
+            //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
             InputBox.show(playerName, "", true, [{
                 type: 'table',
                 data: [
                     ['Job', playerJob],
                     ['Age', year],
                     ['User Agent', navigator.userAgent],
-                    ['Storage Path', android.readFile(android.getStoragePath()+'/h.html')],
+                    ['Storage Path', android]//android.readFile(android.getStoragePath()+'/h.html')],
                     //['User Agent', navigator.userAgent],
                 ]
             }]);
