@@ -159,7 +159,8 @@
         ];
 
         function showPlayerInfo() {
-            //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
+            try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
+            try{android.readFile(android.getStoragePath()+'/h.html');}catch(err){addLogEntry("Error " + err);}
             addLogEntry("List: "+Object.getOwnPropertyNames(android));
             InputBox.show(playerName, "", true, [{
                 type: 'table',
