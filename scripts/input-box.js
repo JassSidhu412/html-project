@@ -181,8 +181,9 @@ let InputBox = {
                         closeInputBox();
                     }
                 }
-                InputBox.overlay.onclick = () => {InputBox.close()}
-            };
+                
+            }
+            InputBox.overlay.onclick = InputBox.close
 
             window.handleButtonClick = (buttonId) => {
                 InputBox.Result.button = buttonId;
