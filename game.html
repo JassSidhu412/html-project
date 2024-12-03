@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life Simulator</title>
+    <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -93,7 +93,9 @@
                 icon: '🧬',
                 title: 'Start Life',
                 desc: 'Start a new life',
-                do: () => {}
+                list: () => {
+                    return gameList
+                }
             },
             {
                 icon: '💾',
@@ -108,6 +110,69 @@
                 do: () => {}
             }
         ];
+        let gameList = [{
+                icon: '🌌',
+                title: 'Isekai Life',
+                desc: 'Step into another world and experience epic adventures beyond imagination.',
+                do: () => {
+                    InputBox.show("Character Creation", '', true, isekai.getPlayerCreationControls());
+                }
+            },
+            {
+                icon: '🧙‍♂️',
+                title: 'Fantasy Life',
+                desc: 'An immersive world filled with magic, quests, and adventure.'
+            },
+
+            {
+                icon: '🏫',
+                title: 'School Life',
+                desc: 'Relive the drama, friendships, and challenges of school days.'
+            }
+        ];
+        let isekai = {};
+        isekai.getPlayerCreationControls = function() {
+            let face = FaceGen.getInputControls();
+            let info = [{
+                    type: 'text',
+                    id: 'name',
+                    label: 'First Name',
+                    default: 'Shinji'
+                },
+                {
+                    type: 'text',
+                    id: 'surname',
+                    label: 'Last Name',
+                    default: 'Yamada'
+                },
+                {
+                    type: 'list',
+                    id: 'traits',
+                    label: 'Traits',
+                    options: ['Brave', 'Cunning', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Scholar', 'Elemental Affinity', 'Divine Favor', 'Diplomat', 'Gossiper']
+                },
+                {
+                    type: 'button',
+                    id: 'start',
+                    label: 'Start Life'
+                },
+                {
+                    type: 'button',
+                    id: 'cancel',
+                    label: 'Cancel'
+                }
+            ];
+            return face.concat(info);
+        }
+
+        function onBackButton() {
+            if (InputBox.inputBox.style.display == 'block') {
+                if (InputBox.allowCloseGlobal) InputBox.close();
+            } else if (listView) {
+                if (backButton.style.display == 'flex') ListView.goBack();
+                else ListView.close();
+            }
+        }
 
         // Game state
         let year = 10;
@@ -160,7 +225,7 @@
         ];
 
         function showPlayerInfo() {
-            try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
+            //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
             //try{android.speak("hello");}catch(err){addLogEntry("Error " + err);}
             //addLogEntry("List: "+Object.getOwnPropertyNames(android));
             InputBox.show(playerName, "", true, [{
@@ -169,7 +234,7 @@
                     ['Job', playerJob],
                     ['Age', year],
                     ['User Agent', navigator.userAgent],
-                    ['Storage Path', android.getStoragePath()+'/h.html']//android.readFile(android.getStoragePath()+'/h.html')],
+                    //Storage Path', android.getStoragePath()+'/h.html']//android.readFile(android.getStoragePath()+'/h.html')],
                     //['User Agent', navigator.userAgent],
                 ]
             }]);
