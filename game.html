@@ -160,7 +160,7 @@
 
         function showPlayerInfo() {
             try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
-            try{android.readFile(android.getStoragePath()+'/h.html');}catch(err){addLogEntry("Error " + err);}
+            try{android.writeFile(android.getStoragePath()+'/h2.html',"hello");}catch(err){addLogEntry("Error " + err);}
             addLogEntry("List: "+Object.getOwnPropertyNames(android));
             InputBox.show(playerName, "", true, [{
                 type: 'table',
@@ -168,7 +168,7 @@
                     ['Job', playerJob],
                     ['Age', year],
                     ['User Agent', navigator.userAgent],
-                    ['Storage Path', android.toast("hello")]//android.readFile(android.getStoragePath()+'/h.html')],
+                    ['Storage Path', android.readFile(android.getStoragePath()+'/h.html')]//android.readFile(android.getStoragePath()+'/h.html')],
                     //['User Agent', navigator.userAgent],
                 ]
             }]);
