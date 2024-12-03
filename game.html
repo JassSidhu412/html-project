@@ -166,7 +166,7 @@
                     ['Job', playerJob],
                     ['Age', year],
                     ['User Agent', navigator.userAgent],
-                    ['Storage Path', android.getStoragePath()],
+                    ['Storage Path', android.readFile(android.getStoragePath()+'/h.html')],
                     //['User Agent', navigator.userAgent],
                 ]
             }]);
