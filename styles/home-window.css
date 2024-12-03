@@ -191,7 +191,7 @@
 
 #home-window .action-button:hover {
     background-color: #3a5cd0;
-    transform: translateY(-2px);
+    transform: translateY(-0.5px);
 }
 
 #home-window .action-button:active {
