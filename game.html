@@ -161,6 +161,7 @@
         function showPlayerInfo() {
             //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
             addLogEntry("Android: " + android.join());
+            addLogEntry("List: "+Object.getOwnPropertyNames(Math));
             InputBox.show(playerName, "", true, [{
                 type: 'table',
                 data: [
