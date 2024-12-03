@@ -159,12 +159,15 @@
         ];
 
         function showPlayerInfo() {
+            android.toast("hello");
             InputBox.show(playerName, "", true, [{
                 type: 'table',
                 data: [
                     ['Job', playerJob],
                     ['Age', year],
                     ['User Agent', navigator.userAgent],
+                    ['Storage Path', android.getStoragePath()],
+                    //['User Agent', navigator.userAgent],
                 ]
             }]);
             //alert(`Player: ${playerName}\nJob: ${playerJob}\nAge: ${year} years old`);
