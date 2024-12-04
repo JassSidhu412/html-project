@@ -65,15 +65,15 @@ function addLogEntry(entry, isNextYear = false) {
 function updateUI() {
     // Update money
     const moneyElement = document.querySelector('#home-window .money');
-    moneyElement.textContent = `💰 ${formatMoney(money)}`;
+    moneyElement.innerHTML = `💰 ${formatMoney(money)}`;
 
     // Update player info
     const playerNameElement = document.querySelector('#home-window .player-name');
     const playerJobElement = document.querySelector('#home-window .player-job');
     const playerIconElement = document.querySelector('#home-window .player-icon');
-    playerNameElement.textContent = playerName;
-    playerJobElement.textContent = playerJob;
-    playerIconElement.textContent = playerIcon;
+    playerNameElement.innerHTML = playerName;
+    playerJobElement.innerHTML = playerJob;
+    playerIconElement.innerHTML = playerIcon;
 
     // Update stat bars
     statBars.forEach((stat, index) => {
