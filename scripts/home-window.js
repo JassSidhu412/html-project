@@ -34,7 +34,7 @@ function createHomeWindow() {
                             </div>
                             <div class="action-buttons">
                                 ${actionButtons.map(button => `
-                                    <button class="action-button" onclick="button.action">${button.text}</button>
+                                    <button class="action-button" onclick="${button.action}">${button.text}</button>
                                 `).join('')}
                             </div>
                         </div>
