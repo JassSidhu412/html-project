@@ -30,6 +30,7 @@ function getUniqueID() {
 async function loadAllAssets() {
     let scriptAssets = ['image-lib', 'home-window', "face-generator", "name-generator", "input-box", "list-view"];
     let styleAssets = ["style", 'home-window', "input-box", "list-view"];
+    let gameAssets = ['isekai/main.js'];
 
     for (let scriptPath of scriptAssets) {
         const script = document.createElement('script');
@@ -41,5 +42,10 @@ async function loadAllAssets() {
         const style = document.createElement('style');
         style.textContent = await fetchFile(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/styles/${stylePath}.css`);
         document.head.appendChild(style);
+    }
+    for (let scriptPath of gameAssets) {
+        const script = document.createElement('script');
+        script.textContent = await fetchFile(`https://raw.githubusercontent.com/JassSidhu412/html-project/main/games/${scriptPath}`);
+        document.body.appendChild(script);
     }
 }
