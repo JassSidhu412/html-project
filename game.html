@@ -40,6 +40,7 @@
             script.textContent = Content;
             document.body.appendChild(script);
             await loadAllAssets();
+            playerIcon = FaceGen.create(30, 'male', [1, 0, 0, 0]);
         }
 
 
@@ -69,12 +70,18 @@
             // Age Up button functionality
             ageUpButton.addEventListener('click', ageUp);
         }
-        let player = {};
+        let player = {
+            name: 'Shinji',
+            surname: 'Yamada',
+            age: 15,
+            skills: []
+        };
         let game = {};
         let data = {};
+        let savedGames = [];
 
         data.save = function() {
-            localStorage.setItem('data', JSON.stringify(data)); //data.player
+            localStorage.setItem('data', JSON.stringify(data)); //data.vars=['player','npc','logs','year','game']
         }
         data.load = function() {
             data = JSON.parse(localStorage.getItem('data'));
@@ -83,6 +90,7 @@
         function setIsekaiGame() {
             game.name = 'Isekai Life';
         }
+
 
 
 
@@ -107,8 +115,100 @@
                 icon: '📖',
                 title: 'Load Life',
                 desc: 'Load a saved life',
+                list: savedGames
+            },
+            {
+                separator: 'Misc'
+            },
+            {
+                icon: '⚙️',
+                title: 'Settings',
+                desc: 'Settings life',
+                do: () => pop('Under construction', 'This Feature will available in future.')
+            },
+        ];
+        let schoolRoomsList = [{
+                icon: '🏫',
+                title: 'Class',
+                desc: 'Teaching room',
                 do: () => {}
-            }
+            },
+            {
+                icon: '👥',
+                title: 'Staff Room',
+                desc: 'Room for school staff',
+                do: () => {}
+            },
+            {
+                icon: '🏋️‍♀️',
+                title: 'Gym',
+                desc: 'Physical education room',
+                list: () => {
+                    return [{
+                            icon: '🗿️',
+                            title: 'Gym Storeroom',
+                            desc: 'Storage room for gym equipment',
+                            do: () => {}
+                        },
+                        {
+                            icon: '🏋️‍♂️',
+                            title: 'Work out',
+                            desc: 'Area for physical exercise',
+                            do: () => {}
+                        },
+                        {
+                            separator: 'Facilities'
+                        },
+                        {
+                            icon: '💬',
+                            title: 'Interaction',
+                            desc: 'Area for socializing and relaxation',
+                            do: () => {}
+                        },
+                    ]
+                }
+            },
+            {
+                icon: '🏟️',
+                title: 'Sports Ground',
+                desc: 'Outdoor sports area',
+                list: () => {
+                    return [{
+                            icon: '🤖',
+                            title: 'Machine Room',
+                            desc: 'Room for sports equipment and machinery',
+                            do: () => {}
+                        },
+                        {
+                            icon: '🏋️‍♂️',
+                            title: 'Work out',
+                            desc: 'Area for physical exercise and sports',
+                            do: () => {}
+                        },
+                        {
+                            separator: 'Facilities'
+                        },
+                        {
+                            icon: '💬',
+                            title: 'Interaction',
+                            desc: 'Area for socializing and relaxation',
+                            do: () => {}
+                        },
+                    ]
+                }
+            },
+            {
+                icon: '🏊‍♀️',
+                title: 'Swimming Pool',
+                desc: 'School swimming pool',
+                do: () => {}
+            },
+            {
+                icon: '🏥',
+                title: 'Infirmery',
+                desc: 'School medical room',
+                do: () => {}
+            },
         ];
         let gameList = [{
                 icon: '🌌',
@@ -121,49 +221,21 @@
             {
                 icon: '🧙‍♂️',
                 title: 'Fantasy Life',
-                desc: 'An immersive world filled with magic, quests, and adventure.'
+                desc: 'An immersive world filled with magic, quests, and adventure.',
+                do: () => pop('Under construction', 'This Feature will available in future.')
             },
 
             {
                 icon: '🏫',
                 title: 'School Life',
-                desc: 'Relive the drama, friendships, and challenges of school days.'
+                desc: 'Relive the drama, friendships, and challenges of school days.',
+                do: () => pop('Under construction', 'This Feature will available in future.')
             }
         ];
-        let isekai = {};
-        isekai.getPlayerCreationControls = function() {
-            let face = FaceGen.getInputControls();
-            let info = [{
-                    type: 'text',
-                    id: 'name',
-                    label: 'First Name',
-                    default: 'Shinji'
-                },
-                {
-                    type: 'text',
-                    id: 'surname',
-                    label: 'Last Name',
-                    default: 'Yamada'
-                },
-                {
-                    type: 'list',
-                    id: 'traits',
-                    label: 'Traits',
-                    options: ['Brave', 'Cunning', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Scholar', 'Elemental Affinity', 'Divine Favor', 'Diplomat', 'Gossiper']
-                },
-                {
-                    type: 'button',
-                    id: 'start',
-                    label: 'Start Life'
-                },
-                {
-                    type: 'button',
-                    id: 'cancel',
-                    label: 'Cancel'
-                }
-            ];
-            return face.concat(info);
-        }
+        let school = {};
+        let fantasy = {};
+
+        
 
         function onBackButton() {
             if (InputBox.inputBox.style.display == 'block') {
@@ -177,12 +249,27 @@
         // Game state
         let year = 10;
         let money = 50000;
-        let playerName = "John Doe";
+        let playerName = "Shinji Yamada";
         let playerJob = "Software Developer";
-        let playerIcon = "👤";
+        let playerIcon = 'X';
 
         // Action buttons array
-        let actionButtons = ["Occupation", "Assets", "Relationships", "Activities"];
+        let actionButtons = [{
+            text: "Occupation",
+            action: 'alert(\'hello\')'
+        }, {
+            text: "Assets",
+            action: "alert('hello')"
+        }, {
+            text: "Relationships",
+            action: "alert('hello')"
+        }, {
+            text: "Activites",
+            action: "ListView.open('Activites',schoolRoomsList)"
+        }];
+        school.showAct = function() {
+            ListView.show('Activites', schoolRoomsList);
+        }
 
         // Stats bars array
         let statBars = [{
@@ -244,6 +331,10 @@
         function ageUp() {
             year++;
             addLogEntry("Year " + year, true);
+        }
+
+        function pop(title, desc) {
+            InputBox.show(title, desc, true);
         }
 
         // Initialize the game when the DOM is fully loaded
