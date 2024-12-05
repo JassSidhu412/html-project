@@ -768,317 +768,367 @@ async function loadAllAssets() {
     }
 }
 let url = `https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/core.js`;
-        async function loadAssets() {
-            const response = await fetch(url);
-            const Content = await response.text();
-            const script = document.createElement('script');
-            script.textContent = Content;
-            document.body.appendChild(script);
-            await loadAllAssets();
-            
+async function loadAssets() {
+    const response = await fetch(url);
+    const Content = await response.text();
+    const script = document.createElement('script');
+    script.textContent = Content;
+    document.body.appendChild(script);
+    await loadAllAssets();
+
+}
+let aiFunctions=`let tx = document.getElementsByClassName("ql-editor textarea")[0];
+let go = document.getElementsByClassName("send-button")[0];
+
+let sc = document.getElementsByClassName("chat-history")[1];
+
+function SendPrompt(text) {
+    let previousResponse = null;
+    return new Promise((resolve, reject) => {
+
+        tx.textContent = text;
+        setTimeout(function() {
+            go.click();
+            setTimeout(function() {
+                const interval = setInterval(() => {
+					let rs = sc.getElementsByClassName("model-response-text");
+                    const response = rs[rs.length - 1].innerText; 
+                    if (response && response === previousResponse) { 
+                        clearInterval(interval); 
+                        resolve(response);
+                    }
+                    previousResponse = response;
+                }, 1000);
+                setTimeout(() => {
+                    clearInterval(interval);
+                    reject(new Error('Timeout waiting for response'));
+                }, 20000);
+            }, 2000);
+        }, 500);
+    });
+}
+async function ask(text) {
+    const response = await SendPrompt(text);
+    return response;
+}`;
+function initAI(){
+	if(android) android.aiEval(aiFunctions);
+}
+
+
+
+async function init() {
+    //await loadAssets();
+    const splashScreen = document.getElementById('splash-screen');
+    const homeWindow = createHomeWindow();
+    document.body.appendChild(homeWindow);
+
+    const logArea = document.getElementById('logArea');
+    const ageUpButton = document.getElementById('ageUpButton');
+
+    // Add initial log entries
+    logEntries.forEach(entry => addLogEntry(entry));
+
+    // Simulate new events every 5 seconds
+    setInterval(() => {
+        const randomEntry = logEntries[Math.floor(Math.random() * logEntries.length)];
+        //android.speak(randomEntry);
+        addLogEntry(randomEntry);
+    }, 5000);
+    playerIcon = FaceGen.create(30, 'male', [1, 0, 0, 0]);
+
+    // Age Up button functionality
+    ageUpButton.addEventListener('click', ageUp);
+
+
+
+
+    // Remove splash screen
+    splashScreen.style.display = 'none';
+	initAI();
+}
+function getAiResponse(json){
+	alert(json);
+}
+let player = {
+    name: 'Shinji',
+    surname: 'Yamada',
+    age: 15,
+    skills: []
+};
+let game = {};
+let data = {};
+let savedGames = [];
+
+data.save = function() {
+    localStorage.setItem('data', JSON.stringify(data)); //data.vars=['player','npc','logs','year','game']
+}
+data.load = function() {
+    data = JSON.parse(localStorage.getItem('data'));
+}
+
+function setIsekaiGame() {
+    game.name = 'Isekai Life';
+}
+
+
+
+
+function showMenu() {
+    ListView.open('Menu', menuList);
+}
+async function askQues(){
+	let result = await InputBox.show(playerName, "", true, [
+	{type:'text',id:'prompt',text:'Prompt'},
+	{type:'button',text:'Ask',id:'askButton'},
+	{type:'button',text:'Cancel',id:'Cancel'}
+	]);
+	if(result.button=='askButton') android.aiEval(`ask("${result.prompt}")`);
+}
+let menuList = [{
+        icon: '🧬',
+        title: 'Start Life',
+        desc: 'Start a new life',
+        list: () => {
+            return gameList
         }
+    },
+    {
+        icon: '💾',
+        title: 'Save Life',
+        desc: 'Save current life',
+        do: () => { askQues()}
 
-
-
-        async function init() {
-            //await loadAssets();
-			const splashScreen = document.getElementById('splash-screen');
-            const homeWindow = createHomeWindow();
-            document.body.appendChild(homeWindow);
-
-            const logArea = document.getElementById('logArea');
-            const ageUpButton = document.getElementById('ageUpButton');
-
-            // Add initial log entries
-            logEntries.forEach(entry => addLogEntry(entry));
-
-            // Simulate new events every 5 seconds
-            setInterval(() => {
-                const randomEntry = logEntries[Math.floor(Math.random() * logEntries.length)];
-                //android.speak(randomEntry);
-                addLogEntry(randomEntry);
-            }, 5000);
-			playerIcon = FaceGen.create(30, 'male', [1, 0, 0, 0]);
-
-            // Age Up button functionality
-            ageUpButton.addEventListener('click', ageUp);
-			
-			
-            
-
-            // Remove splash screen
-            splashScreen.style.display = 'none';
+    },
+    {
+        icon: '📖',
+        title: 'Load Life',
+        desc: 'Load a saved life',
+        list: savedGames
+    },
+    {
+        separator: 'Misc'
+    },
+    {
+        icon: '⚙️',
+        title: 'Settings',
+        desc: 'Settings life',
+        do: () => pop('Under construction', 'This Feature will available in future.')
+    },
+];
+let schoolRoomsList = [{
+        icon: '🏫',
+        title: 'Class',
+        desc: 'Teaching room',
+        do: () => {}
+    },
+    {
+        icon: '👥',
+        title: 'Staff Room',
+        desc: 'Room for school staff',
+        do: () => {}
+    },
+    {
+        icon: '🏋️‍♀️',
+        title: 'Gym',
+        desc: 'Physical education room',
+        list: () => {
+            return [{
+                    icon: '🗿️',
+                    title: 'Gym Storeroom',
+                    desc: 'Storage room for gym equipment',
+                    do: () => {}
+                },
+                {
+                    icon: '🏋️‍♂️',
+                    title: 'Work out',
+                    desc: 'Area for physical exercise',
+                    do: () => {}
+                },
+                {
+                    separator: 'Facilities'
+                },
+                {
+                    icon: '💬',
+                    title: 'Interaction',
+                    desc: 'Area for socializing and relaxation',
+                    do: () => {}
+                },
+            ]
         }
-        let player = {
-            name: 'Shinji',
-            surname: 'Yamada',
-            age: 15,
-            skills: []
-        };
-        let game = {};
-        let data = {};
-        let savedGames = [];
-
-        data.save = function() {
-            localStorage.setItem('data', JSON.stringify(data)); //data.vars=['player','npc','logs','year','game']
+    },
+    {
+        icon: '🏟️',
+        title: 'Sports Ground',
+        desc: 'Outdoor sports area',
+        list: () => {
+            return [{
+                    icon: '🤖',
+                    title: 'Machine Room',
+                    desc: 'Room for sports equipment and machinery',
+                    do: () => {}
+                },
+                {
+                    icon: '🏋️‍♂️',
+                    title: 'Work out',
+                    desc: 'Area for physical exercise and sports',
+                    do: () => {}
+                },
+                {
+                    separator: 'Facilities'
+                },
+                {
+                    icon: '💬',
+                    title: 'Interaction',
+                    desc: 'Area for socializing and relaxation',
+                    do: () => {}
+                },
+            ]
         }
-        data.load = function() {
-            data = JSON.parse(localStorage.getItem('data'));
+    },
+    {
+        icon: '🏊‍♀️',
+        title: 'Swimming Pool',
+        desc: 'School swimming pool',
+        do: () => {}
+    },
+    {
+        icon: '🏥',
+        title: 'Infirmery',
+        desc: 'School medical room',
+        do: () => {}
+    },
+];
+let gameList = [{
+        icon: '🌌',
+        title: 'Isekai Life',
+        desc: 'Step into another world and experience epic adventures beyond imagination.',
+        do: () => {
+            InputBox.show("Character Creation", '', true, isekai.getPlayerCreationControls());
         }
+    },
+    {
+        icon: '🧙‍♂️',
+        title: 'Fantasy Life',
+        desc: 'An immersive world filled with magic, quests, and adventure.',
+        do: () => pop('Under construction', 'This Feature will available in future.')
+    },
 
-        function setIsekaiGame() {
-            game.name = 'Isekai Life';
-        }
+    {
+        icon: '🏫',
+        title: 'School Life',
+        desc: 'Relive the drama, friendships, and challenges of school days.',
+        do: () => pop('Under construction', 'This Feature will available in future.')
+    }
+];
+let school = {};
+let fantasy = {};
 
 
 
+function onBackButton() {
+    if (InputBox.inputBox.style.display == 'block') {
+        if (InputBox.allowCloseGlobal) InputBox.close();
+    } else if (listView) {
+        if (backButton.style.display == 'flex') ListView.goBack();
+        else ListView.close();
+    }
+}
 
-        function showMenu() {
-            ListView.open('Menu', menuList);
-        }
-        let menuList = [{
-                icon: '🧬',
-                title: 'Start Life',
-                desc: 'Start a new life',
-                list: () => {
-                    return gameList
-                }
-            },
-            {
-                icon: '💾',
-                title: 'Save Life',
-                desc: 'Save current life',
-                do: () => {}
-            },
-            {
-                icon: '📖',
-                title: 'Load Life',
-                desc: 'Load a saved life',
-                list: savedGames
-            },
-            {
-                separator: 'Misc'
-            },
-            {
-                icon: '⚙️',
-                title: 'Settings',
-                desc: 'Settings life',
-                do: () => pop('Under construction', 'This Feature will available in future.')
-            },
-        ];
-        let schoolRoomsList = [{
-                icon: '🏫',
-                title: 'Class',
-                desc: 'Teaching room',
-                do: () => {}
-            },
-            {
-                icon: '👥',
-                title: 'Staff Room',
-                desc: 'Room for school staff',
-                do: () => {}
-            },
-            {
-                icon: '🏋️‍♀️',
-                title: 'Gym',
-                desc: 'Physical education room',
-                list: () => {
-                    return [{
-                            icon: '🗿️',
-                            title: 'Gym Storeroom',
-                            desc: 'Storage room for gym equipment',
-                            do: () => {}
-                        },
-                        {
-                            icon: '🏋️‍♂️',
-                            title: 'Work out',
-                            desc: 'Area for physical exercise',
-                            do: () => {}
-                        },
-                        {
-                            separator: 'Facilities'
-                        },
-                        {
-                            icon: '💬',
-                            title: 'Interaction',
-                            desc: 'Area for socializing and relaxation',
-                            do: () => {}
-                        },
-                    ]
-                }
-            },
-            {
-                icon: '🏟️',
-                title: 'Sports Ground',
-                desc: 'Outdoor sports area',
-                list: () => {
-                    return [{
-                            icon: '🤖',
-                            title: 'Machine Room',
-                            desc: 'Room for sports equipment and machinery',
-                            do: () => {}
-                        },
-                        {
-                            icon: '🏋️‍♂️',
-                            title: 'Work out',
-                            desc: 'Area for physical exercise and sports',
-                            do: () => {}
-                        },
-                        {
-                            separator: 'Facilities'
-                        },
-                        {
-                            icon: '💬',
-                            title: 'Interaction',
-                            desc: 'Area for socializing and relaxation',
-                            do: () => {}
-                        },
-                    ]
-                }
-            },
-            {
-                icon: '🏊‍♀️',
-                title: 'Swimming Pool',
-                desc: 'School swimming pool',
-                do: () => {}
-            },
-            {
-                icon: '🏥',
-                title: 'Infirmery',
-                desc: 'School medical room',
-                do: () => {}
-            },
-        ];
-        let gameList = [{
-                icon: '🌌',
-                title: 'Isekai Life',
-                desc: 'Step into another world and experience epic adventures beyond imagination.',
-                do: () => {
-                    InputBox.show("Character Creation", '', true, isekai.getPlayerCreationControls());
-                }
-            },
-            {
-                icon: '🧙‍♂️',
-                title: 'Fantasy Life',
-                desc: 'An immersive world filled with magic, quests, and adventure.',
-                do: () => pop('Under construction', 'This Feature will available in future.')
-            },
+// Game state
+let year = 10;
+let money = 50000;
+let playerName = "Shinji Yamada";
+let playerJob = "Software Developer";
+let playerIcon = 'X';
 
-            {
-                icon: '🏫',
-                title: 'School Life',
-                desc: 'Relive the drama, friendships, and challenges of school days.',
-                do: () => pop('Under construction', 'This Feature will available in future.')
-            }
-        ];
-        let school = {};
-        let fantasy = {};
+// Action buttons array
+let actionButtons = [{
+    text: "Occupation",
+    action: 'alert(\'hello\')'
+}, {
+    text: "Assets",
+    action: "alert('hello')"
+}, {
+    text: "Relationships",
+    action: "alert('hello')"
+}, {
+    text: "Activites",
+    action: "ListView.open('Activites',schoolRoomsList)"
+}];
+school.showAct = function() {
+    ListView.show('Activites', schoolRoomsList);
+}
 
-        
+// Stats bars array
+let statBars = [{
+        name: "Health",
+        value: 80,
+        color: "#FF6B6B"
+    },
+    {
+        name: "Moral",
+        value: 60,
+        color: "#4ECDC4"
+    },
+    {
+        name: "Charm",
+        value: 70,
+        color: "#45B7D1"
+    },
+    {
+        name: "Strength",
+        value: 50,
+        color: "#F7B731"
+    },
+    {
+        name: "Intelligence",
+        value: 90,
+        color: "#6C5CE7"
+    }
+];
 
-        function onBackButton() {
-            if (InputBox.inputBox.style.display == 'block') {
-                if (InputBox.allowCloseGlobal) InputBox.close();
-            } else if (listView) {
-                if (backButton.style.display == 'flex') ListView.goBack();
-                else ListView.close();
-            }
-        }
+// Sample log entries
+const logEntries = [
+    "You woke up at 7:00 AM",
+    "You had breakfast: +10 Health",
+    "You went to work: +200",
+    "You had a great conversation with a coworker: +5 Charm",
+    "You finished a challenging project: +10 Intelligence",
+    "You hit the gym after work: +5 Strength",
+    "You had dinner with friends: +15 Moral",
+    "You read a book before bed: +5 Intelligence"
+];
 
-        // Game state
-        let year = 10;
-        let money = 50000;
-        let playerName = "Shinji Yamada";
-        let playerJob = "Software Developer";
-        let playerIcon = 'X';
+function showPlayerInfo() {
+    //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
+    //try{android.speak("hello");}catch(err){addLogEntry("Error " + err);}
+    //addLogEntry("List: "+Object.getOwnPropertyNames(android));
+    InputBox.show(playerName, "", true, [{
+        type: 'table',
+        data: [
+            ['Job', playerJob],
+            ['Age', year],
+            //Storage Path', android.getStoragePath()+'/h.html']//android.readFile(android.getStoragePath()+'/h.html')],
+            //['User Agent', navigator.userAgent],
+        ]
+    },{type:'text',id:'prompt'},{type:'button',id:'askButton'},{type:'button',id:'Cancel'}
+	]);
+    //alert(`Player: ${playerName}\nJob: ${playerJob}\nAge: ${year} years old`);
+}
 
-        // Action buttons array
-        let actionButtons = [{
-            text: "Occupation",
-            action: 'alert(\'hello\')'
-        }, {
-            text: "Assets",
-            action: "alert('hello')"
-        }, {
-            text: "Relationships",
-            action: "alert('hello')"
-        }, {
-            text: "Activites",
-            action: "ListView.open('Activites',schoolRoomsList)"
-        }];
-        school.showAct = function() {
-            ListView.show('Activites', schoolRoomsList);
-        }
+function ageUp() {
+    year++;
+    addLogEntry("Year " + year, true);
+}
 
-        // Stats bars array
-        let statBars = [{
-                name: "Health",
-                value: 80,
-                color: "#FF6B6B"
-            },
-            {
-                name: "Moral",
-                value: 60,
-                color: "#4ECDC4"
-            },
-            {
-                name: "Charm",
-                value: 70,
-                color: "#45B7D1"
-            },
-            {
-                name: "Strength",
-                value: 50,
-                color: "#F7B731"
-            },
-            {
-                name: "Intelligence",
-                value: 90,
-                color: "#6C5CE7"
-            }
-        ];
+function pop(title, desc) {
+    InputBox.show(title, desc, true);
+}
 
-        // Sample log entries
-        const logEntries = [
-            "You woke up at 7:00 AM",
-            "You had breakfast: +10 Health",
-            "You went to work: +200",
-            "You had a great conversation with a coworker: +5 Charm",
-            "You finished a challenging project: +10 Intelligence",
-            "You hit the gym after work: +5 Strength",
-            "You had dinner with friends: +15 Moral",
-            "You read a book before bed: +5 Intelligence"
-        ];
 
-        function showPlayerInfo() {
-            //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
-            //try{android.speak("hello");}catch(err){addLogEntry("Error " + err);}
-            //addLogEntry("List: "+Object.getOwnPropertyNames(android));
-            InputBox.show(playerName, "", true, [{
-                type: 'table',
-                data: [
-                    ['Job', playerJob],
-                    ['Age', year],
-                    ['User Agent', navigator.userAgent],
-                    //Storage Path', android.getStoragePath()+'/h.html']//android.readFile(android.getStoragePath()+'/h.html')],
-                    //['User Agent', navigator.userAgent],
-                ]
-            }]);
-            //alert(`Player: ${playerName}\nJob: ${playerJob}\nAge: ${year} years old`);
-        }
-
-        function ageUp() {
-            year++;
-            addLogEntry("Year " + year, true);
-        }
-
-        function pop(title, desc) {
-            InputBox.show(title, desc, true);
-        }
-		
-
-        // Initialize the game when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', init);let ChosenColors= ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'];
+// Initialize the game when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', init);let ChosenColors= ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'];
    /* //[  '#169EFF', '#167BFF', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF','#F092FF', '#D592FF', '#9000FF', '#3DA303', '#205900', '#1F1F1F',  '#555555',  '#ACACAC',  '#FAFAFA',  '#00FFB2'],//['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"],
     eyesColors: ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'],
     //['#131313', '#616161', '#C5C5C5', '#EBEBEB', '#7A5544', '#793D21', '#CB2626', '#CB2686', '#CB26C3', '#8E26CB', '#5226CB', '#2691CB', '#26BDCB', '#26CB9C', '#26CB60', '#00A1FF', '#34CB26', '#8ECB26', '#429F00', '#C5CB26', '#CB9926', '#CB7026', '#FD9F24', '#E8DC00', '#FDD524', '#EEC2FF'],
