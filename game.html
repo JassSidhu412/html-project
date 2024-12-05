@@ -879,11 +879,14 @@ function showMenu() {
 }
 async function askQues(){
 	let result = await InputBox.show(playerName, "", true, [
-	{type:'text',id:'prompt',text:'Prompt'},
-	{type:'button',text:'Ask',id:'askButton'},
-	{type:'button',text:'Cancel',id:'Cancel'}
+	{type:'text',id:'prompt',label:'Prompt'},
+	{type:'text',id:'scr',label:'Script'},
+	{type:'button',label:'Ask',id:'askButton'},
+	{type:'button',label:'Eval',id:'evalButton'},
+	{type:'button',label:'Cancel',id:'Cancel'}
 	]);
 	if(result.button=='askButton') android.aiEval(`ask("${result.prompt}")`);
+	if(result.button=='evalButton') eval(result.scr);
 }
 let menuList = [{
         icon: '🧬',
