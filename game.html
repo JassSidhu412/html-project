@@ -848,7 +848,7 @@ async function init() {
 
     // Remove splash screen
     splashScreen.style.display = 'none';
-	initAI();
+	
 }
 function getAiResponse(json){
 	alert(json);
@@ -881,15 +881,18 @@ function showMenu() {
     ListView.open('Menu', menuList);
 }
 async function askQues(){
+	initAI();
 	let result = await InputBox.show(playerName, "", true, [
 	{type:'text',id:'prompt',label:'Prompt'},
 	{type:'text',id:'scr',label:'Script'},
 	{type:'button',label:'Ask',id:'askButton'},
 	{type:'button',label:'Eval',id:'evalButton'},
+	{type:'button',label:'Hide',id:'hideButton'},
 	{type:'button',label:'Cancel',id:'Cancel'}
 	]);
 	if(result.button=='askButton') android.aiEval(`ask("${result.prompt}")`);
 	if(result.button=='evalButton') eval(result.scr);
+	if(result.button=='evalButton') android.openAI();
 }
 //Get menu list for runtime
 let menuList = [ListFolder('🧬','Start Life','Start a new life',() => {return gameList;}),
