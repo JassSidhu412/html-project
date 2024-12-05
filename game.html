@@ -851,7 +851,9 @@ async function init() {
     splashScreen.style.display = 'none';
 	
 }
+let isPop=false
 function getAiResponse(json){
+	if(isPop) pop("AI Response",json);
 	addLogEntry(json);
 }
 let player = {
@@ -891,7 +893,7 @@ async function askQues(){
 	{type:'button',label:'Hide',id:'hideButton'},
 	{type:'button',label:'Cancel',id:'Cancel'}
 	]);
-	if(result.button=='askButton') android.aiEval(`ask("${result.prompt}")`);
+	if(result.button=='askButton') android.aiEval(`ask(${JSON.stringify(result.prompt)})`);
 	if(result.button=='evalButton') eval(result.scr);
 	if(result.button=='evalButton') android.openAI();
 }
