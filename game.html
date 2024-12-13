@@ -43,6 +43,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 #home-window .menu-button {
     background: none;
     border: none;
@@ -536,13 +537,22 @@ scroll-area.::-webkit-scrollbar-thumb:hover {
     bottom: 0;
 }
 
-#listViewHeader {
+#listViewHeadera {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
     background-color: #4a90e2;
     color: white;
+}
+#listViewHeader {
+    background-color: #4169e1;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #listViewCloseButton,
@@ -554,13 +564,18 @@ scroll-area.::-webkit-scrollbar-thumb:hover {
     color: white;
     padding: 0;
     width: 40px;
-    height: 40px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 #listViewTitle {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+#listViewTitlea {
     font-size: 20px;
     font-weight: bold;
     flex-grow: 1;
@@ -1782,10 +1797,12 @@ const ListView = {
             listView = document.createElement('div');
             listView.id = 'listView';
             listView.innerHTML = `
+			${isAndroid() ? '<div id="" class="top-bar"></div>' : ''}
                         <div id="listViewHeader">
                             <button id="listViewCloseButton" style="font-size:32px;">×</button>
                             <button id="listViewBackButton" style="display: none;"><div class="triangle-left" style="border-right-color:#eee;"></div></button>
                             <span id="listViewTitle"></span>
+							<span></span>
                         </div>
                         <div id="listViewItems"></div>
                     `;
