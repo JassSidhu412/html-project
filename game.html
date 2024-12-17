@@ -33,6 +33,15 @@
     height: 100%;
 }
 
+.top-padding-bar {
+    background-color: #4169e1;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 
 #home-window .top-bar {
     background-color: #4169e1;
     color: white;
@@ -1323,7 +1332,7 @@ function createHomeWindow() {
     homeWindow.id = 'home-window';
     homeWindow.innerHTML = `
                 <div class="container">
-				${isAndroid() ? '<div id="" class="top-bar"></div>' : ''}
+				${isAndroid() ? '<div id="" class="top-padding-bar"></div>' : ''}
                     <div class="top-bar">
                         <button class="menu-button" onclick="showMenu()">☰</button>
                         <div class="game-title">Life Simulator</div>
@@ -1797,7 +1806,7 @@ const ListView = {
             listView = document.createElement('div');
             listView.id = 'listView';
             listView.innerHTML = `
-			${isAndroid() ? '<div id="" class="top-bar"></div>' : ''}
+			${isAndroid() ? '<div id="" class="top-padding-bar"></div>' : ''}
                         <div id="listViewHeader">
                             <button id="listViewCloseButton" style="font-size:32px;">×</button>
                             <button id="listViewBackButton" style="display: none;"><div class="triangle-left" style="border-right-color:#eee;"></div></button>
