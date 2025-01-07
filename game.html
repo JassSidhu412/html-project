@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.0.2">
+    <meta name="version" content="0.0.1.0">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -741,10 +741,11 @@ body {
     const response = await fetch(url);
     return await response.text();
 }
+
 window.onbeforeunload = function() {
     return 'Want to leave?';
 }
-
+window.version = document.getElementsByName("version")[0].content;
 
 function getRandom(max, min) {
     if (!min) min = 0;
@@ -848,6 +849,7 @@ function initAI(){
 
 async function init() {
     //await loadAssets();
+	
     const splashScreen = document.getElementById('splash-screen');
     const homeWindow = createHomeWindow();
     document.body.appendChild(homeWindow);
@@ -868,9 +870,6 @@ async function init() {
 
     // Age Up button functionality
     ageUpButton.addEventListener('click', ageUp);
-
-
-
 
     // Remove splash screen
     splashScreen.style.display = 'none';
@@ -903,8 +902,6 @@ function setIsekaiGame() {
 }
 
 
-
-
 function showMenu() {
     ListView.open('Menu', menuList);
 }
@@ -923,18 +920,23 @@ async function askQues(){
 	if(result.button=='evalButton') android.openAI();
 }
 //Get menu list for runtime
-let menuList = [ListFolder('🧬','Start Life','Start a new life',() => {return gameList;}),
+let menuList = [
+    {
+        icon: '🧬',
+        title: 'Start Life',
+        desc: 'Begin a brand-new life adventure',
+        do: () => { return gameList; }
+    },
     {
         icon: '💾',
         title: 'Save Life',
-        desc: 'Save current life',
-        do: () => { askQues()}
-
+        desc: 'Save your current progress in life',
+        do: () => { save(); }
     },
     {
         icon: '📖',
         title: 'Load Life',
-        desc: 'Load a saved life',
+        desc: 'Continue from a previously saved life',
         list: savedGames
     },
     {
@@ -943,15 +945,66 @@ let menuList = [ListFolder('🧬','Start Life','Start a new life',() => {return 
     {
         icon: '⚙️',
         title: 'Settings',
-        desc: 'Settings life',
-        do: () => android.openAI()//pop('Under construction', 'This Feature will available in future.')
+        desc: 'Customize your life settings',
+        do: () => {}
     },
-	{
-        icon: '⚙️',
+    {
+        icon: '🔄',
         title: 'Update',
-        desc: 'Version: '+version+" "+checkForUpdate(),
-        do: () => Update()
+        desc: 'Version: ' + version + " - " + checkForUpdate(),
+        do: () => { Update(); }
     },
+    {
+        icon: '🤖',
+        title: 'Load AI',
+        desc: 'Initialize the AI assistant for help',
+        do: () => { loadAI(); }
+    },
+    {
+        icon: '❓',
+        title: 'Ask from AI',
+        desc: 'Get answers or insights from the AI',
+        do: () => { askAI(); }
+    },
+    {
+        icon: '🌦️',
+        title: 'Weather',
+        desc: 'Check the current weather',
+        do: () => { pop("This Week",getWeather()); }
+    },
+    {
+        separator: 'Debug'
+    },
+    {
+        icon: '⚡',
+        title: 'Quick New Game',
+        desc: 'Instantly start a new game',
+        do: () => { startQuickNewGame(); }
+    },
+    {
+        icon: '🗑️',
+        title: 'Clear Cache',
+        desc: 'Clear temporary files and cache',
+        do: () => { clearCache(); }
+    },
+    {
+        icon: '❌',
+        title: 'Clear Save Games',
+        desc: 'Delete all saved games',
+        do: () => { clearSavedGames(); }
+    },
+    {
+        icon: '🛠️',
+        title: 'Modify Stats',
+        desc: 'Edit in-game statistics and attributes',
+        do: () => { modifyStats(); }
+    },
+    {
+        icon: '🔍',
+        title: 'Eval',
+        desc: 'Evaluate custom code snippets',
+        do: () => { evaluateCode(); }
+    }
 ];
 let schoolRoomsList = [{
         icon: '🏫',
@@ -2054,7 +2107,7 @@ window.getDragonName=function(type) {
 
 
 function checkForUpdate(){
-	window.version = document.getElementsByName("version")[0].content;
+	
 	window.newVersion=null;
 	if(isAndroid()){
 		
@@ -2071,6 +2124,14 @@ function Update(){
 		android.reset();
 	}
 }
+
+function getWeather() {
+	let htm= android.downloadString("https://www.google.com/search?q=moga+weather&oq=moga+we&gs_lcrp=EgZjaHJvbWUqFwgBEAAYFBhGGIMBGIACGIcCGLEDGIAEMgYIABBFGDkyFwgBEAAYFBhGGIMBGIACGIcCGLEDGIAEMgwIAhAAGBQYhwIYgAQyBwgDEAAYgAQyBwgEEAAYgAQyDAgFEAAYQxiABBiKBTIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABNIBCDM2NDBqMGo3qAIIsAIB&sourceid=chrome&ie=UTF-8",125000);
+    let dummyElement = document.createElement('div');
+	dummyElement.innerHTML= htm.split(`<div class="R3Y3ec rr3bxd">`)[1].split(`<span jscontroller="eLOmLe">`)[0];
+	return dummyElement.innerText;
+}
+ 
 let isekai={};
 isekai.startLife = function(res){
   player={name:res.name,surname:res.surname,gender:res.gender,traits:res.traits};
