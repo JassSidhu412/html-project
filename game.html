@@ -2063,6 +2063,13 @@ function checkForUpdate(){
 	//if(newVersion!=version)
 		return newVersion;
 }
+function Update(){
+	if(isAndroid()){
+		android.deleteFile(android.getDir()+"/base.html");
+		android.downloadFile("https://raw.githubusercontent.com/JassSidhu412/html-project/main/game.html",android.getDir()+"/base.html");
+		android.reset();
+	}
+}
 let isekai={};
 isekai.startLife = function(res){
   player={name:res.name,surname:res.surname,gender:res.gender,traits:res.traits};
