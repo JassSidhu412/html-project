@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="version" content="1.0.0">
+    <meta name="version" content="0.0.2">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -745,8 +744,7 @@ body {
 window.onbeforeunload = function() {
     return 'Want to leave?';
 }
-let version = document.getElementsByName("version")[0].content;
-let newVersion=null;
+
 
 function getRandom(max, min) {
     if (!min) min = 0;
@@ -2056,9 +2054,12 @@ window.getDragonName=function(type) {
 
 
 function checkForUpdate(){
+	window.version = document.getElementsByName("version")[0].content;
+	window.newVersion=null;
 	if(isAndroid()){
+		
 		let s=android.downloadString("https://raw.githubusercontent.com/JassSidhu412/html-project/main/game.html",300);
-		newVersion=s.split('<meta name="version" content="')[1].split('"')[0];
+		window.newVersion=newVersion=s.split('<meta name="version" content="')[1].split('"')[0];
 	}
 	//if(newVersion!=version)
 		return newVersion;
@@ -2321,6 +2322,5 @@ isekai.flags={
 };
 
     </script>
-	
 </body>
 </html>
