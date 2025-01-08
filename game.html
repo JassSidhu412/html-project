@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.0.1.0">
+    <meta name="version" content="0.0.2.0">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -919,13 +919,22 @@ async function askQues(){
 	if(result.button=='evalButton') eval(result.scr);
 	if(result.button=='evalButton') android.openAI();
 }
+async function evaluateCode(){
+	initAI();
+	let result = await InputBox.show(playerName, "", true, [
+	{type:'text',id:'scr',label:'Script'},
+	{type:'button',label:'Eval',id:'evalButton'},
+	{type:'button',label:'Cancel',id:'Cancel'}
+	]);
+	if(result.button=='evalButton') eval(result.scr);
+}
 //Get menu list for runtime
 let menuList = [
     {
         icon: '🧬',
         title: 'Start Life',
         desc: 'Begin a brand-new life adventure',
-        do: () => { return gameList; }
+        list: () => { return gameList; }
     },
     {
         icon: '💾',
@@ -958,19 +967,13 @@ let menuList = [
         icon: '🤖',
         title: 'Load AI',
         desc: 'Initialize the AI assistant for help',
-        do: () => { loadAI(); }
+        do: () => { if(isAndroid()) android.loadAI(); }
     },
     {
         icon: '❓',
         title: 'Ask from AI',
         desc: 'Get answers or insights from the AI',
         do: () => { askAI(); }
-    },
-    {
-        icon: '🌦️',
-        title: 'Weather',
-        desc: 'Check the current weather',
-        do: () => { pop("This Week",getWeather()); }
     },
     {
         separator: 'Debug'
@@ -2131,7 +2134,18 @@ function getWeather() {
 	dummyElement.innerHTML= htm.split(`<div class="R3Y3ec rr3bxd">`)[1].split(`<span jscontroller="eLOmLe">`)[0];
 	return dummyElement.innerText;
 }
- 
+ async function getPlayerDetails() {
+    let controls = [
+        { type: 'text', id: 'name', label: 'First Name', default: 'Shinji' },
+        { type: 'list', id: 'traits', maxSelect: 2, label: 'Traits', 
+          options: ['Brave', 'Charismatic', 'Wise', 'Curious', 'Navigator', 
+                    'Elemental Affinity', 'Divine Favor', 'Diplomat', 'Gossiper'] },
+        { type: 'slider', id: 'strength', label: 'Strength', min: 1, max: 10, default: 5 },
+        { type: 'button', id: 'submit', label: 'Submit' }
+    ];
+    let result = await InputBox.show('Create Character', 'Enter your character details:', true, controls);
+    console.log(result);
+}
 let isekai={};
 isekai.startLife = function(res){
   player={name:res.name,surname:res.surname,gender:res.gender,traits:res.traits};
