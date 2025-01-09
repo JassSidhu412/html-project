@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.0.2.0">
+    <meta name="version" content="0.0.3.0">
+	<meta name="whatsnew" content="{whatsnew}">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -747,7 +748,7 @@ window.onbeforeunload = function() {
 }
 window.version = document.getElementsByName("version")[0].content;
 
-function getRandom(max, min) {
+function getRandom(max, min) {//both inclusive
     if (!min) min = 0;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -1303,10 +1304,13 @@ let FaceGen = {
         FaceGen.createControls();
     },
     changeGender: function(s) {
-        FaceGen.gender = s.split('-')[0];
+		if(typeof(s)=='number'){
+			FaceGen.gender = s==0?'male':'female';
+		}
+		else FaceGen.gender = s.split('-')[0];
         document.getElementById('face').innerHTML = FaceGen.getCurrentSVG();
-        InputBox.changeSwitch('style', 'hair-option');
-        FaceGen.showSection('hair-option');
+        InputBox.changeSwitch('style', 0);//'hair-option');
+        FaceGen.showSection(0);//'hair-option');
         //FaceGen.createControls();
         //document.getElementById('hair-option').onclick();
         //if(FaceGen.gender=='male') FaceGen.showSection(0);
@@ -1322,13 +1326,13 @@ let FaceGen = {
         let num = 4;
         if (FaceGen.gender == 'female') document.getElementById('back-hair-option').style.display = 'inline-block';
         else document.getElementById('back-hair-option').style.display = 'none';
-        if (type === 'hair-option')
+        if (type === 0)//'hair-option')
             if (FaceGen.gender == 'female') num = 3;
             else num = 0;
-        else if (type === 'Hair Color')
+        else if (type === 2)//'Hair Color')
             if (FaceGen.gender == 'female') num = 5;
             else num = 1;
-        else if (type === 'Eye Color')
+        else if (type === 3)//'Eye Color')
             if (FaceGen.gender == 'female') num = 6;
             else num = 2;
         for (let i = 0; i < 7; i++) {
@@ -1598,14 +1602,24 @@ let InputBox = {
                 switch (control.type) {
                     case 'text':
                     case 'number':
+						InputBox.Result[control.id]=control.action;
+						let name;
+						let ImStyle=control.image?`font-size: 25px;padding:0;background-color:white;` : '';
+						if(control.image) name= control.image;
+						else if(control.button)name=control.button;
                         inputBoxControls.innerHTML += `
                                 <label for="${control.id}">${InputBox.getText(control.label)}</label>
-                                <input type="${control.type}" id="${control.id}" name="${control.id}" 
+								<div style="display: flex;">
+                                <input style="flex-grow: 1;" type="${control.type}" id="${control.id}" name="${control.id}" 
                                     value="${control.type === 'number' && (control.default === undefined || control.default === 0) ? 0 : control.default || ''}"
+									returnKeyType="done"
                                     ${control.min !== undefined ? `min="${control.min}"` : ''}
                                     ${control.max !== undefined ? `max="${control.max}"` : ''}
-                                    onchange="InputBox.validateNumberInput(this)">
+                                    ${control.type=='number'?` onkeypress="InputBox.validateNumberKey(${control.min})" oninput="InputBox.validateNumberInput(this)" onchange="InputBox.validateNumberInput(this)"`:''}>
+									${name?`<button style="width: auto;margin-left: 2px;${ImStyle}" onclick="InputBox.Result['${control.id}']()">${name}</button></div>`:''}
                             `;
+							//let textBox=document.getElementById(control.id);
+							//textBox.nextSibling.onclick=control.action;
                         break;
                     case 'select':
                         const options = control.options.map((option) => `<option value="${option}">${option}</option>`).join('');
@@ -1669,8 +1683,8 @@ let InputBox = {
                             control.maxSelect = 1000;
                         }
 
-                        const listItems = control.options.map((option) => `
-                                <button onclick="InputBox.toggleListSelection('${control.id}', '${option}', ${control.maxSelect})">${option}</button>
+                        const listItems = control.options.map((option,i) => `
+                                <button data-index="${i}" onclick="InputBox.toggleListSelection('${control.id}', '${option}', ${control.maxSelect})">${option}</button>
                             `).join('');
                         inputBoxControls.innerHTML += `
                                 <div class="listContainer">
@@ -1683,7 +1697,10 @@ let InputBox = {
                         break;
                     case 'switch':
                         if (!control.default) control.default = 0;
-                        const switchItems = control.options.map((option) => InputBox.getSwitchOption(control, option)).join('');
+						for(let i =0;i<control.options.length;i++){
+							if(typeof(control.options[i])=='string') control.options[i]={text:control.options[i]};
+						}
+                        const switchItems = control.options.map((option,index) => InputBox.getSwitchOption(control, option,index)).join('');
                         inputBoxControls.innerHTML += `
                                 <div class="switchContainer">
                                     <label>${control.label}</label>
@@ -1696,7 +1713,7 @@ let InputBox = {
 
                         if (control.default < control.options.length || control.default > 0) num = control.default;
 
-                        InputBox.toggleSwitchSelection(control.id, control.options[num]);
+                        InputBox.toggleSwitchSelection(control.id, num);//control.options[num]);
                         const el = document.getElementById(control.id);
                         el.children[num].classList.add('selected');
                         break;
@@ -1751,7 +1768,11 @@ let InputBox = {
                 InputBox.Result.button = buttonId;
                 const inputs = inputBoxControls.querySelectorAll('input, select');
                 inputs.forEach((input) => {
-                    InputBox.Result[input.name] = input.value;
+					console.log(input.type);
+					if(input.type =='number' ||input.type =='range') InputBox.Result[input.name] = Number(input.value);
+					else if(input.tagName =='SELECT') InputBox.Result[input.name] = input.selectedIndex 
+                    else InputBox.Result[input.name] = input.value;
+					//console.log(input.type);
                 });
 
                 closeInputBox();
@@ -1778,14 +1799,20 @@ let InputBox = {
         }
         progressBarFill.style.backgroundColor = color;
     },
+	validateNumberKey: function(min) {
+		if(event.key=='e'||event.key=='.'||event.key=='+') event.preventDefault();
+		else if(min!==undefined&& min >= 0 && event.key == '-')  event.preventDefault();
+	},
 
     validateNumberInput: function(input) {
+		
         const min = parseInt(input.min);
         const max = parseInt(input.max);
-        const value = parseInt(input.value);
+        const value = parseInt(input.value.replace('e','').replace('.',''));
 
         if (value < min) input.value = min;
-        if (value > max) input.value = max;
+        else if (value > max) input.value = max;
+		else if(Number(input.value)!=value) input.value=value;
     },
 
     toggleListSelection: function(listId, option, maxSelect) {
@@ -1802,11 +1829,13 @@ let InputBox = {
         }
 
         // Update InputBox.Result
-        InputBox.Result[listId] = Array.from(container.querySelectorAll('button.selected')).map((btn) => btn.textContent);
+        InputBox.Result[listId] = Array.from(container.querySelectorAll('button.selected')).map((btn) => parseInt(btn.dataset.index));//btn.textContent);
     },
 
-    getSwitchOption: function(control, option) {
-        let id = '';
+    getSwitchOption: function(control, option,index) {
+		//if(typeof(option) == 'string') option={id:option,text:option};
+		//option.id='_sw'+option.id;
+        let id = ` id="_sw${option}"`;
         let style = '';
         let text = option;
         let Id = option;
@@ -1818,19 +1847,20 @@ let InputBox = {
             if (option.style) style = ` style="${option.style}"`;
             text = option.text;
         }
-        return `<button${id+style} onclick="InputBox.toggleSwitchSelection('${control.id}', '${Id}',${control.action})">${text}</button>`;
+        return `<button${id+style} onclick="InputBox.toggleSwitchSelection('${control.id}', ${index},${control.action})">${text}</button>`;
     },
 
     toggleSwitchSelection: function(switchId, option, action) {
-        const button = event.target;
+        let button; //= document.getElementById(option);//event.target;
         const container = document.getElementById(switchId);
         const buttons = container.querySelectorAll('button');
         if (typeof(action) === 'function') action(option);
         buttons.forEach((btn) => btn.classList.remove('selected'));
+		button = buttons[option];
         button.classList.add('selected');
 
         // Update InputBox.Result
-        InputBox.Result[switchId] = typeof option == 'string' ? option : option.id;
+        InputBox.Result[switchId] = option;
     },
 
     changeSwitch: function(switchId, option, button) {
@@ -1839,8 +1869,9 @@ let InputBox = {
         const container = document.getElementById(switchId);
         const buttons = container.querySelectorAll('button');
         buttons.forEach((btn) => btn.classList.remove('selected'));
+		button = buttons[option];
         button.classList.add('selected');
-        InputBox.Result[switchId] = typeof option == 'string' ? option : option.id;
+        InputBox.Result[switchId] =  option;// == 'string' ? option : option.id;
     },
 
     getText: function(text) {
@@ -2108,14 +2139,15 @@ window.getDragonName=function(type) {
     return list;
 }
 
-
+let hts="";
 function checkForUpdate(){
 	
 	window.newVersion=null;
 	if(isAndroid()){
 		
-		let s=android.downloadString("https://raw.githubusercontent.com/JassSidhu412/html-project/main/game.html",300);
-		window.newVersion=newVersion=s.split('<meta name="version" content="')[1].split('"')[0];
+		let s = android.downloadString("https://raw.githubusercontent.com/JassSidhu412/html-project/main/game.html",300);
+		hrs=s;
+		window.newVersion = s.split('<meta name="version" content="')[1].split('"')[0];
 	}
 	//if(newVersion!=version)
 		return newVersion;
@@ -2145,6 +2177,25 @@ function getWeather() {
     ];
     let result = await InputBox.show('Create Character', 'Enter your character details:', true, controls);
     console.log(result);
+}
+async function newGame(){
+let playerRes = await InputBox.show('New Game', "Fill the form to start new game", true, [
+		{ type: 'table', data: [
+            ['Story', 'Isekai Hero'],
+            ['Chapters', 10],
+			['Genre',[{color:'pink',text:"Romance"},"Fantasy",{style:'text-shadow: 2px 2px 5px red;',text:"Supernatural"}]],
+			['Traffic',{value:20,max:100,color:'green'}]]},
+        { type: 'text', id: 'name', label: 'Name', default: 'Shinji',button:'Random',action:()=>{document.getElementById('name').value=getJapName();} },
+		{ type: 'number', id: 'age', label: 'Age',min:15,max:100, default: 15 ,button:'Ran',image:'🎲',action:()=>{document.getElementById('age').value=getRandom(100,15);} },
+		{ type: 'select', id: 'gender', label: 'Gender', options: ['Male', 'Female'] },
+        { type: 'list', id: 'traits', maxSelect: 2, label: 'Traits', options: ['Brave', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Elemental Affinity'] },
+		{ type: 'switch', id: 'race', label: 'Race',default:0, options: ['Human', 'Elf','Dwarf', 'Dragon', 'Demon', 'Angel', {text:'Celestial (Premium)',id:'celestial-switch',style:'background-color:gold;'}] ,action:()=>{}},
+        { type: 'slider', id: 'randomness', label: 'Randomness', min: 1, max: 100, default: 50 },
+		{ type: 'progress', id: 'energy', label: 'Energy', max: 100, value: 75 },
+        { type: 'button', id: 'submit', label: 'Submit' },
+		{ type: 'button', id: 'cancel', label: 'Cancel' }
+    ]);
+	console.log(playerRes);
 }
 let isekai={};
 isekai.startLife = function(res){
