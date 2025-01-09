@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.0.3.0">
+    <meta name="version" content="0.0.4.0">
 	<meta name="whatsnew" content="{whatsnew}">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -766,6 +766,10 @@ function parseColor(color) {
 function isAndroid(){
 	return typeof android !== 'undefined'
 }
+function toast(text){
+	if(typeof android !== 'undefined') android.toast(text.toString());
+	else alert(text);
+}
 let uniqueIdCounter = 0;
 
 function getUniqueID() {
@@ -921,13 +925,12 @@ async function askQues(){
 	if(result.button=='evalButton') android.openAI();
 }
 async function evaluateCode(){
-	initAI();
-	let result = await InputBox.show(playerName, "", true, [
-	{type:'text',id:'scr',label:'Script'},
-	{type:'button',label:'Eval',id:'evalButton'},
+	let result = await InputBox.show("Evaluate Javascript", "", true, [
+	{ type: 'select', id: 'clas', label: 'Class', options: ['window','android', 'isekai'] },
+	{type:'text',id:'scr',label:'Script',image:'🚀',action:(input)=>{toast(eval(document.getElementById('clas').value+'.'+input.value));}},
 	{type:'button',label:'Cancel',id:'Cancel'}
 	]);
-	if(result.button=='evalButton') eval(result.scr);
+	//if(result.button=='evalButton') eval(result.scr);
 }
 //Get menu list for runtime
 let menuList = [
@@ -961,7 +964,7 @@ let menuList = [
     {
         icon: '🔄',
         title: 'Update',
-        desc: 'Version: ' + version + " - " + checkForUpdate(),
+        desc: 'Version: ' + version + " " + checkForUpdate(),
         do: () => { Update(); }
     },
     {
@@ -1616,7 +1619,7 @@ let InputBox = {
                                     ${control.min !== undefined ? `min="${control.min}"` : ''}
                                     ${control.max !== undefined ? `max="${control.max}"` : ''}
                                     ${control.type=='number'?` onkeypress="InputBox.validateNumberKey(${control.min})" oninput="InputBox.validateNumberInput(this)" onchange="InputBox.validateNumberInput(this)"`:''}>
-									${name?`<button style="width: auto;margin-left: 2px;${ImStyle}" onclick="InputBox.Result['${control.id}']()">${name}</button></div>`:''}
+									${name?`<button style="width: auto;margin-left: 2px;${ImStyle}" onclick="textAction('${control.id}',this)">${name}</button></div>`:''}
                             `;
 							//let textBox=document.getElementById(control.id);
 							//textBox.nextSibling.onclick=control.action;
@@ -1742,6 +1745,7 @@ let InputBox = {
                 } else if (typeof data === 'object' && data !== null) return `<td><div class="tableProgress"><div class="tableProgressBar" style="width:${data.value/data.max*100}%;background-color:${data.color??=''}"></div></div></td>`; //`<td><progress value="${data.value}" max="${data.max}"/></td>`;
                 return `<td>${data}</td>`;
             }
+			
 
             function closeInputBox() {
                 InputBox.inputBox.scrollTop = 0;
@@ -1825,7 +1829,8 @@ let InputBox = {
         } else if (selectedButtons.length < maxSelect) {
             button.classList.add('selected');
         } else {
-            alert(`You can only select up to ${maxSelect} items.`);
+            if(isAndroid()) android.toast(`You can only select up to ${maxSelect} items.`);
+			else alert(`You can only select up to ${maxSelect} items.`);
         }
 
         // Update InputBox.Result
@@ -1878,6 +1883,9 @@ let InputBox = {
         return text;
     }
 };
+function textAction(id,button){
+	InputBox.Result[id](button.previousElementSibling);
+	}
 InputBox.init();
 function InputButton(id,text){
 	if(!text) text = id;
@@ -2150,7 +2158,7 @@ function checkForUpdate(){
 		window.newVersion = s.split('<meta name="version" content="')[1].split('"')[0];
 	}
 	//if(newVersion!=version)
-		return newVersion;
+		return newVersion?'Latest Available Version: '+ newVersion:"";
 }
 function Update(){
 	if(isAndroid()){
@@ -2185,8 +2193,8 @@ let playerRes = await InputBox.show('New Game', "Fill the form to start new game
             ['Chapters', 10],
 			['Genre',[{color:'pink',text:"Romance"},"Fantasy",{style:'text-shadow: 2px 2px 5px red;',text:"Supernatural"}]],
 			['Traffic',{value:20,max:100,color:'green'}]]},
-        { type: 'text', id: 'name', label: 'Name', default: 'Shinji',button:'Random',action:()=>{document.getElementById('name').value=getJapName();} },
-		{ type: 'number', id: 'age', label: 'Age',min:15,max:100, default: 15 ,button:'Ran',image:'🎲',action:()=>{document.getElementById('age').value=getRandom(100,15);} },
+        { type: 'text', id: 'name', label: 'Name', default: 'Shinji',button:'Random',action:(input)=>{input.value=getJapName();} },
+		{ type: 'number', id: 'age', label: 'Age',min:15,max:100, default: 15 ,button:'Ran',image:'🎲',action:(input)=>{input.value=getRandom(100,15);} },
 		{ type: 'select', id: 'gender', label: 'Gender', options: ['Male', 'Female'] },
         { type: 'list', id: 'traits', maxSelect: 2, label: 'Traits', options: ['Brave', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Elemental Affinity'] },
 		{ type: 'switch', id: 'race', label: 'Race',default:0, options: ['Human', 'Elf','Dwarf', 'Dragon', 'Demon', 'Angel', {text:'Celestial (Premium)',id:'celestial-switch',style:'background-color:gold;'}] ,action:()=>{}},
