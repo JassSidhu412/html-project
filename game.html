@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.0.7.0">
+    <meta name="version" content="0.0.8.0">
     <meta name="whatsnew" content="{whatsnew}">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -931,7 +931,7 @@ async function askQues(){
 	if(result.button=='evalButton') android.openAI();
 }
 async function evaluateCode(){
-	let classes=['window','android', 'isekai','InputBox','ListView','FaceGen','ImageGen'];
+	let classes=['window','android', 'isekai','InputBox','ListView','FaceGen','ImageGen','device'];
 	let result = await InputBox.show("Evaluate Javascript", "", true, [
 	{ type: 'select', id: 'clas', label: 'Class', options: classes },
 	{type:'text',id:'scr',label:'Script',image:'🚀',action:(input)=>{toast(eval(document.getElementById('clas').value+'.'+input.value));}},
