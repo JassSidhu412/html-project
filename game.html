@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.2.1.0">
-    <meta name="whatsnew" content="What's new feature added">
+    <meta name="version" content="0.3.0.0">
+    <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -1638,7 +1638,7 @@ let InputBox = {
 								<div style="display: flex;">
                                 <input style="flex-grow: 1;" type="${control.type}" id="${control.id}" name="${control.id}" 
                                     value="${control.type === 'number' && (control.value === undefined || control.value === 0) ? 0 : control.value || ''}"
-									returnKeyType="done"
+									enterkeyhint="done"
                                     ${control.min !== undefined ? `min="${control.min}"` : ''}
                                     ${control.max !== undefined ? `max="${control.max}"` : ''}
                                     ${control.type=='number'?` onkeypress="InputBox.validateNumberKey(${control.min})" oninput="InputBox.validateNumberInput(this)" onchange="InputBox.validateNumberInput(this)"`:''}>
@@ -1994,11 +1994,21 @@ const ListView = {
                 listItems.appendChild(separator);
                 return;
             }
+			visibility=false;
+			if(item.visibility===undefined&&item.visibility===true) visibility=true;
+			else if(typeof(item.visibility) ==='function') visibility=item.visibility();
+			if(!visibility) return;
 
             const hide = typeof item.hide === 'function' ? item.hide() : item.hide;
             if (hide) return;
 
             const disable = typeof item.disable === 'function' ? item.disable() : item.disable;
+			if(item.disable===undefined){
+				enabled=false;
+				if(item.enabled===undefined&&item.enabled===true) enabled=true;
+				else if(typeof(item.enabled) ==='function') enabled=item.enabled();
+				if(!enabled) disable=true;
+			}
 
             const listItem = document.createElement('div');
             listItem.className = 'listItem' + (disable ? ' disabled' : '');
