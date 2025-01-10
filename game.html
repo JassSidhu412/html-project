@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.1.0">
+    <meta name="version" content="0.3.2.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -726,7 +726,59 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #3151ac;
 }
+.toast-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
 
+.toast {
+    background-color: #333333;
+    color: #FFFFFF;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+#notification-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 9000;
+        }
+        .notification {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            max-width: 300px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .notification::before {
+            content: '✨';
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body>
@@ -766,16 +818,13 @@ function parseColor(color) {
         b
     };
 }
-function isAndroid(){
-	return typeof android !== 'undefined'
-}
 if(isAndroid()){
 	window.device=JSON.parse(android.getDeviceVersion());
 	
 }
 function toast(text){
 	if(typeof android !== 'undefined') android.toast(text.toString());
-	else alert(text);
+	else winToast(text.toString(),false);
 }
 let uniqueIdCounter = 0;
 
@@ -885,7 +934,7 @@ async function init() {
 
     // Remove splash screen
     splashScreen.style.display = 'none';
-	
+	window.container = document.getElementById('notification-container');
 }
 let isPop=false
 function getAiResponse(json){
@@ -932,7 +981,7 @@ async function askQues(){
 	if(result.button=='evalButton') android.openAI();
 }
 async function evaluateCode(){
-	let classes=['window','android', 'isekai','InputBox','ListView','FaceGen','ImageGen','device','navigator'];
+	let classes=['window','android', 'isekai','InputBox','ListView','FaceGen','ImageGen','device','navigator','os'];
 	let result = await InputBox.show("Evaluate Javascript", "", true, [
 	{ type: 'select', id: 'clas', label: 'Class', options: classes },
 	{type:'text',id:'scr',label:'Script',image:'🚀',action:(input)=>{toast(eval(document.getElementById('clas').value+'.'+input.value));}},
@@ -1465,6 +1514,8 @@ function createHomeWindow() {
                         </div>
                     </div>
                 </div>
+				<div id="toast-container" class="toast-container"></div>
+				<div id="notification-container"></div>
             `;
     return homeWindow;
 }
@@ -1589,8 +1640,22 @@ IconGen.createAnim = function(w, h, fps, images, end) {
     return svg;
 }
 
-
+function isAndroid(){
+	return typeof android !== 'undefined'
+}
+let os={android:typeof android !== 'undefined'};
+os.windows =!os.android;
+let projectUrl="https://raw.githubusercontent.com/JassSidhu412/html-project/main/";
+if(os.android){
+	os.dir=android.getDir();
+	os.storage=android.getStoragePath();
+	os.reset = function(){android.reset();}
+	os.downloadFile = function(url,file){android.downloadFile(url,file);}
+	os.downloadString = function(url,bytes){ return android.downloadString(url.toString(),bytes);}
+	os.exit() = function(){android.finish();}
+}
 let InputBox = {
+	Params:{},
     Result: {},
     allowCloseGlobal: false,
     inputBox: document.createElement('div'),
@@ -1619,6 +1684,7 @@ let InputBox = {
             inputBoxDesc.textContent = InputBox.getText(desc);
             inputBoxControls.innerHTML = '';
             InputBox.Result = {};
+			InputBox.Params={};
             InputBox.allowCloseGlobal = allowClose;
 
             if (controls == undefined) controls = [];
@@ -1657,6 +1723,7 @@ let InputBox = {
                             `;
                         break;
                     case 'button':
+						InputBox.Params[control.id]={condition:control.condition,alt:control.alt};
                         inputBoxControls.innerHTML += `
                                 <button onclick="handleButtonClick('${control.id}')">${InputBox.getText(control.label)}</button>
                             `;
@@ -1708,6 +1775,7 @@ let InputBox = {
                             mx = '';
                             control.maxSelect = 1000;
                         }
+						InputBox.Result[control.id]=[];
 
                         const listItems = control.options.map((option,i) => `
                                 <button data-index="${i}" onclick="InputBox.toggleListSelection('${control.id}', '${option}', ${control.maxSelect})">${option}</button>
@@ -1792,6 +1860,15 @@ let InputBox = {
             InputBox.overlay.onclick = InputBox.close
 
             window.handleButtonClick = (buttonId) => {
+				if(InputBox.Params[buttonId].condition!==undefined){
+					let fun=InputBox.Params[buttonId].condition;
+					if(typeof fun ==='function') fun=fun();
+					
+					if(!fun){
+						if(InputBox.Params[buttonId].alt!==undefined) InputBox.Params[buttonId].alt()
+						return;
+					}
+				}
                 InputBox.Result.button = buttonId;
                 const inputs = inputBoxControls.querySelectorAll('input, select');
                 inputs.forEach((input) => {
@@ -2179,6 +2256,112 @@ window.getDragonName=function(type) {
     return list;
 }
 
+const toastQueue = [];
+let isShowingToast = false;
+
+function winToast(text, long) {
+    toastQueue.push({
+        text,
+        long
+    });
+    if (!isShowingToast) {
+        showNextToast();
+    }
+}
+
+function showNextToast() {
+    if (toastQueue.length === 0) {
+        isShowingToast = false;
+        return;
+    }
+
+    isShowingToast = true;
+    const {
+        text,
+        long
+    } = toastQueue.shift();
+    const duration = long ? 3500 : 2000;
+
+    const toastElement = document.createElement('div');
+    toastElement.className = 'toast';
+    toastElement.textContent = text;
+
+    const container = document.getElementById('toast-container');
+    container.appendChild(toastElement);
+
+    // Force reflow to enable transition
+    toastElement.offsetHeight;
+
+    toastElement.classList.add('show');
+
+    setTimeout(() => {
+        toastElement.classList.remove('show');
+        setTimeout(() => {
+            container.removeChild(toastElement);
+            showNextToast();
+        }, 300);
+    }, duration);
+}
+
+function showMultipleToasts() {
+    winToast('First toast', false);
+    winToast('Second toast', true);
+    winToast('Third toast', false);
+}
+
+const maxNotifications = 3; // Maximum number of notifications shown at once
+        const notificationDuration = 3000; // Duration in milliseconds
+        const notificationQueue = [];
+        const container = document.getElementById('notification-container');
+        let lastNotificationTime = 0;
+        const minNotificationDelay = 200; // Minimum delay between notifications in milliseconds
+
+        function notify(text) {
+            const currentTime = Date.now();
+            const timeSinceLastNotification = currentTime - lastNotificationTime;
+            
+            if (timeSinceLastNotification < minNotificationDelay) {
+                setTimeout(() => notify(text), minNotificationDelay - timeSinceLastNotification);
+                return;
+            }
+
+            lastNotificationTime = currentTime;
+            notificationQueue.push(text);
+            processQueue();
+        }
+
+        function processQueue() {
+            if (container.children.length < maxNotifications && notificationQueue.length > 0) {
+                const text = notificationQueue.shift();
+                const notification = createNotification(text);
+                container.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        container.removeChild(notification);
+                        processQueue();
+                    }, 300);
+                }, notificationDuration);
+            }
+        }
+
+        function createNotification(text) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = text;
+            return notification;
+        }
+
+        function simulateMultipleNotifications() {
+            for (let i = 0; i < 10; i++) {
+                notify(`Notification ${i + 1}`);
+            }
+        }
 //=========================================================================version.js===================================================================================
 let hts="";
 function checkForUpdate(){
@@ -2233,7 +2416,7 @@ let playerRes = await InputBox.show('New Game', "Fill the form to start new game
 		{ type: 'switch', id: 'race', label: 'Race',value:0, options: ['Human', 'Elf','Dwarf', 'Dragon', 'Demon', 'Angel', {text:'Celestial (Premium)',id:'celestial-switch',style:'background-color:gold;'}] ,action:()=>{}},
         { type: 'slider', id: 'randomness', label: 'Randomness', min: 1, max: 100, value: 50 },
 		{ type: 'progress', id: 'energy', label: 'Energy', max: 100, value: 75 },
-        { type: 'button', id: 'submit', label: 'Submit' },
+        { type: 'button', id: 'submit', label: 'Submit',condition:()=>{return InputBox.Result.traits.length==2;},alt:()=>{toast('Select 2 Traits');} },
 		{ type: 'button', id: 'cancel', label: 'Cancel' }
     ]);
 	console.log(playerRes);
