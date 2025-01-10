@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.0.0">
+    <meta name="version" content="0.3.1.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -1995,7 +1995,7 @@ const ListView = {
                 return;
             }
 			visibility=false;
-			if(item.visibility===undefined&&item.visibility===true) visibility=true;
+			if(item.visibility===undefined||item.visibility===true) visibility=true;
 			else if(typeof(item.visibility) ==='function') visibility=item.visibility();
 			if(!visibility) return;
 
@@ -2005,7 +2005,7 @@ const ListView = {
             const disable = typeof item.disable === 'function' ? item.disable() : item.disable;
 			if(item.disable===undefined){
 				enabled=false;
-				if(item.enabled===undefined&&item.enabled===true) enabled=true;
+				if(item.enabled===undefined||item.enabled===true) enabled=true;
 				else if(typeof(item.enabled) ==='function') enabled=item.enabled();
 				if(!enabled) disable=true;
 			}
