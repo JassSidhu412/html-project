@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.4.0">
+    <meta name="version" content="0.3.5.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -1653,7 +1653,7 @@ if(os.android){
 	os.reset = function(){android.reset();}
 	os.downloadFile = function(url,file){android.downloadFile(url,file);}
 	os.downloadString = function(url,bytes){ return android.downloadString(url.toString(),bytes);}
-	os.exit() = function(){android.finish();}
+	os.exit = function(){android.finish();}
 	os.checkFile = function(path){return android.checkFile(path);}
 	os.writeFile = function(path,text){android.writeFile(path,text);}
 	os.readFile = function(path){return android.readFile(path);}
