@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.2.0">
+    <meta name="version" content="0.3.3.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -471,7 +471,7 @@
     transition: all 0.3s ease;
 }
 #inputBox .tableProgress {
-    background-color: #d9d9d9;
+    background-color: #e8e8e8;/*#d9d9d9;*/
     border-radius: 5px;
 }
 
@@ -1697,13 +1697,14 @@ let InputBox = {
 						InputBox.Result[control.id]=control.action;
 						let name;
 						let ImStyle=control.image?`font-size: 25px;padding:0;background-color:white;` : '';
+						let valnum =control.min === undefined  ? 0:control.min;
 						if(control.image) name= control.image;
 						else if(control.button)name=control.button;
                         inputBoxControls.innerHTML += `
                                 <label for="${control.id}">${InputBox.getText(control.label)}</label>
 								<div style="display: flex;">
                                 <input style="flex-grow: 1;" type="${control.type}" id="${control.id}" name="${control.id}" 
-                                    value="${control.type === 'number' && (control.value === undefined || control.value === 0) ? 0 : control.value || ''}"
+                                    value="${control.type === 'number' && (control.value === undefined || control.value === 0) ? valnum : control.value || ''}"
 									enterkeyhint="done"
                                     ${control.min !== undefined ? `min="${control.min}"` : ''}
                                     ${control.max !== undefined ? `max="${control.max}"` : ''}
@@ -2076,10 +2077,10 @@ const ListView = {
 			else if(typeof(item.visibility) ==='function') visibility=item.visibility();
 			if(!visibility) return;
 
-            const hide = typeof item.hide === 'function' ? item.hide() : item.hide;
+            let hide = typeof item.hide === 'function' ? item.hide() : item.hide;
             if (hide) return;
 
-            const disable = typeof item.disable === 'function' ? item.disable() : item.disable;
+            let disable = typeof item.disable === 'function' ? item.disable() : item.disable;
 			if(item.disable===undefined){
 				enabled=false;
 				if(item.enabled===undefined||item.enabled===true) enabled=true;
@@ -2309,10 +2310,10 @@ function showMultipleToasts() {
     winToast('Third toast', false);
 }
 
-const maxNotifications = 3; // Maximum number of notifications shown at once
+const maxNotifications = 7; // Maximum number of notifications shown at once
         const notificationDuration = 3000; // Duration in milliseconds
         const notificationQueue = [];
-        const container = document.getElementById('notification-container');
+        
         let lastNotificationTime = 0;
         const minNotificationDelay = 200; // Minimum delay between notifications in milliseconds
 
@@ -2408,15 +2409,16 @@ let playerRes = await InputBox.show('New Game', "Fill the form to start new game
             ['Story', 'Isekai Hero'],
             ['Chapters', 10],
 			['Genre',[{color:'pink',text:"Romance"},"Fantasy",{style:'text-shadow: 2px 2px 5px red;',text:"Supernatural"}]],
-			['Traffic',{value:20,max:100,color:'green'}]]},
+			['Traffic',{value:20,max:100,color:'green'}],
+			['Traffic',{value:20,max:100}]]},
         { type: 'text', id: 'name', label: 'Name', value: 'Shinji',button:'Random',action:(input)=>{input.value=getJapName();} },
-		{ type: 'number', id: 'age', label: 'Age',min:15,max:100, value: 15 ,button:'Ran',image:'🎲',action:(input)=>{input.value=getRandom(100,15);} },
+		{ type: 'number', id: 'age', label: 'Age',min:15,max:100, values: 15 ,button:'Ran',image:'🎲',action:(input)=>{input.value=getRandom(100,15);} },
 		{ type: 'select', id: 'gender', label: 'Gender', options: ['Male', 'Female'] },
         { type: 'list', id: 'traits', maxSelect: 2, label: 'Traits', options: ['Brave', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Elemental Affinity'] },
-		{ type: 'switch', id: 'race', label: 'Race',value:0, options: ['Human', 'Elf','Dwarf', 'Dragon', 'Demon', 'Angel', {text:'Celestial (Premium)',id:'celestial-switch',style:'background-color:gold;'}] ,action:()=>{}},
+		{ type: 'switch', id: 'race', label: 'Race',value:0, options: ['Human', 'Elf','Dwarf', 'Dragon', 'Demon', 'Angel', {text:'Celestial (Premium)',id:'celestial-switch',style:'background-color:gold;'}] ,action:()=>{toast('hello')}},
         { type: 'slider', id: 'randomness', label: 'Randomness', min: 1, max: 100, value: 50 },
 		{ type: 'progress', id: 'energy', label: 'Energy', max: 100, value: 75 },
-        { type: 'button', id: 'submit', label: 'Submit',condition:()=>{return InputBox.Result.traits.length==2;},alt:()=>{toast('Select 2 Traits');} },
+        { type: 'button', id: 'submit', label: 'Submit',condition:()=>{return InputBox.Result.traits.length==2;},alt:()=>{notify('Select 2 Traits');} },
 		{ type: 'button', id: 'cancel', label: 'Cancel' }
     ]);
 	console.log(playerRes);
@@ -2598,12 +2600,14 @@ isekai.activities = [
                 {
                     icon: '🌳',
                     title: 'Forest',
+					enabled:false,
                     desc: 'Hunt wild beasts and gather rare herbs.',
                     do: () => {}
                 },
                 {
                     icon: '🏔️',
                     title: 'Mountain',
+					visibility:false,
                     desc: 'Explore caves and mine valuable ores.',
                     do: () => {}
                 },
