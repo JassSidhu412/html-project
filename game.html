@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.3.0">
+    <meta name="version" content="0.3.4.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -479,6 +479,7 @@
     background-color: #2196F3;
     height: 20px;
     border-radius: 5px;
+	transition: width 0.3s ease;
 }
 .scroll-area {
             display: flex;
@@ -1653,7 +1654,16 @@ if(os.android){
 	os.downloadFile = function(url,file){android.downloadFile(url,file);}
 	os.downloadString = function(url,bytes){ return android.downloadString(url.toString(),bytes);}
 	os.exit() = function(){android.finish();}
+	os.checkFile = function(path){return android.checkFile(path);}
+	os.writeFile = function(path,text){android.writeFile(path,text);}
+	os.readFile = function(path){return android.readFile(path);}
+	os.deleteFile = function(path){android.deleteFile(path);}
+	os.checkDir = function(path){return android.checkDir(path);}
+	os.createDir = function(path){android.createDir(path);}
+	os.deleteDir = function(path){android.deleteDir(path);}
 }
+
+
 let InputBox = {
 	Params:{},
     Result: {},
@@ -1740,7 +1750,7 @@ let InputBox = {
                         inputBoxControls.innerHTML += `
                                 <div class="inputBoxProgressContainer">
                                     <label for="${control.id}">${InputBox.getText(control.label)}</label>
-                                    <div id="${control.id}" class="inputBoxProgressBar">
+                                    <div data-type="progressBar" data-max="${control.max}" id="${control.id}" class="inputBoxProgressBar">
                                         <div class="inputBoxProgressBarFill"></div>
                                     </div>
                                 </div>
@@ -1784,7 +1794,7 @@ let InputBox = {
                         inputBoxControls.innerHTML += `
                                 <div class="listContainer">
                                     <label>${control.label}${mx}</label>
-                                    <div id="${control.id}">
+                                    <div data-max="${control.maxSelect}" data-type="list" id="${control.id}">
                                         ${listItems}
                                     </div>
                                 </div>
@@ -1799,7 +1809,7 @@ let InputBox = {
                         inputBoxControls.innerHTML += `
                                 <div class="switchContainer">
                                     <label>${control.label}</label>
-                                    <div id="${control.id}">
+                                    <div data-type="switch" id="${control.id}">
                                         ${switchItems}
                                     </div>
                                 </div>
@@ -1834,7 +1844,7 @@ let InputBox = {
                             s += `<span class="data-item">${item}</span>`;
                     }
                     return `${s}</td>`;
-                } else if (typeof data === 'object' && data !== null) return `<td><div class="tableProgress"><div class="tableProgressBar" style="width:${data.value/data.max*100}%;background-color:${data.color??=''}"></div></div></td>`; //`<td><progress value="${data.value}" max="${data.max}"/></td>`;
+                } else if (typeof data === 'object' && data !== null) return `<td><div class="tableProgress"><div ${data.id ? `id="${data.id}"`:''} class="tableProgressBar" data-max="${data.max}" data-type="progress" style="width:${data.value/data.max*100}%;background-color:${data.color??=''}"></div></div></td>`; //`<td><progress value="${data.value}" max="${data.max}"/></td>`;
                 return `<td>${data}</td>`;
             }
 			
@@ -1939,7 +1949,7 @@ let InputBox = {
     getSwitchOption: function(control, option,index) {
 		//if(typeof(option) == 'string') option={id:option,text:option};
 		//option.id='_sw'+option.id;
-        let id = ` id="_sw${option}"`;
+        let id = ` id="_sw${option}"`;//Some Extra things to remove
         let style = '';
         let text = option;
         let Id = option;
@@ -1980,7 +1990,19 @@ let InputBox = {
 
     getText: function(text) {
         return text;
-    }
+    },
+	setValue: function(controlId,value){
+		let control = document.getElementById(controlId);
+		if(control){
+			if(control.type==='range') control.value=value;
+			else if(control.type==='text') control.value=value;
+			else if(control.type==='number') control.value=value;
+			else if(control.tagName==='SELECT') control.selectedIndex=value;
+			else if(control.dataset.type==='switch') InputBox.toggleSwitchSelection(controlId,value);
+			else if(control.dataset.type==='progress') control.style.width = (value/Number(control.dataset.max) *100)+"%";
+			else if(control.dataset.type==='progressBar') control.children[0].style.width = (value/Number(control.dataset.max) *100)+"%";
+		}
+	}
 };
 function textAction(id,button){
 	InputBox.Result[id](button.previousElementSibling);
@@ -2409,11 +2431,12 @@ let playerRes = await InputBox.show('New Game', "Fill the form to start new game
             ['Story', 'Isekai Hero'],
             ['Chapters', 10],
 			['Genre',[{color:'pink',text:"Romance"},"Fantasy",{style:'text-shadow: 2px 2px 5px red;',text:"Supernatural"}]],
-			['Traffic',{value:20,max:100,color:'green'}],
-			['Traffic',{value:20,max:100}]]},
+			['Rating',{id:'rating',value:50,max:100,color:'green'}],
+			['Traffic',{id:'traffic',value:20,max:100}]]},
         { type: 'text', id: 'name', label: 'Name', value: 'Shinji',button:'Random',action:(input)=>{input.value=getJapName();} },
 		{ type: 'number', id: 'age', label: 'Age',min:15,max:100, values: 15 ,button:'Ran',image:'🎲',action:(input)=>{input.value=getRandom(100,15);} },
 		{ type: 'select', id: 'gender', label: 'Gender', options: ['Male', 'Female'] },
+		{ type: 'label', value: 'Gender', text: "Hello" },
         { type: 'list', id: 'traits', maxSelect: 2, label: 'Traits', options: ['Brave', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Elemental Affinity'] },
 		{ type: 'switch', id: 'race', label: 'Race',value:0, options: ['Human', 'Elf','Dwarf', 'Dragon', 'Demon', 'Angel', {text:'Celestial (Premium)',id:'celestial-switch',style:'background-color:gold;'}] ,action:()=>{toast('hello')}},
         { type: 'slider', id: 'randomness', label: 'Randomness', min: 1, max: 100, value: 50 },
