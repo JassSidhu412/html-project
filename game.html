@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.5.0">
+    <meta name="version" content="0.3.7.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -753,7 +753,7 @@ body {
 
 #notification-container {
             position: fixed;
-            top: 20px;
+            top: 80px;
             left: 20px;
             display: flex;
             flex-direction: column;
@@ -791,7 +791,156 @@ body {
         </svg>
     </div>
     <script>
-        
+        //=============================================================================scripts\init.js=============================================================================
+function isAndroid(){
+	return typeof android !== 'undefined'
+}
+let os={android:typeof android !== 'undefined'};
+os.windows =!os.android;
+let projectUrl="https://raw.githubusercontent.com/JassSidhu412/html-project/main/";
+if(os.android){
+	os.dir=android.getDir();
+	os.storage=android.getStoragePath();
+	os.reset = function(){android.reset();}
+	os.downloadFile = function(url,file){android.downloadFile(url,file);}
+	os.downloadString = function(url,bytes){ return android.downloadString(url.toString(),bytes);}
+	os.exit = function(){android.finish();}
+	os.checkFile = function(path){return android.checkFile(path);}
+	os.writeFile = function(path,text){android.writeFile(path,text);}
+	os.readFile = function(path){return android.readFile(path);}
+	os.deleteFile = function(path){android.deleteFile(path);}
+	os.checkDir = function(path){return android.checkDir(path);}
+	os.createDir = function(path){android.createDir(path);}
+	os.deleteDir = function(path){android.deleteDir(path);}
+}
+
+// Initialize the game when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', init);
+
+async function init() {
+    const splashScreen = document.getElementById('splash-screen');
+    const homeWindow = createHomeWindow();
+    document.body.appendChild(homeWindow);
+    const logArea = document.getElementById('logArea');
+    const ageUpButton = document.getElementById('ageUpButton');
+	changeStatsBars();
+    ageUpButton.addEventListener('click', ageUp);
+    // Remove splash screen
+    splashScreen.style.display = 'none';
+	window.container = document.getElementById('notification-container');
+	for(let n of npcs){
+		Rel.push({ icon: n.face(50), title: n.fullname, desc: {text:`Relationships: `,value:n.relationships,max:100} });
+	}
+	moneyElement = document.querySelector('#home-window .money');
+	playerNameElement = document.querySelector('#home-window .player-name');
+	playerJobElement = document.querySelector('#home-window .player-job');
+	playerIconElement = document.querySelector('#home-window .player-icon');
+}
+let bars=[];
+let moneyElement;
+let playerNameElement;
+let playerJobElement;
+let playerIconElement;
+//=============================================================================scripts\main.js=============================================================================
+class Person{
+	constructor(Name,Surname,Age,Gender,Appearance){
+		[this.name,this.surname,this.age,this.gender,this.appearance]=[Name,Surname,Age,Gender,Appearance];
+	}
+	get fullname(){ return this.name + ' ' + this.surname;}
+	face(size=40){ return FaceGen.create(size, this.gender === 0 ? 'male' : 'female' , this.appearance)}
+}
+class Player extends Person{
+	constructor(Name,Surname,Age,Gender,Appearance){
+		super(Name,Surname,Age,Gender,Appearance);
+	}
+}
+// Game state
+let year = 10;
+
+//let copy = Object.assign({}, original);
+let player = {
+    name: 'Shinji',
+    surname: 'Yamada',
+	gender:0,
+    age: 15,
+	money:50000,
+	job: 'Adventurer',
+	appearance: [1,0,0,0],
+	health:90,
+	moral:50
+};
+let npc={name:'Rin',surname:'Yamana',gender:1,age:15,appearance: [0,0,0,0]};
+let npcs = [
+	Object.assign(new Person(), {name:'Rin', surname:'Yamana', gender:1, age:15, appearance: [0,0,0,0],relationships:100}),
+	Object.assign(new Person(), {name:'Erika', surname:'Yamana', gender:1, age:14, appearance: [2,3,4,2],relationships:80}),
+	Object.assign(new Person(), {name:'Laura', surname:'Stone', gender:1, age:13, appearance: [0,0,0,0],relationships:50}),
+	Object.assign(new Person(), {name:'Leon', surname:'Yamana', gender:0, age:15, appearance: [1,0,2,0],relationships:10}),
+];
+npc=npcs[0];//Object.assign(new Person(),npc);
+player=Object.assign(new Player(),player);
+
+let Rel=[];
+
+function UpdateStats(){
+	bars[0].style.width = `${player.health}%`;
+	bars[1].style.width = `${player.moral}%`;
+}
+//newPlayer.fullname=function(){return player.name+' '+player.surname};
+
+
+
+// Action buttons array
+let actionButtons = [
+	{ text: "Occupation", action: 'alert(\'hello\')'},
+	{ text: "Assets", action: "alert('hello')"},
+	{ text: "Relationships", action: "ListView.open('Relationships',Rel)"},
+	{ text: "Activites", action: "ListView.open('Activites',schoolRoomsList)"}];
+
+// Stats bars array
+let statBars = [
+	{ name: "Health", value: 80, color: "#FF6B6B" },
+    { name: "Moral", value: 60, color: "#4ECDC4"},
+    { name: "Charm", value: 70, color: "#45B7D1"},
+    { name: "Strength", value: 50, color: "#F7B731"},
+    { name: "Intelligence", value: 90, color: "#6C5CE7"}];
+
+
+function showPlayerInfo() {
+    InputBox.show(player.fullname, "", true, [{
+        type: 'table', data: [
+            ['Job', player.job],
+            ['Age', player.age],
+        ]}]);
+}
+function ageUp() {
+    year++;
+    addLogEntry("Year " + year, true);
+}
+
+function pop(title, desc) {
+    InputBox.show(title, desc, true);
+}
+function log(text,isHeading=false){
+	addLogEntry(text,isHeading);
+}
+async function exit(){
+	let confirm = await InputBox.show("Confirm Exit","Are you sure you want to exit",true,[{ type: 'button', id: 'yes', label: 'Yes' },{ type: 'button', id: 'no', label: 'No' }])
+	if(confirm.button=='yes') os.exit();
+}
+
+function onBackButton() {
+    if (InputBox.inputBox.style.display == 'block') {
+        if (InputBox.allowCloseGlobal) InputBox.close();
+    }
+	else if (listView) {
+        if (backButton.style.display == 'flex') ListView.goBack();
+        else ListView.close();
+    }
+	else if(os.android) exit();
+}
+
+
+//=============================================================================scripts\core.js=============================================================================
 //==========================================================================core.js========================================================================================
 async function fetchFile(url) {
     const response = await fetch(url);
@@ -856,8 +1005,10 @@ async function loadAllAssets() {
     }
 }
 
+//==========================================================================scripts\activities.js==========================================================================
 
 
+//=============================================================================scripts\extra.js=============================================================================
 let url = `https://raw.githubusercontent.com/JassSidhu412/html-project/main/scripts/core.js`;
 async function loadAssets() {
     const response = await fetch(url);
@@ -908,7 +1059,7 @@ function initAI(){
 }
 
 
-
+/*
 async function init() {
     //await loadAssets();
 	
@@ -936,18 +1087,32 @@ async function init() {
     // Remove splash screen
     splashScreen.style.display = 'none';
 	window.container = document.getElementById('notification-container');
+	Rel.push({ icon: npc.face(), title: npc.fullname(), desc: `Age: ${npc.age}` });
 }
+
+/*
+function showPlayerInfo() {
+    //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
+    //try{android.speak("hello");}catch(err){addLogEntry("Error " + err);}
+    //addLogEntry("List: "+Object.getOwnPropertyNames(android));
+    InputBox.show(player.fullname(), "", true, [{
+        type: 'table',
+        data: [
+            ['Job', player.job],
+            ['Age', year],
+            //Storage Path', android.getStoragePath()+'/h.html']//android.readFile(android.getStoragePath()+'/h.html')],
+            //['User Agent', navigator.userAgent],
+        ]
+    }//,{type:'text',id:'prompt'},{type:'button',id:'askButton'},{type:'button',id:'Cancel'}
+	]);
+    //alert(`Player: ${playerName}\nJob: ${playerJob}\nAge: ${year} years old`);
+}*/
 let isPop=false
 function getAiResponse(json){
 	if(isPop) pop("AI Response",json);
 	addLogEntry(json);
 }
-let player = {
-    name: 'Shinji',
-    surname: 'Yamada',
-    age: 15,
-    skills: []
-};
+
 let game = {};
 let data = {};
 let savedGames = [];
@@ -1068,7 +1233,7 @@ let menuList = [
         icon: '❌',
         title: 'Clear Save Games',
         desc: 'Delete all saved games',
-        do: () => { clearSavedGames(); }
+        do: () => { exit(); }
     },
     {
         icon: '🛠️',
@@ -1166,95 +1331,16 @@ let schoolRoomsList = [{
         do: () => {}
     },
 ];
-let gameList = [{
-        icon: '🌌',
-        title: 'Isekai Life',
-        desc: 'Step into another world and experience epic adventures beyond imagination.',
-        do: () => {
-            //InputBox.show("Character Creation", '', true, 
-			isekai.getPlayerCreationControls();//);
-        }
-    },
-    {
-        icon: '🧙‍♂️',
-        title: 'Fantasy Life',
-        desc: 'An immersive world filled with magic, quests, and adventure.',
-        do: () => pop('Under construction', 'This Feature will available in future.')
-    },
-
-    {
-        icon: '🏫',
-        title: 'School Life',
-        desc: 'Relive the drama, friendships, and challenges of school days.',
-        do: () => pop('Under construction', 'This Feature will available in future.')
-    }
-];
+let gameList = [
+	{ icon: '🌌', title: 'Isekai Life', desc: 'Step into another world and experience epic adventures beyond imagination.', do: () => { isekai.getPlayerCreationControls();}},
+    { icon: '🧙‍♂️', title: 'Fantasy Life', desc: 'An immersive world filled with magic, quests, and adventure.', do: () => pop('Under construction', 'This Feature will available in future.')},
+    { icon: '🏫', title: 'School Life', desc: 'Relive the drama, friendships, and challenges of school days.', do: () => pop('Under construction', 'This Feature will available in future.')}];
 let school = {};
 let fantasy = {};
 
-
-
-function onBackButton() {
-    if (InputBox.inputBox.style.display == 'block') {
-        if (InputBox.allowCloseGlobal) InputBox.close();
-    } else if (listView) {
-        if (backButton.style.display == 'flex') ListView.goBack();
-        else ListView.close();
-    }
-}
-
-// Game state
-let year = 10;
-let money = 50000;
-let playerName = "Shinji Yamada";
-let playerJob = "Software Developer";
-let playerIcon = 'X';
-
-// Action buttons array
-let actionButtons = [{
-    text: "Occupation",
-    action: 'alert(\'hello\')'
-}, {
-    text: "Assets",
-    action: "alert('hello')"
-}, {
-    text: "Relationships",
-    action: "alert('hello')"
-}, {
-    text: "Activites",
-    action: "ListView.open('Activites',schoolRoomsList)"
-}];
 school.showAct = function() {
     ListView.show('Activites', schoolRoomsList);
 }
-
-// Stats bars array
-let statBars = [{
-        name: "Health",
-        value: 80,
-        color: "#FF6B6B"
-    },
-    {
-        name: "Moral",
-        value: 60,
-        color: "#4ECDC4"
-    },
-    {
-        name: "Charm",
-        value: 70,
-        color: "#45B7D1"
-    },
-    {
-        name: "Strength",
-        value: 50,
-        color: "#F7B731"
-    },
-    {
-        name: "Intelligence",
-        value: 90,
-        color: "#6C5CE7"
-    }
-];
 
 // Sample log entries
 const logEntries = [
@@ -1268,35 +1354,9 @@ const logEntries = [
     "You read a book before bed: +5 Intelligence"
 ];
 
-function showPlayerInfo() {
-    //try{android.toast("hello");}catch(err){addLogEntry("Error " + err);}
-    //try{android.speak("hello");}catch(err){addLogEntry("Error " + err);}
-    //addLogEntry("List: "+Object.getOwnPropertyNames(android));
-    InputBox.show(playerName, "", true, [{
-        type: 'table',
-        data: [
-            ['Job', playerJob],
-            ['Age', year],
-            //Storage Path', android.getStoragePath()+'/h.html']//android.readFile(android.getStoragePath()+'/h.html')],
-            //['User Agent', navigator.userAgent],
-        ]
-    },{type:'text',id:'prompt'},{type:'button',id:'askButton'},{type:'button',id:'Cancel'}
-	]);
-    //alert(`Player: ${playerName}\nJob: ${playerJob}\nAge: ${year} years old`);
-}
-
-function ageUp() {
-    year++;
-    addLogEntry("Year " + year, true);
-}
-
-function pop(title, desc) {
-    InputBox.show(title, desc, true);
-}
 
 
-// Initialize the game when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', init);
+//========================================================================scripts\face-generator.js========================================================================
 //==========================================================================face=generator.js====================================================================================
 let ChosenColors= ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'];
    /* //[  '#169EFF', '#167BFF', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF','#F092FF', '#D592FF', '#9000FF', '#3DA303', '#205900', '#1F1F1F',  '#555555',  '#ACACAC',  '#FAFAFA',  '#00FFB2'],//['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"],
@@ -1471,6 +1531,7 @@ let FaceGen = {
     }
 };
 
+//==========================================================================scripts\home-window.js==========================================================================
 //==========================================================================home-window.js=====================================================================================
 function createHomeWindow() {
     const homeWindow = document.createElement('div');
@@ -1485,13 +1546,13 @@ function createHomeWindow() {
                     </div>
                     <div class="player-bar">
                         <div class="player-info" onclick="showPlayerInfo()">
-                            <span class="player-icon">${playerIcon}</span>
+                            <span class="player-icon">${player.face()}</span>
                             <div>
-                                <div class="player-name">${playerName}</div>
-                                <div class="player-job">${playerJob}</div>
+                                <div class="player-name">${player.fullname}</div>
+                                <div class="player-job">${player.job}</div>
                             </div>
                         </div>
-                        <div class="money">💰 ${formatMoney(money)}</div>
+                        <div class="money">💰 ${formatMoney(player.money)}</div>
                     </div>
                     <div class="log-area" id="logArea">
                         <!-- Log entries will be added here dynamically -->
@@ -1516,7 +1577,7 @@ function createHomeWindow() {
                     </div>
                 </div>
 				<div id="toast-container" class="toast-container"></div>
-				<div id="notification-container"></div>
+				<div id="notification-container" style"${os.android?'top: 120px;':''}"></div>
             `;
     return homeWindow;
 }
@@ -1529,13 +1590,17 @@ function changeActionButtons(){
 	btns.innerHTML = actionButtons.map(button => `<button class="action-button" onclick="${button.action}">${button.text}</button>`).join('');
 }
 function changeStatsBars(){
-	let bars=document.getElementById("stat-bars");
-	bars.innerHTML = statBars.map(stat => `
+	let sbars=document.getElementById("stat-bars");
+	sbars.innerHTML = statBars.map(stat => `
                                     <div class="stat-bar">
                                         <div class="stat-label" style="color: ${stat.color};">${stat.name}</div>
                                         <div class="stat-progress"><div class="stat-fill" style="width: ${stat.value}%; background-color: ${stat.color};"></div></div>
                                     </div>
                                 `).join('');
+	statBars.forEach((stat, index) => {
+        bars[index] = document.querySelectorAll('#home-window .stat-fill')[index];
+    });
+	
 }
 function addLogEntry(entry, isNextYear = false) {
     const logArea = document.getElementById('logArea');
@@ -1552,25 +1617,28 @@ function addLogEntry(entry, isNextYear = false) {
 }
 
 function updateUI() {
-    // Update money
+    /*/ Update money
     const moneyElement = document.querySelector('#home-window .money');
-    moneyElement.innerHTML = `💰 ${formatMoney(money)}`;
+    
 
     // Update player info
     const playerNameElement = document.querySelector('#home-window .player-name');
     const playerJobElement = document.querySelector('#home-window .player-job');
-    const playerIconElement = document.querySelector('#home-window .player-icon');
-    playerNameElement.innerHTML = playerName;
-    playerJobElement.innerHTML = playerJob;
-    playerIconElement.innerHTML = playerIcon;
+    const playerIconElement = document.querySelector('#home-window .player-icon');*/
+	UpdateStats();
+	moneyElement.innerHTML = `💰 ${formatMoney(player.money)}`;
+    playerNameElement.innerHTML = player.fullname;
+    playerJobElement.innerHTML = player.job;
+    playerIconElement.innerHTML = player.face();
 
-    // Update stat bars
+    /*// Update stat bars
     statBars.forEach((stat, index) => {
         const statFillElement = document.querySelectorAll('#home-window .stat-fill')[index];
         statFillElement.style.width = `${stat.value}%`;
-    });
+    });*/
 }
 
+//===========================================================================scripts\image-lib.js===========================================================================
 let IconGen = {
     dir: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/images/'
 };
@@ -1641,29 +1709,7 @@ IconGen.createAnim = function(w, h, fps, images, end) {
     return svg;
 }
 
-function isAndroid(){
-	return typeof android !== 'undefined'
-}
-let os={android:typeof android !== 'undefined'};
-os.windows =!os.android;
-let projectUrl="https://raw.githubusercontent.com/JassSidhu412/html-project/main/";
-if(os.android){
-	os.dir=android.getDir();
-	os.storage=android.getStoragePath();
-	os.reset = function(){android.reset();}
-	os.downloadFile = function(url,file){android.downloadFile(url,file);}
-	os.downloadString = function(url,bytes){ return android.downloadString(url.toString(),bytes);}
-	os.exit = function(){android.finish();}
-	os.checkFile = function(path){return android.checkFile(path);}
-	os.writeFile = function(path,text){android.writeFile(path,text);}
-	os.readFile = function(path){return android.readFile(path);}
-	os.deleteFile = function(path){android.deleteFile(path);}
-	os.checkDir = function(path){return android.checkDir(path);}
-	os.createDir = function(path){android.createDir(path);}
-	os.deleteDir = function(path){android.deleteDir(path);}
-}
-
-
+//===========================================================================scripts\input-box.js===========================================================================
 let InputBox = {
 	Params:{},
     Result: {},
@@ -2016,6 +2062,7 @@ function InputText(id,text){
 	if(!text) text = id;
 	return {type:'text',label:text,id:id}
 }
+//===========================================================================scripts\list-view.js===========================================================================
 //==========================================================================list-view.js====================================================================================
 let listView, closeButton, backButton, listTitle, listItems;
 
@@ -2166,6 +2213,7 @@ function ListFolder(icon,title,desc,list){
 function ListSep(text){
 	return {separator:text}
 }
+//========================================================================scripts\name-generator.js========================================================================
 jap1 = ["Akahito", "Akeno", "Aki", "Akihiro", "Akihisa", "Akihito", "Akikazu", "Akinari", "Akinori", "Akio", "Akio", "Akira", "Amane", "Anzai", "Arata", "Arinori", "Aritomo", "Ashihei", "Atasuke", "Atshushi", "Atsumichi", "Atsumori", "Atsutane", "Azumamaro", "Baiko", "Bairei", "Bakin", "Basho", "Benjiro", "Benkei", "Bokkai", "Botan", "Buncho", "Bunjiro", "Bunrakuken", "Bunzo", "Bussho", "Chikafusa", "Chikao", "Chiko", "Chojiro", "Chomei", "Chuichi", "Dai", "Daisetsu", "Daisuke", "Danjuro", "Danno", "Dayu", "Denbe", "Doi", "Dokuohtei", "Doppo", "Ebizo", "Eichi", "Eichiro", "Eien", "Eiichi", "Eiji", "Eijiro", "Eikichi", "Eisaku", "Eisen", "Eishi", "Eisuke", "Eitoku", "Eizan", "Eizo", "Ekiken", "Ennosuke", "Etsuya", "Fujimaro", "Fujio", "Fukusaburu", "Fumiaki", "Fumihiko", "Fumihiro", "Fumimaro", "Fumio", "Gaho", "Gekko", "Gempachi", "Gengyo", "Genichi", "Genjo", "Gennai", "Gennosuke", "Genpaku", "Gesshin", "Gidayu", "Gihei", "Giichi", "Gonkuro", "Gonshiro", "Goro", "Gyokusho", "Gyukudo", "Hachemon", "Hachigoro", "Hachiro", "Hajime", "Hakuseki", "Hanshiro", "Haranobu", "Haru", "Haru", "Haruhiko", "Haruhiro", "Haruki", "Haruko", "Harumi", "Harunobu", "Hayato", "Heihachiro", "Heiji", "Heikichi", "Heizo", "Hideaki", "Hidehira", "Hidekazu", "Hideki", "Hidemichi", "Hideo", "Hidetada", "Hidetora", "Hidetoshi", "Hidetsugu", "Hideyori", "Hideyoshi", "Higashikuni", "Hikaru", "Hikosaburo", "Hikozaemon", "Hiro", "Hiroaki", "Hirobumi", "Hirofumi", "Hiroharu", "Hirohisa", "Hiroji", "Hirokazu", "Hirokichi", "Hirokumi", "Hiroshi", "Hiroshige", "Hirotada", "Hirotaka", "Hirotsugu", "Hiroya", "Hiroyasu", "Hiroyuki", "Hisahsi", "Hisaki", "Hisamitsu", "Hisanobu", "Hisashi", "Hisato", "Hisayuki", "Hitomaro", "Hitoshi", "Hogai", "Hoitsu", "Hokichi", "Hokusai", "Honzo", "Horiuchi", "Hoshi", "Hoshiko", "Hyobe", "Hyosuke", "Hyotaru", "Ichibei", "Ichiro", "Ichisake", "Ichiyo", "Ichizo", "Iemitsu", "Iemochi", "Ienobu", "Iesada", "Ieshige", "Ietsuna", "Ieyasu", "Ieyoshi", "Ikemoto", "Ikki", "Ikku", "Inejiro", "Ippei", "Isamu", "Isao", "Isei", "Isoruko", "Isoshi", "Iwane", "Iwao", "Izo", "Izumo", "Jakuchu", "Jin", "Jinzaburo", "Jiro", "Jo", "Joben", "Joji", "Jomei", "Josuke", "Jotaro", "Jou", "Juichi", "Jun", "Junichi", "Junichiro", "Junji", "Junnosuke", "Junzo", "Juro", "Jurobei", "Juzaburo", "Juzo", "Kado", "Kadonomaro", "Kaemon", "Kafu", "Kagehisa", "Kagetoki", "Kageyasu", "Kaii", "Kakuei", "Kakuzo", "Kamatari", "Kamlyn", "Kan", "Kanbe", "Kane", "Kaneie", "Kanezane", "Kanjiro", "Kanko", "Kannon", "Kano", "Kansuke", "Kantaro", "Kanzaburo", "Kaori", "Kaoru", "Kata", "Katai", "Katsuhiko", "Katsuhito", "Katsumi", "Katsumoto", "Katsunan", "Katsunosuki", "Katsuyoshi", "Katsuyuki", "Katzumi", "Kawanari", "Kazu", "Kazuhiko", "Kazuhiro", "Kazuki", "Kazuko", "Kazuma", "Kazunori", "Kazuo", "Kazushi", "Kazushige", "Kazutoshi", "Kazuyuki", "Kei", "Keiji", "Keiki", "Keishi", "Keisuke", "Keita", "Keitaro", "Keizo", "Ken", "Kenichi", "Kenji", "Kenji", "Kenji", "Kenjiro", "Kenkichi", "Kenko", "Kensaku", "Kenshin", "Kentaro", "Kenzaburo", "Kenzan", "Kenzo", "Kichibei", "Kichisaburo", "Kiemon", "Kiichi", "Kijuro", "Kikaku", "Kikugoro", "Kikunojo", "Kimi", "Kiminobu", "Kimitada", "Kin", "Kingo", "Kinji", "Kinmochi", "Kinnojo", "Kinnosuke", "Kinzo", "Kioshi", "Kisho", "Kitahachi", "Kiyoemon", "Kiyohira", "Kiyohisa", "Kiyomasu", "Kiyomori", "Kiyonaga", "Kiyonobu", "Kiyonori", "Kiyoshi", "Kiyotaka", "Koan", "Kobo", "Koetsu", "Kohei", "Koichi", "Koin", "Koji", "Kojiro", "Kojuro", "Kokan", "Kokei", "Koki", "Kokushi", "Konosuke", "Konoye", "Konyo", "Korechika", "Korekiyo", "Korenaga", "Korin", "Koryusai", "Kosaku", "Kosami", "Koshiro", "Kosho", "Kotaro", "Koto", "Koyo", "Kozue", "Kuemon", "Kuma", "Kumanosuke", "Kuniaki", "Kunihiko", "Kunimatsu", "Kunimichi", "Kunio", "Kunisada", "Kunitaro", "Kuniyoshi", "Kuniyuki", "Kuri", "Kyoden", "Kyoichi", "Kyoji", "Kyoshi", "Kyuichi", "Kyushichi", "Kyuso", "Kyuwa", "Mabuchi", "Magobei", "Magohachi", "Makoto", "Mamoru", "Manabu", "Manobu", "Manzo", "Mareo", "Maresuke", "Marihito", "Maris", "Marise", "Maro", "Masaaki", "Masafumi", "Masaharu", "Masahide", "Masahiko", "Masahiro", "Masakado", "Masakazu", "Masaki", "Masami", "Masamichi", "Masamune", "Masanobu", "Masanori", "Masao", "Masaru", "Masashi", "Masashige", "Masatake", "Masato", "Masayoshi", "Masayuki", "Masazumi", "Mashai", "Mashashi", "Mashiro", "Masu", "Masuhiro", "Masujiro", "Masutaro", "Matabei", "Matashichi", "Matsu", "Matsudaira", "Matsuo", "Matsusuke", "Matsuta", "Matsuyo", "Meiji", "Michihiro", "Michinaga", "Michinori", "Michio", "Michizane", "Mieko", "Miki", "Mikio", "Minoru", "Misao", "Mito", "Mitsuharu", "Mitsuhide", "Mitsukuni", "Mitsunari", "Mitsuo", "Mitsuoki", "Mitsuzuka", "Miyazaki", "Miyoko", "Mobumasu", "Mochihito", "Mokichi", "Mokuami", "Momoru", "Montaro", "Monzaemon", "Morie", "Morihiro", "Morimasa", "Morio", "Moromao", "Moronobu", "Motoichi", "Motoki", "Motonobu", "Motoshige", "Mototsune", "Motoyasu", "Motoyuki", "Munemitsu", "Munemori", "Munenori", "Muneyaki", "Munoto", "Murai", "Mushanokoji", "Mutsohito", "Naganori", "Naizen", "Nakamaro", "Nakazo", "Namboku", "Nampo", "Naoaki", "Naofumi", "Naohiro", "Naoki", "Naoko", "Naomichi", "Naonobu", "Naosuke", "Naoya", "Naozane", "Narahiko", "Nariaki", "Nariakira", "Narihari", "Narihira", "Naruhiko", "Natsu", "Natsume", "Natsuo", "Nichiren", "Nikki", "Nikko", "Ninsei", "Niou", "Nissho", "Noboru", "Nobuatsu", "Nobuharu", "Nobuhiko", "Nobuhisa", "Nobuhito", "Nobukazu", "Nobuo", "Noburo", "Nobusuke", "Nobuyoki", "Nobuyori", "Nobuyoshi", "Nori", "Noriaki", "Norihide", "Norihisa", "Norinaga", "Norio", "Norishige", "Noritada", "Noritoshi", "Noriyori", "Noriyuki", "Norogumi", "Oda", "Ogai", "Okakura", "Okitsugu", "Okura", "Okyoito", "Omezo", "Oniji", "Orinosuke", "Osamu", "Otojiro", "Rai", "Raidon", "Razan", "Rei", "Reijiro", "Reizo", "Renjiro", "Renzo", "Rikiya", "Rikyu", "Ringo", "Rinji", "Rintaro", "Rkuemon", "Robun", "Roka", "Roku", "Rosanjin", "Ryo", "Ryobe", "Ryoichi", "Ryoko", "Ryoma", "Ryosei", "Ryozo", "Ryu", "Ryuichi", "Ryunosuke", "Ryushi", "Ryutaro", "Ryuzaburo", "Saburo", "Sachi", "Sachio", "Sadaharu", "Sadahige", "Sadakuno", "Sadanobu", "Sadao", "Sadatake", "Sadayoshi", "Saemon", "Saikaku", "Saionji", "Sakutaro", "Samba", "Saneatsu", "Sanetomo", "Sanjiro", "Sanjuro", "Sanraku", "Sanzo", "Satoru", "Satoshi", "Sawao", "Seibei", "Seiesnsui", "Seihachi", "Seiho", "Seiichi", "Seiji", "Seika", "Seiki", "Seinosuke", "Seiryo", "Seishiro", "Seishisai", "Seison", "Seitaro", "Sekien", "Sen", "Senichi", "Senzo", "Sessue", "Settan", "Sharaku", "Shiba", "Shichirobei", "Shigeaki", "Shigekazu", "Shigeki", "Shigeko", "Shigemasa", "Shigematsu", "Shigemori", "Shigenaga", "Shigenobu", "Shigeru", "Shigetaka", "Shigetoki", "Shigochiyo", "Shihei", "Shihi", "Shijo", "Shiki", "Shiko", "Shimei", "Shimpei", "Shingen", "Shinichi", "Shinji", "Shinkichi", "Shino", "Shinobu", "ShinriKiyaru", "Shinsaku", "Shinsui", "Shintaro", "Shinzaburo", "Shinzo", "Shirai", "Shiro", "Shirosama", "Shizue", "Sho", "Shoda", "Shogo", "Shohei", "Shoichi", "Shoin", "Shoji", "Shojiro", "Shoko", "Shoraku", "Shosuke", "Shotaro", "Shoyo", "Shozaburo", "Shozo", "Shuichi", "Shuji", "Shukishi", "Shuko", "Shumei", "Shumkichi", "Shun", "Shunâ€™en", "Shuncho", "Shungyosai", "Shunichi", "Shunji", "Shunko", "Shunmyo", "Shunsen", "Shunsho", "Shunso", "Shunsuke", "Shusake", "Shusaku", "Shusui", "Shuzo", "Soetsu", "Sofu", "Soh", "Soichiro", "Sojuro", "Sorai", "Sosa", "Soseki", "Soshitsu", "Soshu", "Sosuke", "Sotan", "Sotaro", "Sotatsu", "Sozen", "Sozui", "Ssekien", "Subaru", "Suezo", "Sugimoto", "Sugita", "Sukejuro", "Sukenobu", "Suketsune", "Sukeyasu", "Sumio", "Sumiteru", "Sumitomo", "Susumu", "Suzu", "Suzu", "Tabito", "Tadahisa", "Tadakuni", "Tadamasa", "Tadamichi", "Tadao", "Tadashi", "Tadasu", "Tadasuke", "Tadataka", "Tadayoshi", "Tadayuki", "Tadiyuki", "Taheiji", "Taikan", "Taisho", "Taisuke", "Taji", "Takaaki", "Takafumi", "Takahashi", "Takahiro", "Takakazu", "Takamasa", "Takamori", "Takamuku", "Takanibu", "Takanobu", "Takanori", "Takao", "Takashi", "Takauji", "Takayuki", "Takechi", "Takehide", "Takeichi", "Takeji", "Takejiro", "Takenao", "Takeo", "Takeru", "Takeshi", "Takesi", "Taki", "Takiji", "Takuboku", "Takuji", "Takuma", "Takuro", "Takuya", "Tamasaburo", "Tamasine", "Tameyoshi", "Tamotsu", "Tamuramaro", "Tanak", "Tango", "Tanjiro", "Tanosuke", "Tanyu", "Tanzan", "Taro", "Taro", "Taroemon", "Tarozaemon", "Tashiaki", "Tashiro", "Tasuku", "Tatsui", "Tatsukichi", "Tatsuya", "Tatsuzo", "Taysuke", "Teiji", "Teijo", "Teika", "Teiljo", "Teinosuke", "Tekkan", "Tenshin", "Terao", "Teriuihi", "Terumoto", "Teruo", "Tessai", "Tetsu", "Tetsuhiko", "Tetsui", "Tetsunori", "Tetsuo", "Tetsuya", "Tetsuyuki", "Tetsuzan", "Thoki", "Tobei", "Togai", "Tohaku", "Toichi", "Toin", "Toju", "Tokaji", "Toki", "Tokichiro", "Tokimasa", "Tokimune", "Tokugawa", "Tokuhei", "Tokuma", "Tokutomi", "Tomeo", "Tomiichi", "Tomiji", "Tomoaki", "Tomohiko", "Tomokazu", "Tomomi", "Tomoyuki", "Ton", "Torajiro", "Torazo", "Torio", "Toru", "Toshi", "Toshiaki", "Toshiharu", "Toshikasu", "Toshikazu", "Toshiki", "Toshikuni", "Toshimichi", "Toshinobu", "Toshiro", "Toshitsugu", "Toshiyuki", "Toson", "Totoya", "Toyoaki", "Toyoharu", "Toyokazu", "Toyokuni", "Toyonobu", "Toyoshige", "Toyotomi", "Toyozo", "Tsugahara", "Tsugiharu", "Tsuginori", "Tsugumichi", "Tsukasa", "Tsumemasa", "Tsunayoshi", "Tsuneari", "Tsuneo", "Tsunesaburo", "Tsuneyo", "Tsuramatsu", "Tsurayaki", "Tsuruki", "Tsutomu", "Tsuyoshi", "Udo", "Ukon", "Ukyo", "Unkei", "Utaemon", "Utamara", "Utamuro", "Utemaro", "Waotaka", "Washi", "Washichi", "Yachi", "Yaichiro", "Yajirobei", "Yakamochi", "Yakumo", "Yamato", "Yasotaro", "Yasuhide", "Yasuhiko", "Yasuhiro", "Yasujiro", "Yasukazu", "Yasunari", "Yasunobu", "Yasuo", "Yasuoka", "Yasushi", "Yasutake", "Yasutoki", "Yasuyuki", "Yataro", "Yatsuhiro", "Yodo", "Yohachi", "Yoichi", "Yoichibei", "Yoriie", "Yorikane", "Yoringa", "Yoritoki", "Yoritomo", "Yoriyoshi", "Yoriyuki", "Yosai", "Yoshi", "Yoshiaga", "Yoshiaki", "Yoshida", "Yoshifumi", "Yoshifusa", "Yoshihide", "Yoshihiro", "Yoshihisa", "Yoshihito", "Yoshii", "Yoshiiku", "Yoshikazu", "Yoshiki", "Yoshimasa", "Yoshimatsu", "Yoshimi", "Yoshimitsu", "Yoshimochi", "Yoshimune", "Yoshinaka", "Yoshino", "Yoshinobu", "Yoshinori", "Yoshio", "Yoshisada", "Yoshitaka", "Yoshitake", "Yoshiteru", "Yoshitoki", "Yoshitomo", "Yoshitora", "Yoshitoshi", "Yoshitsune", "Yoshiyuki", "Yoson", "Yosuke", "Yozo", "Yugoro", "Yuichi", "Yuifum", "Yuji", "Yujiro", "Yuki", "Yukichi", "Yukinaga", "Yukio", "Yuko", "Yunosuke", "Yushiro", "Yusuke", "Yutaka", "Zenko", "Zeshin"];
 jap2 = ['Abi', 'Ado', 'Aeko', 'Aemi', 'Agasa', 'Ai', 'Aiga', 'Aiko', 'Aira', 'Aisa', 'Aishun', 'Akae', 'Akako', 'Akane', 'Akasuki', 'Akemi', 'Akeno', 'Aki', 'Akiko', 'Akina', 'Akio', 'Akira', 'Akirako', 'Akko', 'Ako', 'Akoto', 'Akuro', 'Amarante', 'Amari', 'Amaya', 'Ami', 'Anbi', 'Anda', 'Ane', 'Aneka', 'Aneko', 'Anii', 'Anju', 'Ano', 'Anri', 'Ao', 'Aoba', 'Aoi', 'Aomi', 'Aoki', 'Are', 'Arei', 'Ari', 'Arisa', 'Arisu', 'Asa', 'Asahi', 'Asaji', 'Asako', 'Asami', 'Asuka', 'Atsuko', 'Au', 'Aya', 'Ayaka', 'Ayako', 'Ayame', 'Ayano', 'Ayao', 'Ayase', 'Aye', 'Ayuka', 'Ayuko', 'Ayumi', 'Ayuri', 'Azami', 'Azumi', 'Azusa', 'Bachiko', 'Beni', 'Benten', 'Chiaki', 'Chie', 'Chieko', 'Chifumi', 'Chifuyu', 'Chigusa', 'Chiharu', 'Chihiro', 'Chiho', 'Chihoko', 'Chihomi', 'Chihori', 'Chika', 'Chikage', 'Chikako', 'Chikaze', 'Chiko', 'Chikuma', 'Chima', 'Chimaki', 'Chimako', 'Chimari', 'China', 'Chinami', 'Chinatsu', 'Chino', 'Chio', 'Chisa', 'Chisato', 'Chise', 'Chisuzu', 'Chitako', 'Chitose', 'Chiyako', 'Chiyeko', 'Chiyo', 'Chiyu', 'Chiyuki', 'Chiyumi', 'Chiyuri', 'Chizu', 'Chizuru', 'Cho', 'Dai', 'Den', 'Dori', 'Eari', 'Eba', 'Echiko', 'Egao', 'Eho', 'Ei', 'Eiko', 'Eimu', 'Eire', 'Eitsu', 'Eka', 'Ema', 'Emao', 'Eme', 'Emi', 'Emiho', 'Emika', 'Emiko', 'Emina', 'Emio', 'Emiri', 'Emiya', 'Emu', 'En', 'Ena', 'Enko', 'Enri', 'Ere', 'Eren', 'Erena', 'Eri', 'Erika', 'Eriko', 'Erisa', 'Erisu', 'Erize', 'Eru', 'Esumi', 'Etsu', 'Etsuko', 'Euiko', 'Fuji', 'Fujiko', 'Fukami', 'Fuki', 'Fukuko', 'Fumi', 'Fumie', 'Fumika', 'Fumiki', 'Fumiko', 'Fumiya', 'Fusa', 'Fusae', 'Futaba', 'Fuuko', 'Fuyu', 'Fuyuko', 'Fuyume', 'Gemmei', 'Gen', 'Gin', 'Gina', 'Ginko', 'Hagino', 'Hainako', 'Hairi', 'Hako', 'Hama', 'Hami', 'Han', 'Hana', 'Hanae', 'Hanako', 'Haniko', 'Haru', 'Harui', 'Haruka', 'Harukichi', 'Haruko', 'Harumi', 'Hasumi', 'Hatomi', 'Hatsu', 'Hatsue', 'Hatsuka', 'Hatsumi', 'Hatsune', 'Hatsuyo', 'Haya', 'Hazuki', 'Hibari', 'Hide', 'Hideko', 'Hikari', 'Hikaru', 'Himeka', 'Himeko', 'Hina', 'Hinako', 'Hirari', 'Hiro', 'Hiroe', 'Hiroko', 'Hiromi', 'Hiroshi', 'Hisa', 'Hisae', 'Hisako', 'Hisano', 'Hitomi', 'Hitomo', 'Hitoshi', 'Hizuru', 'Homi', 'Homugi', 'Hona', 'Honami', 'Honoka', 'Honomi', 'Hoshi', 'Hoshie', 'Hoshiko', 'Hoshiyo', 'Hosuzu', 'Hotaru', 'Hozumi', 'Iako', 'Ibu', 'Ichi', 'Ichie', 'Ichiha', 'Ichiho', 'Ichiko', 'Ichino', 'Ie', 'Iena', 'Iho', 'Ihono', 'Iki', 'Ikoi', 'Iku', 'Ikue', 'Ikuko', 'Ikumu', 'Ima', 'Imari', 'Ina', 'Inaho', 'Inari', 'Ine', 'Ino', 'Inoue', 'Io', 'Ioko', 'Iona', 'Iori', 'Irisa', 'Isa', 'Isaki', 'Isako', 'Isami', 'Isamu', 'Ise', 'Ishi', 'Isoko', 'Isono', 'Isuzu', 'Ito', 'Itsuko', 'Iwa', 'Iyo', 'Iyona', 'Izumi', 'Jin', 'Jori', 'Joruri', 'Jun', 'June', 'Junko', 'Juri', 'Juria', 'Kadiri', 'Kae', 'Kaede', 'Kagami', 'Kaho', 'Kahori', 'Kahoru', 'Kai', 'Kaida', 'Kaiya', 'Kaiyo', 'Kameko', 'Kako', 'Kama', 'Kame', 'Kami', 'Kamie', 'Kaminari', 'Kamlyn', 'Kana', 'Kane', 'Kaneko', 'Kaneru', 'Kanna', 'Kanon', 'Kao', 'Kaori', 'Kaoru', 'Karen', 'Karin', 'Kasumi', 'Kata', 'Katsu', 'Katsue', 'Katsuko', 'Katsumi', 'Kawa', 'Kaya', 'Kayami', 'Kayo', 'Kayoko', 'Kayu', 'Kazashi', 'Kazu', 'Kazue', 'Kazuko', 'Kazumi', 'Kei', 'Keiko', 'Kichi', 'Kiho', 'Kii', 'Kiko', 'Kiku', 'Kikyo', 'Kimi', 'Kimie', 'Kimiko', 'Kin', 'Kina', 'Kino', 'Kinu', 'Kinuko', 'Kinuye', 'Kinuyo', 'Kioko', 'Kioshi', 'Kirari', 'Kiri', 'Kisa', 'Kishi', 'Kit', 'Kita', 'Kiwa', 'Kiyo', 'Kiyoko', 'Kiyomi', 'Kiyoshi', 'Kiyumi', 'Ko', 'Kochiyo', 'Kofuyu', 'Kohana', 'Koharu', 'Koi', 'Koiso', 'Koken', 'Koko', 'Koma', 'Komachi', 'Kome', 'Komi', 'Konami', 'Konatsu', 'Koneko', 'Konomi', 'Koto', 'Kotone', 'Kouko', 'Koume', 'Kozakura', 'Kozue', 'Kukiko', 'Kuma', 'Kumi', 'Kumiko', 'Kumiyo', 'Kuni', 'Kunie', 'Kuniko', 'Kura', 'Kurea', 'Kuri', 'Kurumi', 'Kuwa', 'Kyoko', 'Kyouka', 'Kyouko', 'Kyoumi', 'Leiko', 'Machi', 'Machiko', 'Madoka', 'Mae', 'Maeko', 'Maemi', 'Mai', 'Maiko', 'Maiya', 'Maki', 'Makiko', 'Mako', 'Mami', 'Mamiko', 'Man', 'Mana', 'Manami', 'Mari', 'Mariko', 'Marise', 'Maru', 'Masa', 'Masae', 'Masago', 'Masako', 'Masu', 'Masumi', 'Matsu', 'Matsuko', 'Maya', 'Mayako', 'Mayo', 'Mayoko', 'Mayuko', 'Mayumi', 'Megu', 'Megumi', 'Michi', 'Michie', 'Michiko', 'Michiru', 'Midori', 'Mie', 'Mieko', 'Miho', 'Mihoko', 'Miiko', 'Mika', 'Mikazuki', 'Miki', 'Mikka', 'Miliko', 'Mina', 'Minako', 'Mine', 'Mineko', 'Mino', 'Mio', 'Misa', 'Misaki', 'Misako', 'Misao', 'Misato', 'Mitsu', 'Misoka', 'Mitsu', 'Mitsuko', 'Mitsuyo', 'Miu', 'Miwa', 'Miwako', 'Miya', 'Miyako', 'Miyo', 'Miyoko', 'Miyoshi', 'Miyu', 'Miyuki', 'Mizuki', 'Mizuko', 'Moanna', 'Moe', 'Momoko', 'Mon', 'Mori', 'Morie', 'Moto', 'Muika', 'Mura', 'Murasaki', 'Mutsuko', 'Mutsumi', 'Nadeshiko', 'Nagisa', 'Naho', 'Nahoko', 'Nami', 'Namie', 'Namika', 'Namiko', 'Namiyo', 'Nana', 'Nanako', 'Nanami', 'Nanao', 'Nanase', 'Nao', 'Naoko', 'Naomi', 'Naora', 'Nara', 'Nari', 'Nariko', 'Narumi', 'Natsu', 'Natsuko', 'Natsumi', 'Nayoko', 'Nene', 'Nikki', 'Nishi', 'Nomi', 'Nori', 'Norie', 'Noriko', 'Nozomi', 'Nui', 'Nyoko', 'Ochiyo', 'Ogi', 'Oharu', 'Oki', 'Okichi', 'Okiku', 'Okimi', 'Ome', 'Omitsu', 'Ori', 'Oriana', 'Orika', 'Orime', 'Orimi', 'Orino', 'Osami', 'Osen', 'Otoe', 'Otome', 'Otsu', 'Otsune', 'Poemu', 'Rai', 'Raicho', 'Raira', 'Raku', 'Ran', 'Rea', 'Rebun', 'Rei', 'Reichiru', 'Reiko', 'Reina', 'Reira', 'Reisa', 'Remi', 'Remon', 'Ren', 'Rena', 'Rie', 'Rieko', 'Riho', 'Rii', 'Rika', 'Rikako', 'Riko', 'Riku', 'Rin', 'Rina', 'Rinako', 'Ringo', 'Rini', 'Rino', 'Rio', 'Rira', 'Ririko', 'Risa', 'Risako', 'Rise', 'Risu', 'Ritsuko', 'Roku', 'Rokuko', 'Romi', 'Rui', 'Ruka', 'Ruma', 'Rumi', 'Rumiko', 'Runa', 'Ruri', 'Ruriko', 'Ruru', 'Ryo', 'Ryoko', 'Ryou', 'Ryu', 'Sachi', 'Sachiko', 'Sada', 'Sadako', 'Sae', 'Saeko', 'Sai', 'Saika', 'Saito', 'Sakae', 'Sakamae', 'Saki', 'Sakiko', 'Sako', 'Sakue', 'Sakuko', 'Sakura', 'Sakurako', 'Sakuro', 'Sama', 'Sanako', 'Saori', 'Sata', 'Sato', 'Satoko', 'Satomi', 'Satsu', 'Satsuki', 'Satu', 'Sawa', 'Sawako', 'Saya', 'Sayo', 'Sayoko', 'Sayomi', 'Sayuri', 'Sei', 'Seiko', 'Seka', 'Seki', 'Sen', 'Setsu', 'Setsuko', 'Shige', 'Shiho', 'Shihobu', 'Shika', 'Shina', 'Shino', 'Shinobu', 'Shioko', 'Shiori', 'Shirushi', 'Shizu', 'Shizue', 'Shizuka', 'Shoken', 'Shoko', 'Shungiku', 'Sugi', 'Sui', 'Sukey', 'Suki', 'Suko', 'Sumi', 'Sumiko', 'Sute', 'Suzu', 'Suzue', 'Suzuki', 'Suzuko', 'Suzume', 'Tadako', 'Tae', 'Tai', 'Taira', 'Taji', 'Taka', 'Takako', 'Takara', 'Take', 'Taki', 'Tama', 'Tamae', 'Tamafune', 'Tamaki', 'Tamami', 'Tame', 'Tami', 'Tamika', 'Tamiko', 'Tamiyo', 'Tanak', 'Tanaka', 'Tane', 'Tani', 'Taniko', 'Tansho', 'Tara', 'Taree', 'Taru', 'Tatsu', 'Tatsumi', 'Taura', 'Taya', 'Tazu', 'Teruyo', 'Tetsu', 'Toki', 'Tokie', 'Tokiko', 'Tokiwa', 'Tokiyo', 'Toku', 'Tomi', 'Tomiju', 'Tomiko', 'Tomo', 'Tomoe', 'Tomoko', 'Tomomi', 'Tooka', 'Tora', 'Tori', 'Toshi', 'Toshie', 'Toshiko', 'Toya', 'Toyoko', 'Tsugi', 'Tsuki', 'Tsukiko', 'Tsukiyama', 'Tsuna', 'Tsuru', 'Tsuya', 'Ui', 'Uka', 'Uki', 'Ume', 'Umeka', 'Umeki', 'Umeko', 'Umi', 'Una', 'Uno', 'Urako', 'Urano', 'Urara', 'Urena', 'Urumi', 'Usagi', 'Usami', 'Uta', 'Utako', 'Utsuwa', 'Utzuki', 'Uzuki', 'Waka', 'Wakaba', 'Wakako', 'Wakana', 'Wakano', 'Wakayo', 'Waki', 'Wakiko', 'Wako', 'Wakumi', 'Wakuri', 'Wami', 'Warabi', 'Wattan', 'Wayoko', 'Wazuka', 'Yachi', 'Yae', 'Yaeko', 'Yama', 'Yasu', 'Yasuko', 'Yasumu', 'Yatsumi', 'Yawara', 'Yayoi', 'Yei', 'Yo', 'Yodo', 'Yoi', 'Yoka', 'Yokkako', 'Yoko', 'Yone', 'Yori', 'Yoriko', 'Yoshe', 'Yoshi', 'Yoshike', 'Yoshiko', 'Yoshino', 'You', 'Yu', 'Yufu', 'Yui', 'Yuka', 'Yukako', 'Yukari', 'Yuki', 'Yukiji', 'Yukika', 'Yukiko', 'Yukiyo', 'Yuko', 'Yuma', 'Yumako', 'Yume', 'Yumeji', 'Yumi', 'Yumia', 'Yumiko', 'Yumisa', 'Yuna', 'Yuno', 'Yura', 'Yuri', 'Yuria', 'Yuriko', 'Yurisa', 'Yuro', 'Yusa', 'Yusuke', 'Yutori', 'Yutsuko', 'Yuuko', 'Yuyu'];
 jap3 = ["Akemi", "Aki", "Akiho", "Akimi", "Akira", "Anri", "Aoi", "Asuka", "Ayumu", "Chiaki", "Chihiro", "Hajime", "Haru", "Haruichi", "Haruka", "Harumi", "Hatsu", "Hayate", "Hazuki", "Hibiki", "Hifumi", "Hikari", "Hikaru", "Hinata", "Hiromi", "Hiromu", "Hisaya", "Hiyori", "Hotaru", "Ibuki", "Iori", "Itsuki", "Izumi", "Jun", "Kaede", "Kagami", "Kairi", "Kaname", "Kaoru", "Katsumi", "Kayo", "Kazu", "Kazumi", "Kei", "Kou", "Kunie", "Kurumi", "Kyo", "Maiko", "Maki", "Mako", "Makoto", "Masaki", "Masami", "Masumi", "Matoi", "Michi", "Michiru", "Michiyo", "Midori", "Mikoto", "Minori", "Mirai", "Misao", "Mitsue", "Mitsuki", "Mitsuru", "Mitsuyo", "Mizuho", "Mizuki", "Nagisa", "Nao", "Naomi", "Natsuki", "Natsuo", "Nozomi", "Rei", "Ren", "Riku", "Rin", "Rui", "RyÅ", "Ryuko", "Sakae", "Satsuki", "Setsuna", "Shigeri", "Shinobu", "Shion", "Shizuka", "Sora", "Subaru", "Takemi", "Tamaki", "Tatsuki", "Teru", "Tomo", "Tomoe", "Tomomi", "Toshimi", "Tsubasa", "Tsukasa", "YÅ«", "Yoshi", "Yoshika", "Yoshimi", "Yuki", "Yuri"];
@@ -2279,6 +2327,7 @@ window.getDragonName=function(type) {
     return list;
 }
 
+//=============================================================================scripts\toast.js=============================================================================
 const toastQueue = [];
 let isShowingToast = false;
 
@@ -2385,6 +2434,7 @@ const maxNotifications = 7; // Maximum number of notifications shown at once
                 notify(`Notification ${i + 1}`);
             }
         }
+//============================================================================scripts\version.js============================================================================
 //=========================================================================version.js===================================================================================
 let hts="";
 function checkForUpdate(){
@@ -2446,17 +2496,35 @@ let playerRes = await InputBox.show('New Game', "Fill the form to start new game
     ]);
 	console.log(playerRes);
 }
+//===========================================================================games\isekai\init.js===========================================================================
 let isekai={};
+
+// Action buttons array
+isekai.actionButtons = [
+	{ text: "Occupation", action: 'alert(\'hello\')'},
+	{ text: "Assets", action: "alert('hello')"},
+	{ text: "Relationships", action: "ListView.open('Relationships',Rel)"},
+	{ text: "Activites", action: "ListView.open('Activites',isekai.activities)"}];
+
+// Stats bars array
+isekai.statBars = [
+	{ name: "Health", value: 80, color: "#FF6B6B" },
+    { name: "Moral", value: 60, color: "#4ECDC4"},
+    { name: "Charm", value: 70, color: "#45B7D1"},
+    { name: "Strength", value: 50, color: "#F7B731"},
+    { name: "Intelligence", value: 90, color: "#6C5CE7"}];
+//===========================================================================games\isekai\main.js===========================================================================
 isekai.startLife = function(res){
-  player={name:res.name,surname:res.surname,gender:res.gender,traits:res.traits};
-  playerName=player.name+" "+player.surname;
-  playerIcon = FaceGen.create(30, player.gender, FaceGen[player.gender].current);
+  player = { name:res.name, surname:res.surname, gender:res.gender== 'male'?0:1, traits:res.traits,age: 15, money:5000, health:90, moral:50};
+  player.appearance = FaceGen[res.gender].current;
+  player=Object.assign(new Player(),player);
+  
   actionButtons=isekai.actionButtons;
   statBars=isekai.statBars;
   flags=isekai.flags;
   changeActionButtons();
   changeStatsBars();
-  addLogEntry("While I was on my way back home, I caught up in a mysterious aura and ended up in another world of sword and sorcery.");
+  log("While I was on my way back home, I caught up in a mysterious aura and ended up in another world of sword and sorcery.");
   updateUI();
   ListView.close();
   
@@ -2465,82 +2533,22 @@ function save(){
 	let data={};
 	data.player=player;
 	data.flags=flags;
+	data.npcs=npcs;
 }
 
 isekai.getPlayerCreationControls = async function() {
     let face = FaceGen.getInputControls();
-    let info = [{
-            type: 'text',
-            id: 'name',
-            label: 'First Name',
-            default: 'Shinji'
-        },
-        {
-            type: 'text',
-            id: 'surname',
-            label: 'Last Name',
-            default: 'Yamada'
-        },
-        {
-            type: 'list',
-            id: 'traits',
-            label: 'Traits',
-            options: ['Brave', 'Cunning', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Scholar', 'Elemental Affinity', 'Divine Favor', 'Diplomat', 'Gossiper']
-        },
-        {
-            type: 'button',
-            id: 'start',
-            label: 'Start Life'
-        },
-        {
-            type: 'button',
-            id: 'cancel',
-            label: 'Cancel'
-        }
-    ];
-    let result = await InputBox.show(playerName, "", true, face.concat(info));
+    let info = [
+		{ type: 'text', id: 'name', label: 'Name', value: 'Shinji',image:'🎲',action:(input)=>{input.value=getJapName();} },
+		{ type: 'text', id: 'surname', label: 'Surname', value: 'Yamada',image:'🎲',action:(input)=>{input.value=getJapName(3);} },
+        { type: 'list', id: 'traits', label: 'Traits',
+            options: ['Brave', 'Cunning', 'Charismatic', 'Wise', 'Curious', 'Navigator', 'Scholar', 'Elemental Affinity', 'Divine Favor', 'Diplomat', 'Gossiper'] },
+        { type: 'button', id: 'start', label: 'Start Life' },
+        { type: 'button', id: 'cancel', label: 'Cancel' } ];
+    let result = await InputBox.show(player.fullname, "", true, face.concat(info));
 	isekai.startLife(result);
 }
-isekai.Activities={}
-isekai.actionButtons = [{
-    text: "Occupation",
-    action: 'alert(\'hello\')'
-}, {
-    text: "Assets",
-    action: "alert('hello')"
-}, {
-    text: "Relationships",
-    action: "alert('hello')"
-}, {
-    text: "Activites",
-    action: "ListView.open('Activites',isekai.activities)"
-}];
-isekai.statBars = [{
-        name: "Health",
-        value: 80,
-        color: "#FF6B6B"
-    },
-    {
-        name: "Moral",
-        value: 60,
-        color: "#4ECDC4"
-    },
-    {
-        name: "Charm",
-        value: 70,
-        color: "#45B7D1"
-    },
-    {
-        name: "Strength",
-        value: 50,
-        color: "#F7B731"
-    },
-    {
-        name: "Intelligence",
-        value: 90,
-        color: "#6C5CE7"
-    }
-];
+//========================================================================games\isekai\activities.js========================================================================
 isekai.activities = [
     {
         icon: '🏫',
@@ -2690,14 +2698,17 @@ isekai.activities = [
     }
 ];
 
+//========================================================================games\isekai\characters.js========================================================================
 
+//==========================================================================games\isekai\events.js==========================================================================
 
+//==========================================================================games\isekai\flags.js==========================================================================
 isekai.flags={
 	metKing:false,
 	enrollAcademy:false,
 	joinGuild:false,
 };
-
+//==========================================================================games\isekai\player.js==========================================================================
 
     </script>
 </body>
