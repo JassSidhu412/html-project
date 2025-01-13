@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.7.0">
+    <meta name="version" content="0.3.8.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -656,7 +656,7 @@ scroll-area.::-webkit-scrollbar-thumb:hover {
 
 #listView .listViewProgressBar .listViewProgress {
     height: 100%;
-    background-color: #4a90e2;
+    background-color: #2196F3;/*#4a90e2;*/
     transition: width 0.3s ease;
 }
 
@@ -812,7 +812,35 @@ if(os.android){
 	os.checkDir = function(path){return android.checkDir(path);}
 	os.createDir = function(path){android.createDir(path);}
 	os.deleteDir = function(path){android.deleteDir(path);}
+}else{
+	os.deleteFile = function(path){ }
 }
+let data={};
+let logs=[];
+function save(){
+	if(os.android){
+		os.writeFile(os.dir+'/save.json',JSON.stringify(data));
+	}
+	else
+	{
+		localStorage.setItem('data', JSON.stringify(data));
+	}
+}
+function load(){
+	if(os.android){
+		data = JSON.parse(os.readFile(os.dir+'/save.json'));
+	}
+	else
+	{
+		data = JSON.parse(localStorage.getItem('data'));
+		
+	}
+}
+function loadLife(life){
+	if(life.gameName=='Isekai Life') isekai.loadLife(life);
+}
+load();
+if(!data) data={lives:[]};
 
 // Initialize the game when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', init);
@@ -841,6 +869,10 @@ let moneyElement;
 let playerNameElement;
 let playerJobElement;
 let playerIconElement;
+
+const COLOR_BLACK = 0, COLOR_GRAY = 1, COLOR_SILVER = 2, COLOR_WHITE = 3, COLOR_DARK_BLUE = 4, COLOR_LIGHT_BLUE = 5, COLOR_BLUE = 6, COLOR_YELLOW = 7, COLOR_YELLOW_GREEN = 8, COLOR_GOLDEN_YELLOW = 9, COLOR_LIGHT_ORANGE = 10, COLOR_DARK_YELLOW = 11, COLOR_ORANGE = 12, COLOR_RED = 13, COLOR_CRIMSON = 14, COLOR_PINK = 15, COLOR_LIGHT_PINK = 16, COLOR_PURPLE = 17, COLOR_LIGHT_PURPLE = 18, COLOR_LIGHT_VIOLET = 19, COLOR_VIOLET = 20, COLOR_LIGHT_GREEN = 21, COLOR_GREEN = 22, COLOR_DARK_GREEN = 23, COLOR_CYAN = 24, COLOR_DARK_BROWN = 25, COLOR_BROWN = 26, COLOR_LIGHT_BROWN = 27, COLOR_MINT_GREEN = 28;
+const Colors=["Black", "Gray", "Silver", "White", "Dark Blue", "Light Blue", "Blue", "Yellow", "Yellow Green", "Golden Yellow", "Light Orange", "Dark Yellow", "Orange", "Red", "Crimson", "Pink", "Light Pink", "Purple", "Light Purple", "Light Violet", "Violet", "Light Green", "Green", "Dark Green", "Cyan", "Dark Brown", "Brown", "Light Brown", "Mint Green"];
+
 //=============================================================================scripts\main.js=============================================================================
 class Person{
 	constructor(Name,Surname,Age,Gender,Appearance){
@@ -853,6 +885,12 @@ class Player extends Person{
 	constructor(Name,Surname,Age,Gender,Appearance){
 		super(Name,Surname,Age,Gender,Appearance);
 	}
+}
+function aquireData(){
+	
+}
+function saveLife(){
+	save();
 }
 // Game state
 let year = 10;
@@ -869,6 +907,14 @@ let player = {
 	health:90,
 	moral:50
 };
+function getListOfSavedLifes(){
+	let list=[];
+	if(!data.lives) data.lives=[];
+	for(let i of data.lives){
+		list.push({icon:i.player.face(),title:i.player.fullname,desc:'Game: '+i.gameName,do:()=>{loadLife(i);}});
+	}
+	return list;
+}
 let npc={name:'Rin',surname:'Yamana',gender:1,age:15,appearance: [0,0,0,0]};
 let npcs = [
 	Object.assign(new Person(), {name:'Rin', surname:'Yamana', gender:1, age:15, appearance: [0,0,0,0],relationships:100}),
@@ -878,6 +924,10 @@ let npcs = [
 ];
 npc=npcs[0];//Object.assign(new Person(),npc);
 player=Object.assign(new Player(),player);
+
+for(let i of data.lives){
+	i.player=Object.assign(new Player(),i.player);
+}
 
 let Rel=[];
 
@@ -951,7 +1001,7 @@ window.onbeforeunload = function() {
     return 'Want to leave?';
 }
 window.version = document.getElementsByName("version")[0].content;
-version=version.substring(0,version.length-2);
+version=version.substring(0,version.lastIndexOf('.'));
 
 function getRandom(max, min) {//both inclusive
     if (!min) min = 0;
@@ -1113,16 +1163,6 @@ function getAiResponse(json){
 	addLogEntry(json);
 }
 
-let game = {};
-let data = {};
-let savedGames = [];
-
-data.save = function() {
-    localStorage.setItem('data', JSON.stringify(data)); //data.vars=['player','npc','logs','year','game']
-}
-data.load = function() {
-    data = JSON.parse(localStorage.getItem('data'));
-}
 
 function setIsekaiGame() {
     game.name = 'Isekai Life';
@@ -1167,6 +1207,7 @@ async function evaluateKeyCode(clas){
 	if(result.button=='keys') evaluateKeyCode(clas+'.'+AllOptions[result.clas]);
 	//if(result.button=='evalButton') eval(result.scr);
 }
+
 //Get menu list for runtime
 let menuList = [
     {
@@ -1185,7 +1226,7 @@ let menuList = [
         icon: '📖',
         title: 'Load Life',
         desc: 'Continue from a previously saved life',
-        list: savedGames
+        list: getListOfSavedLifes
     },
     {
         separator: 'Misc'
@@ -1221,19 +1262,19 @@ let menuList = [
         icon: '⚡',
         title: 'Quick New Game',
         desc: 'Instantly start a new game',
-        do: () => { startQuickNewGame(); }
+        do: () => { isekai.startLife({name:'Shinji',surname:'Yamada',gender:0,values:[1,0,0,0]}); }
     },
     {
         icon: '🗑️',
         title: 'Clear Cache',
         desc: 'Clear temporary files and cache',
-        do: () => { if(isAndroid()) try{ android.reset();}catch(erros){toast(erros);} }
+        do: () => { exit(); }
     },
     {
         icon: '❌',
         title: 'Clear Save Games',
         desc: 'Delete all saved games',
-        do: () => { exit(); }
+        do: () => { localStorage.clear();os.deleteFile(os.dir+'/save.json');}
     },
     {
         icon: '🛠️',
@@ -1357,7 +1398,6 @@ const logEntries = [
 
 
 //========================================================================scripts\face-generator.js========================================================================
-//==========================================================================face=generator.js====================================================================================
 let ChosenColors= ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'];
    /* //[  '#169EFF', '#167BFF', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF','#F092FF', '#D592FF', '#9000FF', '#3DA303', '#205900', '#1F1F1F',  '#555555',  '#ACACAC',  '#FAFAFA',  '#00FFB2'],//['#000000', '#4B3621', "#FFD700", "#FF4500", "#0000FF", "#008000", "#FFC0CB", "#800080", "#FFFFFF", "#808080", "#C0C0C0", "#FFA500", "#008080"],
     eyesColors: ['#1F1F1F', '#555555', '#ACACAC', '#FAFAFA', '#0000FF', '#169EFF', '#167BFF', '#FFFF00', '#E1FF00', '#FFD000', '#FFA500', '#FFD050', '#FF6E00', '#FF3300', '#FF006A', '#FF0098', '#FF97D5', '#DD00FF', '#F092FF', '#D592FF', '#9000FF', '#37FF00', '#3DA303', '#205900', '#00FFF6', '#5D2500', '#8E5A37', '#BB874B', '#00FFB2'],
@@ -1450,11 +1490,7 @@ let FaceGen = {
         //if(FaceGen.gender=='male') FaceGen.showSection(0);
         //else FaceGen.showSection(3);
     },
-    getCurrentSVG: function() {
-        InputBox.Result.values = this[FaceGen.gender].current.slice();
-        InputBox.Result.gender = FaceGen.gender;
-        return FaceGen.create(300, FaceGen.gender, this[FaceGen.gender].current);
-    },
+    
     showSection: function(type) {
         let Styles = FaceGen.getStyleAreas();
         let num = 4;
@@ -1473,8 +1509,17 @@ let FaceGen = {
             if (num != i) Styles[i].style.display = 'none';
             else Styles[i].style.display = 'flex';
         }
-    },
-    getInputControls: function() {
+    }
+};
+FaceGen.getCurrentSVG= function() {
+    InputBox.Result.values = FaceGen[FaceGen.gender].current.slice();
+    InputBox.Result.gender = FaceGen.gender;
+    return FaceGen.create(300, FaceGen.gender, FaceGen[FaceGen.gender].current);
+    }
+FaceGen.getInputControls = function(gender) {
+		FaceGen.male.current=[0,0,0,0];
+		FaceGen.female.current=[0,0,0,0];
+		if(!gender||gender=='male') FaceGen.gender="male";
         return [{
             type: 'custom',
             id: 'face',
@@ -1514,22 +1559,22 @@ let FaceGen = {
             default: FaceGen.gender == 'male' ? 0 : 1,
             action: FaceGen.changeGender
         }];
-    },
-    getStyleAreas: function() {
+    }
+FaceGen.getStyleAreas= function() {
         let list = [];
         for (let i = 0; i < 7; i++) {
             list.push(document.getElementById(`style-area-div-${i}`));
         }
         return list;
     },
-    getScrollAreaDivs: function() {
+FaceGen.getScrollAreaDivs = function() {
         let s = '';
         for (let i = 0; i < 7; i++) {
             s += `<div class="scroll-area" id="style-area-div-${i}"></div>`;
         }
         return s;
     }
-};
+
 
 //==========================================================================scripts\home-window.js==========================================================================
 //==========================================================================home-window.js=====================================================================================
@@ -1611,9 +1656,23 @@ function addLogEntry(entry, isNextYear = false) {
     }
     logArea.appendChild(logEntry);
     logArea.scrollTop = logArea.scrollHeight;
-
+	logs.push({text:entry,isHeading:isNextYear});
     // Update UI after adding log entry
     updateUI();
+}
+function setLogs(){
+	const logArea = document.getElementById('logArea');
+	logArea.innerHTML="";
+	for(let l of logs){
+		const logEntry = document.createElement('p');
+		logEntry.textContent = l.text;
+		if (l.isHeading) {
+			logEntry.classList.add('next-year');
+		}
+		logArea.appendChild(logEntry);
+		
+	}
+	logArea.scrollTop = logArea.scrollHeight;
 }
 
 function updateUI() {
@@ -2498,6 +2557,8 @@ let playerRes = await InputBox.show('New Game', "Fill the form to start new game
 }
 //===========================================================================games\isekai\init.js===========================================================================
 let isekai={};
+let lifeId=0;
+
 
 // Action buttons array
 isekai.actionButtons = [
@@ -2515,25 +2576,52 @@ isekai.statBars = [
     { name: "Intelligence", value: 90, color: "#6C5CE7"}];
 //===========================================================================games\isekai\main.js===========================================================================
 isekai.startLife = function(res){
-  player = { name:res.name, surname:res.surname, gender:res.gender== 'male'?0:1, traits:res.traits,age: 15, money:5000, health:90, moral:50};
-  player.appearance = FaceGen[res.gender].current;
+  player = { name:res.name, surname:res.surname, gender:res.gender== 'male'||res.gender==0?0:1, traits:res.traits,age: 15, money:5000, health:90, moral:50};
+  player.appearance = res.values;
+  player.job='Aventurer';
   player=Object.assign(new Player(),player);
   
-  actionButtons=isekai.actionButtons;
-  statBars=isekai.statBars;
-  flags=isekai.flags;
-  changeActionButtons();
-  changeStatsBars();
-  log("While I was on my way back home, I caught up in a mysterious aura and ended up in another world of sword and sorcery.");
-  updateUI();
-  ListView.close();
   
+  flags=isekai.flags;
+  
+  
+  if(!data.lives) data.lives=[];
+  lifeId=data.lives.length;
+  data.lives.push({id:lifeId});
+  saveLife=isekai.saveLife;
+  logs=[];
+  log("While I was on my way back home, I caught up in a mysterious aura and ended up in another world of sword and sorcery.");
+  saveLife();
+  isekai.setLife();
 }
-function save(){
-	let data={};
-	data.player=player;
-	data.flags=flags;
-	data.npcs=npcs;
+isekai.setLife = function(){
+	actionButtons=isekai.actionButtons;
+	statBars=isekai.statBars;
+	changeActionButtons();
+	changeStatsBars();
+	updateUI();
+	ListView.close();
+}
+isekai.saveLife = function(){
+	let life={gameName:'Isekai Life'};
+	
+	life.id=lifeId;
+	life.player=player;
+	life.flags=flags;
+	life.npcs=npcs;
+	life.logs=logs;
+	data.lives[lifeId]=life;
+	save();
+}
+isekai.loadLife = function(life){
+	saveLife();//Saved previous
+	lifeId = life.id;
+	player = life.player;
+	flags = life.flags;
+	npcs = life.npcs;
+	logs = life.logs;
+	setLogs();
+	isekai.setLife();
 }
 
 isekai.getPlayerCreationControls = async function() {
@@ -2546,7 +2634,7 @@ isekai.getPlayerCreationControls = async function() {
         { type: 'button', id: 'start', label: 'Start Life' },
         { type: 'button', id: 'cancel', label: 'Cancel' } ];
     let result = await InputBox.show(player.fullname, "", true, face.concat(info));
-	isekai.startLife(result);
+	if(result.button=='start') isekai.startLife(result);
 }
 //========================================================================games\isekai\activities.js========================================================================
 isekai.activities = [
@@ -2655,7 +2743,7 @@ isekai.activities = [
                     icon: '🐉',
                     title: 'Dragon\'s Lair',
                     desc: 'Test your courage by facing a dragon or looting its treasure.',
-                    do: () => {}
+                    do: () => {player.health-=10;notify('-10 Health');ListView.close();updateUI();}
                 }
             ];
         }
@@ -2699,7 +2787,9 @@ isekai.activities = [
 ];
 
 //========================================================================games\isekai\characters.js========================================================================
-
+isekai.npcs=[
+	
+];
 //==========================================================================games\isekai\events.js==========================================================================
 
 //==========================================================================games\isekai\flags.js==========================================================================
