@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="0.3.8.0">
+    <meta name="version" content="0.3.9.0">
     <meta name="whatsnew" content="List View Visiblity and Enabled and Version Fixes">
     <title>Life Craft</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -828,7 +828,8 @@ function save(){
 }
 function load(){
 	if(os.android){
-		data = JSON.parse(os.readFile(os.dir+'/save.json'));
+		if(os.checkFile(os.dir+'/save.json')) data = JSON.parse(os.readFile(os.dir+'/save.json'));
+		else data=null;
 	}
 	else
 	{
