@@ -1,6 +1,6 @@
 [
-  {"kanji": "お願い", "kana": ["おねがい"], "romaji": ["onega i"], "eng": ["favor"]},
-  {"kanji": "お願いします", "kana": ["おねがいします"], "romaji": ["onegaishimasu"], "eng": ["please"]},
+  {"kanji": "お願い", "kana": ["おねがい"], "romaji": ["onegai"], "eng": ["favor"]},
+  {"kanji": "良い", "kana": ["いい","よい"], "romaji": ["ii","yoi"], "eng": ["nice","good"]},
   {"kanji": "ご飯", "kana": ["ごはん"], "romaji": ["gohan"], "eng": ["cooked rice", "meal"]},
   {"kanji": "一体", "kana": ["いったい"], "romaji": ["ittai"], "eng": ["what on earth", "what the…"]},
   {"kanji": "一度", "kana": ["いちど"], "romaji": ["ichido"], "eng": ["once"]},
