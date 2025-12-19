@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Preview Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Preview</h1>
+    <p>Type your HTML code below and click Preview to see it rendered in a new window.</p>
+    
+    <textarea id="htmlCode" placeholder="&lt;h1&gt;Hello World&lt;/h1&gt;&#10;&lt;p&gt;This is a test.&lt;/p&gt;">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome&lt;/h1&gt;
+    &lt;p&gt;Edit the code and preview!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </textarea>
+    
+    <br>
+    <button onclick="preview()">Preview</button>
+    
+    <script>
+        function preview() {
+            var code = document.getElementById('htmlCode').value;
+            var previewWindow = window.open('', '_blank');
+            previewWindow.document.open();
+            previewWindow.document.write(code);
+            previewWindow.document.close();
+        }
+    </script>
+</body>
+</html>
