@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Editor with Download, Preview & GitHub Upload</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; height: 400px; font-family: monospace; }
+        input[type="text"] { width: 300px; padding: 8px; }
+        button { padding: 10px 15px; margin: 5px; }
+        #status { margin-top: 10px; color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Simple HTML Editor</h1>
+    
+    <label>File name: <input type="text" id="filename" value="page.html"></label><br><br>
+    
+    <textarea id="code" placeholder="Type your HTML code here...">
+<!DOCTYPE html>
+<html>
+<head><title>My Page</title></head>
+<body>
+    <h1>Hello World</h1>
+    <p>This is a test page.</p>
+</body>
+</html>
+    </textarea><br><br>
+    
+    <button onclick="downloadFile()">Download</button>
+    <button onclick="previewLocal()">Preview in New Window</button>
+    <button onclick="clearCode()">Clear</button>
+    <br><br>
+    
+    <label>GitHub Token (required for upload): <input type="password" id="token" placeholder="Paste your PAT here"></label><br><br>
+    <button onclick="uploadToGitHub()">Upload to GitHub & Preview</button>
+    
+    <div id="status"></div>
+
+    <script>
+        function getCode() {
+            return document.getElementById('code').value.trim();
+        }
+        
+        function getFilename() {
+            let name = document.getElementById('filename').value.trim();
+            if (!name.endsWith('.html')) name += '.html';
+            return name;
+        }
+        
+        function downloadFile() {
+            const code = getCode();
+            if (!code) return alert('Nothing to download');
+            const blob = new Blob([code], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = getFilename();
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function previewLocal() {
+            const code = getCode();
+            if (!code) return alert('Nothing to preview');
+            const blob = new Blob([code], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            window.open(url, '_blank');
+        }
+        
+        function clearCode() {
+            if (confirm('Clear everything?')) {
+                document.getElementById('code').value = '';
+                document.getElementById('status').textContent = '';
+            }
+        }
+        
+        async function uploadToGitHub() {
+            const token = document.getElementById('token').value.trim();
+            if (!token) return alert('Enter your GitHub token first');
+            
+            const code = getCode();
+            if (!code) return alert('Nothing to upload');
+            
+            const filename = getFilename();
+            const path = 'htmls/' + filename;
+            const repo = 'JassSidhu412/html-project';
+            const branch = 'main';
+            
+            const status = document.getElementById('status');
+            status.textContent = 'Uploading...';
+            status.className = '';
+            
+            try {
+                // Get current file to fetch SHA if it exists
+                let sha = null;
+                const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`, {
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+                });
+                
+                if (getRes.ok) {
+                    const data = await getRes.json();
+                    sha = data.sha;
+                } else if (getRes.status !== 404) {
+                    throw new Error(`Error checking file: ${getRes.status}`);
+                }
+                
+                // Upload (create or update)
+                const contentBase64 = btoa(unescape(encodeURIComponent(code))); // proper UTF-8 base64
+                const body = {
+                    message: `Upload ${filename} via editor`,
+                    content: contentBase64,
+                    branch: branch
+                };
+                if (sha) body.sha = sha;
+                
+                const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+                
+                if (!putRes.ok) {
+                    const err = await putRes.json();
+                    throw new Error(err.message || 'Upload failed');
+                }
+                
+                const rawUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
+                const previewUrl = `https://html-preview.github.io/?url=${rawUrl}`;
+                
+                status.innerHTML = `Uploaded successfully! <a href="${previewUrl}" target="_blank">Preview on html-preview.github.io</a>`;
+            } catch (e) {
+                status.textContent = 'Error: ' + e.message;
+                status.className = 'error';
+            }
+        }
+    </script>
+</body>
+</html>
