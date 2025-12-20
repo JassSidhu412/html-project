@@ -7,21 +7,48 @@
    viewBox="0 0 500 500"
    version="1.1"
    id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="kanji C.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.593"
+     inkscape:cx="165.26138"
+     inkscape:cy="344.85666"
+     inkscape:window-width="1440"
+     inkscape:window-height="837"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs1" />
   <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
      id="layer1">
     <text
        xml:space="preserve"
-       style="font-size:547.773px;font-family:Impact;-inkscape-font-specification:Impact;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a72dd1;fill-opacity:1;stroke-width:1.50001;stroke-linecap:round;stroke-miterlimit:12"
-       x="-22.816605"
-       y="447.92584"
-       id="text3"><tspan
+       style="font-size:525.415px;font-family:Impact;-inkscape-font-specification:Impact;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#a72dd1;fill-opacity:1;stroke-width:1.50001;stroke-linecap:round;stroke-miterlimit:12"
+       x="-11.68123"
+       y="444.84726"
+       id="text3"
+       inkscape:label="Kanji"><tspan
+         sodipodi:role="line"
          id="tspan3"
-         x="-22.816605"
-         y="447.92584"
+         x="-11.68123"
+         y="444.84726"
          style="stroke-width:1.50001">特</tspan></text>
   </g>
 </svg>
