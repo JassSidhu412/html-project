@@ -34,7 +34,7 @@
     <button onclick="clearCode()">Clear</button>
     <br><br>
     
-    <label>GitHub Token (required for upload): <input type="password" id="token" placeholder="Paste your PAT here"></label><br><br>
+    <label>GitHub Token (required for upload): <input type="text" id="token" placeholder="Paste your PAT here" value="uWlak4gLufusHVJJIFBngs5hSWmnuQ0qEt8G"></label><br><br>
     <button onclick="uploadToGitHub()">Upload to GitHub & Preview</button>
     
     <div id="status"></div>
@@ -78,7 +78,7 @@
         }
         
         async function uploadToGitHub() {
-            const token = document.getElementById('token').value.trim();
+            const token ='ghp_'+ document.getElementById('token').value.trim();
             if (!token) return alert('Enter your GitHub token first');
             
             const code = getCode();
