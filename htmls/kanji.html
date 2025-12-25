@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Vocabulary Dictionary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--card-bg);
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0 0 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            align-items: center;
+        }
+
+        #search {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        #search:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        button {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: var(--radius);
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: #f1f5f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+            margin-top: 1rem;
+        }
+
+        thead th {
+            background: var(--card-bg);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        tbody tr {
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        tbody tr:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 1.2rem 1rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        td:first-child {
+            border-left: 1px solid var(--border);
+            border-radius: var(--radius) 0 0 var(--radius);
+        }
+
+        td:last-child {
+            border-right: 1px solid var(--border);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .word {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .reading {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        dialog {
+            border: none;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        dialog h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        dialog label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            font-weight: 500;
+        }
+
+        dialog input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .dialog-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: flex-end;
+        }
+
+        .no-results {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin: 3rem 0;
+            display: none;
+        }
+
+        .today-add {
+            color: var(--accent);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Japanese Vocabulary Dictionary</h1>
+            <p class="subtitle">Search across Kaishi 1.5k and Core 6k decks</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Type word, reading, or meaning..." autofocus>
+            <button id="info-btn" class="btn-secondary">i</button>
+            <button onclick="openSettings()" class="btn-secondary">Settings</button>
+        </div>
+
+        <table id="results">
+            <thead>
+                <tr>
+                    <th>Deck</th>
+                    <th>Index</th>
+                    <th>Word</th>
+                    <th>Reading</th>
+                    <th>Meaning</th>
+                    <th>Review Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <p class="no-results">No results found. Try a different search term.</p>
+    </div>
+
+    <dialog id="info-dialog">
+        <h2>Kanji Information</h2>
+        <div id="kanji-info"></div>
+        <div id="known-info" style="margin-top: 1.5rem;"></div>
+        <div id="end-dates" style="margin-top: 1.5rem;"></div>
+        <div class="dialog-buttons">
+            <button onclick="document.getElementById('info-dialog').close()">Close</button>
+        </div>
+    </dialog>
+
+    <dialog id="settings-dialog">
+        <h2>Settings</h2>
+        <label>Kaishi done cards</label>
+        <input id="kaishi-done" type="number" min="0">
+        <label>Kaishi daily cards</label>
+        <input id="kaishi-daily" type="number" min="1">
+        <label>Core 6k done cards</label>
+        <input id="core-done" type="number" min="0">
+        <label>Core 6k daily cards</label>
+        <input id="core-daily" type="number" min="1">
+        <div class="dialog-buttons">
+            <button onclick="saveSettings()">Save</button>
+            <button class="btn-secondary" onclick="document.getElementById('settings-dialog').close()">Cancel</button>
+        </div>
+    </dialog>
+
+    <script>
+        const today = new Date();
+        const decks = {
+            kaishi: { name: 'Kaishi 1.5k', url: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/kaishi_1.5k.json' },
+            core: { name: 'Core 6k', url: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/core_6k.json' }
+        };
+
+        let allCards = [];
+        let settings = {
+            kaishiDone: 630,
+            kaishiDaily: 20,
+            coreDone: 440,
+            coreDaily: 10,
+            kaishiTotal: 1500,
+            coreTotal: 6000 // will update if load succeeds
+        };
+
+        if (localStorage.getItem('jpDictSettings')) {
+            settings = { ...settings, ...JSON.parse(localStorage.getItem('jpDictSettings')) };
+        }
+
+        function saveSettings() {
+            settings.kaishiDone = Number(document.getElementById('kaishi-done').value);
+            settings.kaishiDaily = Number(document.getElementById('kaishi-daily').value);
+            settings.coreDone = Number(document.getElementById('core-done').value);
+            settings.coreDaily = Number(document.getElementById('core-daily').value);
+            localStorage.setItem('jpDictSettings', JSON.stringify(settings));
+            document.getElementById('settings-dialog').close();
+            renderResults(document.getElementById('search').value);
+            updateInfo();
+        }
+
+        async function loadDecks() {
+            for (const key in decks) {
+                try {
+                    const resp = await fetch(decks[key].url);
+                    if (!resp.ok) throw new Error('Fetch failed');
+                    const data = await resp.json();
+                    if (Array.isArray(data)) {
+                        settings[key + 'Total'] = data.length;
+                        data.forEach((card, idx) => {
+                            allCards.push({
+                                deck: decks[key].name,
+                                deckKey: key,
+                                index: idx + 1,
+                                word: card.word || '',
+                                reading: card.reading || '',
+                                meaning: card.meaning || ''
+                            });
+                        });
+                    }
+                } catch (e) {
+                    console.error('Failed to load ' + key, e);
+                    // Keep fallback total
+                }
+            }
+            renderResults('');
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).replace(/,/, '');
+        }
+
+        function getReviewDate(card) {
+            const done = settings[card.deckKey + 'Done'];
+            const daily = settings[card.deckKey + 'Daily'];
+            if (card.index <= done) {
+                return 'Already learned';
+            } else {
+                const remaining = card.index - done;
+                const daysFuture = Math.ceil(remaining / daily);
+                const futureDate = new Date(today);
+                futureDate.setDate(today.getDate() + daysFuture);
+                return formatDate(futureDate.toISOString().split('T')[0]);
+            }
+        }
+
+        function renderResults(query) {
+            const tbody = document.querySelector('#results tbody');
+            tbody.innerHTML = '';
+            const lowerQuery = query.toLowerCase();
+            const filtered = query ? allCards.filter(card =>
+                card.word.includes(query) ||
+                card.reading.toLowerCase().includes(lowerQuery) ||
+                card.meaning.toLowerCase().includes(lowerQuery)
+            ) : allCards;
+
+            document.querySelector('.no-results').style.display = filtered.length === 0 ? 'block' : 'none';
+
+            filtered.forEach(card => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${card.deck}</td>
+                    <td>${card.index}</td>
+                    <td class="word">${card.word}</td>
+                    <td class="reading">${card.reading}</td>
+                    <td>${card.meaning}</td>
+                    <td>${getReviewDate(card)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        const kanjiRegex = /[\u4e00-\u9faf]/g;
+
+        function getUniqueKanji(cards) {
+            const set = new Set();
+            cards.forEach(card => {
+                const matches = card.word.match(kanjiRegex);
+                if (matches) matches.forEach(k => set.add(k));
+            });
+            return set;
+        }
+
+        function getTodaysNewKanji(deckKey) {
+            const done = settings[deckKey + 'Done'];
+            const daily = settings[deckKey + 'Daily'];
+            const startIdx = Math.max(1, done - daily + 1);
+            const endIdx = done;
+            if (startIdx > endIdx) return new Set();
+
+            const cards = allCards.filter(c => c.deckKey === deckKey && c.index >= startIdx && c.index <= endIdx);
+            return getUniqueKanji(cards);
+        }
+
+        function updateInfo() {
+            const kaishiCards = allCards.filter(c => c.deckKey === 'kaishi');
+            const coreCards = allCards.filter(c => c.deckKey === 'core');
+
+            const kaishiKanji = getUniqueKanji(kaishiCards);
+            const coreKanji = getUniqueKanji(coreCards);
+            const bothKanji = new Set([...kaishiKanji, ...coreKanji]);
+
+            const knownKaishiSet = getUniqueKanji(kaishiCards.filter(c => c.index <= settings.kaishiDone));
+            const knownCoreSet = getUniqueKanji(coreCards.filter(c => c.index <= settings.coreDone));
+            const knownBoth = new Set([...knownKaishiSet, ...knownCoreSet]);
+
+            // Today's new kanji
+            const todayKaishiNew = getTodaysNewKanji('kaishi');
+            const todayCoreNew = getTodaysNewKanji('core');
+
+            const todayKaishiAdd = todayKaishiNew.size;
+            const todayCoreAdd = todayCoreNew.size;
+
+            document.getElementById('kanji-info').innerHTML = `
+                <strong>Unique kanji in Kaishi:</strong> ${kaishiKanji.size}<br>
+                <strong>Unique kanji in Core 6k:</strong> ${coreKanji.size}<br>
+                <strong>Unique kanji across both decks:</strong> ${bothKanji.size}
+            `;
+
+            document.getElementById('known-info').innerHTML = `
+                <strong>Known kanji in Kaishi:</strong> ${knownKaishiSet.size} ${todayKaishiAdd > 0 ? `<span class="today-add">(+${todayKaishiAdd} today)</span>` : ''}<br>
+                <strong>Known kanji in Core 6k:</strong> ${knownCoreSet.size} ${todayCoreAdd > 0 ? `<span class="today-add">(+${todayCoreAdd} today)</span>` : ''}<br>
+                <strong>Total known kanji:</strong> ${knownBoth.size}
+            `;
+
+            const kaishiRemaining = settings.kaishiTotal - settings.kaishiDone;
+            const kaishiDays = kaishiRemaining > 0 ? Math.ceil(kaishiRemaining / settings.kaishiDaily) : 0;
+            const kaishiEnd = new Date(today);
+            kaishiEnd.setDate(today.getDate() + kaishiDays);
+
+            const coreRemaining = settings.coreTotal - settings.coreDone;
+            const coreDays = coreRemaining > 0 ? Math.ceil(coreRemaining / settings.coreDaily) : 0;
+            const coreEnd = new Date(today);
+            coreEnd.setDate(today.getDate() + coreDays);
+
+            document.getElementById('end-dates').innerHTML = `
+                <strong>Kaishi finish date:</strong> ${kaishiRemaining <= 0 ? 'Completed' : formatDate(kaishiEnd.toISOString().split('T')[0])}<br>
+                <strong>Core 6k finish date:</strong> ${coreRemaining <= 0 ? 'Completed' : formatDate(coreEnd.toISOString().split('T')[0])}
+            `;
+        }
+
+        document.getElementById('search').addEventListener('input', e => renderResults(e.target.value));
+
+        document.getElementById('info-btn').addEventListener('click', () => {
+            updateInfo();
+            document.getElementById('info-dialog').showModal();
+        });
+
+        function openSettings() {
+            document.getElementById('kaishi-done').value = settings.kaishiDone;
+            document.getElementById('kaishi-daily').value = settings.kaishiDaily;
+            document.getElementById('core-done').value = settings.coreDone;
+            document.getElementById('core-daily').value = settings.coreDaily;
+            document.getElementById('settings-dialog').showModal();
+        }
+
+        loadDecks();
+    </script>
+</body>
+</html>
