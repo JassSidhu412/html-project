@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser for JassSidhu412/html-project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f0f2f5, #e4e7eb);
+            color: #24292f;
+            min-height: 100vh;
+        }
+        header {
+            background: #24292f;
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .repo-link {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        .repo-link:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        #path {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #57606a;
+        }
+        nav#breadcrumb {
+            margin-bottom: 20px;
+        }
+        nav#breadcrumb a {
+            color: #0969da;
+            text-decoration: none;
+        }
+        nav#breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        nav#breadcrumb span {
+            color: #57606a;
+            margin: 0 5px;
+        }
+        button#up-button {
+            padding: 10px 15px;
+            background: #8250df;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+        button#up-button:hover {
+            background: #6f42c1;
+        }
+        ul#file-list {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            margin-bottom: 12px;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.1s;
+        }
+        li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .name a {
+            font-weight: 600;
+            color: #0969da;
+            text-decoration: none;
+        }
+        .name a:hover {
+            text-decoration: underline;
+        }
+        .folder a {
+            color: #8250df;
+        }
+        .actions button {
+            margin-left: 8px;
+            padding: 8px 12px;
+            background: #0969da;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .actions button:hover {
+            background: #0570d8;
+        }
+        .actions button i {
+            margin-right: 5px;
+        }
+        p {
+            color: #57606a;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GitHub Repository Browser</h1>
+        <p>Exploring: <a href="https://github.com/JassSidhu412/html-project" target="_blank" class="repo-link">JassSidhu412/html-project</a></p>
+    </header>
+
+    <main>
+        <div id="path">Path: /</div>
+        <nav id="breadcrumb"></nav>
+
+        <button id="up-button" style="display:none;">
+            <i class="fas fa-arrow-up"></i> Go Up One Folder
+        </button>
+
+        <p>Loading contents...</p>
+        <ul id="file-list"></ul>
+    </main>
+
+    <script>
+        const owner = 'JassSidhu412';
+        const repo = 'html-project';
+        const branch = 'main';
+
+        let currentPath = '';
+
+        const fileList = document.getElementById('file-list');
+        const pathDisplay = document.getElementById('path');
+        const breadcrumb = document.getElementById('breadcrumb');
+        const upButton = document.getElementById('up-button');
+        const loadingP = document.querySelector('p');
+
+        function getApiUrl(path) {
+            return `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+        }
+
+        function updateBreadcrumb() {
+            breadcrumb.innerHTML = '';
+            const parts = currentPath ? currentPath.split('/') : [];
+
+            const homeA = document.createElement('a');
+            homeA.textContent = repo;
+            homeA.href = '#';
+            homeA.onclick = (e) => { e.preventDefault(); loadDirectory(''); };
+            breadcrumb.appendChild(homeA);
+
+            let accumulated = '';
+            parts.forEach((part, i) => {
+                const span = document.createElement('span');
+                span.textContent = ' / ';
+                breadcrumb.appendChild(span);
+
+                accumulated += (accumulated ? '/' : '') + part;
+
+                const a = document.createElement('a');
+                a.textContent = part;
+                a.href = '#';
+                a.onclick = (e) => { e.preventDefault(); loadDirectory(accumulated); };
+                breadcrumb.appendChild(a);
+            });
+        }
+
+        function loadDirectory(path) {
+            currentPath = path;
+            pathDisplay.textContent = `Path: /${path || ''}`;
+            updateBreadcrumb();
+
+            upButton.style.display = path ? 'block' : 'none';
+
+            fileList.innerHTML = '';
+            loadingP.textContent = 'Loading contents...';
+
+            fetch(getApiUrl(path))
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load directory');
+                    return response.json();
+                })
+                .then(data => {
+                    loadingP.textContent = `${data.length} items found:`;
+
+                    data.sort((a, b) => {
+                        if (a.type === b.type) return a.name.localeCompare(b.name);
+                        return a.type === 'dir' ? -1 : 1;
+                    });
+
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+
+                        const nameDiv = document.createElement('div');
+                        nameDiv.classList.add('name');
+
+                        const link = document.createElement('a');
+                        link.textContent = item.name + (item.type === 'dir' ? '/' : '');
+                        link.href = item.html_url;
+                        link.target = '_blank';
+
+                        if (item.type === 'dir') {
+                            link.classList.add('folder');
+                            link.style.cursor = 'pointer';
+                            link.onclick = (e) => {
+                                e.preventDefault();
+                                loadDirectory((currentPath ? currentPath + '/' : '') + item.name);
+                            };
+                        }
+
+                        nameDiv.appendChild(link);
+                        nameDiv.appendChild(document.createTextNode(` (${item.type})`));
+                        li.appendChild(nameDiv);
+
+                        if (item.type === 'file') {
+                            const fullPath = currentPath ? currentPath + '/' : '';
+                            const githubUrl = `https://github.com/${owner}/${repo}/blob/${branch}/${fullPath}${item.name}`;
+                            const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${fullPath}${item.name}`;
+                            const cdnUrl = `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${branch}/${fullPath}${item.name}`;
+
+                            const actions = document.createElement('div');
+                            actions.classList.add('actions');
+
+                            // HTML preview
+                            if (item.name.toLowerCase().endsWith('.html')) {
+                                const previewBtn = document.createElement('button');
+                                previewBtn.innerHTML = '<i class="fas fa-eye"></i> Preview HTML';
+                                previewBtn.onclick = () => {
+                                    window.open(`https://htmlpreview.github.io/?${githubUrl}`, '_blank');
+                                };
+                                actions.appendChild(previewBtn);
+                            }
+
+                            // Images
+                            const imgExts = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp'];
+                            if (imgExts.some(ext => item.name.toLowerCase().endsWith(ext))) {
+                                const viewBtn = document.createElement('button');
+                                viewBtn.innerHTML = '<i class="fas fa-image"></i> View Image';
+                                viewBtn.onclick = () => {
+                                    window.open(rawUrl, '_blank');
+                                };
+                                actions.appendChild(viewBtn);
+                            }
+
+                            // JS files: only CDN copy
+                            if (item.name.endsWith('.js')) {
+                                const cdnBtn = document.createElement('button');
+                                cdnBtn.innerHTML = '<i class="fas fa-copy"></i> Copy CDN URL';
+                                cdnBtn.onclick = () => {
+                                    navigator.clipboard.writeText(cdnUrl).then(() => {
+                                        cdnBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                                        setTimeout(() => { cdnBtn.innerHTML = '<i class="fas fa-copy"></i> Copy CDN URL'; }, 2000);
+                                    });
+                                };
+                                actions.appendChild(cdnBtn);
+                            }
+
+                            // Other files: raw copy (optional, but keeping for usefulness)
+                            else if (!item.name.toLowerCase().endsWith('.html') && !imgExts.some(ext => item.name.toLowerCase().endsWith(ext))) {
+                                const rawBtn = document.createElement('button');
+                                rawBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Raw URL';
+                                rawBtn.onclick = () => {
+                                    navigator.clipboard.writeText(rawUrl).then(() => {
+                                        rawBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                                        setTimeout(() => { rawBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Raw URL'; }, 2000);
+                                    });
+                                };
+                                actions.appendChild(rawBtn);
+                            }
+
+                            li.appendChild(actions);
+                        }
+
+                        fileList.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    loadingP.textContent = 'Error: ' + error.message;
+                });
+        }
+
+        upButton.onclick = () => {
+            if (!currentPath) return;
+            const parts = currentPath.split('/');
+            parts.pop();
+            loadDirectory(parts.join('/'));
+        };
+
+        loadDirectory('');
+    </script>
+</body>
+</html>
