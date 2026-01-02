@@ -256,12 +256,14 @@
 
     <dialog id="settings-dialog">
         <h2>Settings</h2>
-        <label>Kaishi done cards</label>
-        <input id="kaishi-done" type="number" min="0">
+        <label>Base date (yyyy-mm-dd)</label>
+        <input id="base-date" type="date">
+        <label>Kaishi cards done on base date</label>
+        <input id="kaishi-base-done" type="number" min="0">
         <label>Kaishi daily cards</label>
         <input id="kaishi-daily" type="number" min="1">
-        <label>Core 6k done cards</label>
-        <input id="core-done" type="number" min="0">
+        <label>Core 6k cards done on base date</label>
+        <input id="core-base-done" type="number" min="0">
         <label>Core 6k daily cards</label>
         <input id="core-daily" type="number" min="1">
         <div class="dialog-buttons">
@@ -271,7 +273,7 @@
     </dialog>
 
     <script>
-        const today = new Date();
+        const realToday = new Date(); // Browser's current date
         const decks = {
             kaishi: { name: 'Kaishi 1.5k', url: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/kaishi_1.5k.json' },
             core: { name: 'Core 6k', url: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/core_6k.json' }
@@ -279,22 +281,40 @@
 
         let allCards = [];
         let settings = {
-            kaishiDone: 630,
+            baseDate: '2025-12-17',
+            kaishiBaseDone: 630,
             kaishiDaily: 20,
-            coreDone: 440,
+            coreBaseDone: 440,
             coreDaily: 10,
             kaishiTotal: 1500,
-            coreTotal: 6000 // will update if load succeeds
+            coreTotal: 6000
         };
 
         if (localStorage.getItem('jpDictSettings')) {
-            settings = { ...settings, ...JSON.parse(localStorage.getItem('jpDictSettings')) };
+            const loaded = JSON.parse(localStorage.getItem('jpDictSettings'));
+            settings = { ...settings, ...loaded };
+            // Convert old format if present
+            if (loaded.kaishiDone !== undefined) {
+                settings.kaishiBaseDone = loaded.kaishiDone;
+                settings.coreBaseDone = loaded.coreDone;
+                delete settings.kaishiDone;
+                delete settings.coreDone;
+            }
+        }
+
+        function getCurrentDone(deckKey) {
+            const baseDone = settings[deckKey + 'BaseDone'];
+            const daily = settings[deckKey + 'Daily'];
+            const base = new Date(settings.baseDate);
+            const daysPassed = Math.floor((realToday - base) / (1000 * 60 * 60 * 24));
+            return Math.max(baseDone + daysPassed * daily, baseDone);
         }
 
         function saveSettings() {
-            settings.kaishiDone = Number(document.getElementById('kaishi-done').value);
+            settings.baseDate = document.getElementById('base-date').value;
+            settings.kaishiBaseDone = Number(document.getElementById('kaishi-base-done').value);
             settings.kaishiDaily = Number(document.getElementById('kaishi-daily').value);
-            settings.coreDone = Number(document.getElementById('core-done').value);
+            settings.coreBaseDone = Number(document.getElementById('core-base-done').value);
             settings.coreDaily = Number(document.getElementById('core-daily').value);
             localStorage.setItem('jpDictSettings', JSON.stringify(settings));
             document.getElementById('settings-dialog').close();
@@ -306,7 +326,7 @@
             for (const key in decks) {
                 try {
                     const resp = await fetch(decks[key].url);
-                    if (!resp.ok) throw new Error('Fetch failed');
+                    if (!resp.ok) throw new Error();
                     const data = await resp.json();
                     if (Array.isArray(data)) {
                         settings[key + 'Total'] = data.length;
@@ -322,30 +342,28 @@
                         });
                     }
                 } catch (e) {
-                    console.error('Failed to load ' + key, e);
-                    // Keep fallback total
+                    console.error('Failed to load ' + key);
                 }
             }
             renderResults('');
         }
 
-        function formatDate(dateStr) {
-            if (!dateStr) return '-';
-            const d = new Date(dateStr);
-            return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).replace(/,/, '');
+        function formatDate(dateObj) {
+            if (!dateObj) return '-';
+            return dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).replace(/,/, '');
         }
 
         function getReviewDate(card) {
-            const done = settings[card.deckKey + 'Done'];
+            const currentDone = getCurrentDone(card.deckKey);
             const daily = settings[card.deckKey + 'Daily'];
-            if (card.index <= done) {
+            if (card.index <= currentDone) {
                 return 'Already learned';
             } else {
-                const remaining = card.index - done;
+                const remaining = card.index - currentDone;
                 const daysFuture = Math.ceil(remaining / daily);
-                const futureDate = new Date(today);
-                futureDate.setDate(today.getDate() + daysFuture);
-                return formatDate(futureDate.toISOString().split('T')[0]);
+                const futureDate = new Date(realToday);
+                futureDate.setDate(realToday.getDate() + daysFuture);
+                return formatDate(futureDate);
             }
         }
 
@@ -387,10 +405,10 @@
         }
 
         function getTodaysNewKanji(deckKey) {
-            const done = settings[deckKey + 'Done'];
             const daily = settings[deckKey + 'Daily'];
-            const startIdx = Math.max(1, done - daily + 1);
-            const endIdx = done;
+            const currentDone = getCurrentDone(deckKey);
+            const startIdx = Math.max(1, currentDone - daily + 1);
+            const endIdx = currentDone;
             if (startIdx > endIdx) return new Set();
 
             const cards = allCards.filter(c => c.deckKey === deckKey && c.index >= startIdx && c.index <= endIdx);
@@ -405,11 +423,13 @@
             const coreKanji = getUniqueKanji(coreCards);
             const bothKanji = new Set([...kaishiKanji, ...coreKanji]);
 
-            const knownKaishiSet = getUniqueKanji(kaishiCards.filter(c => c.index <= settings.kaishiDone));
-            const knownCoreSet = getUniqueKanji(coreCards.filter(c => c.index <= settings.coreDone));
+            const kaishiCurrentDone = getCurrentDone('kaishi');
+            const coreCurrentDone = getCurrentDone('core');
+
+            const knownKaishiSet = getUniqueKanji(kaishiCards.filter(c => c.index <= kaishiCurrentDone));
+            const knownCoreSet = getUniqueKanji(coreCards.filter(c => c.index <= coreCurrentDone));
             const knownBoth = new Set([...knownKaishiSet, ...knownCoreSet]);
 
-            // Today's new kanji
             const todayKaishiNew = getTodaysNewKanji('kaishi');
             const todayCoreNew = getTodaysNewKanji('core');
 
@@ -428,19 +448,19 @@
                 <strong>Total known kanji:</strong> ${knownBoth.size}
             `;
 
-            const kaishiRemaining = settings.kaishiTotal - settings.kaishiDone;
+            const kaishiRemaining = settings.kaishiTotal - kaishiCurrentDone;
             const kaishiDays = kaishiRemaining > 0 ? Math.ceil(kaishiRemaining / settings.kaishiDaily) : 0;
-            const kaishiEnd = new Date(today);
-            kaishiEnd.setDate(today.getDate() + kaishiDays);
+            const kaishiEnd = new Date(realToday);
+            kaishiEnd.setDate(realToday.getDate() + kaishiDays);
 
-            const coreRemaining = settings.coreTotal - settings.coreDone;
+            const coreRemaining = settings.coreTotal - coreCurrentDone;
             const coreDays = coreRemaining > 0 ? Math.ceil(coreRemaining / settings.coreDaily) : 0;
-            const coreEnd = new Date(today);
-            coreEnd.setDate(today.getDate() + coreDays);
+            const coreEnd = new Date(realToday);
+            coreEnd.setDate(realToday.getDate() + coreDays);
 
             document.getElementById('end-dates').innerHTML = `
-                <strong>Kaishi finish date:</strong> ${kaishiRemaining <= 0 ? 'Completed' : formatDate(kaishiEnd.toISOString().split('T')[0])}<br>
-                <strong>Core 6k finish date:</strong> ${coreRemaining <= 0 ? 'Completed' : formatDate(coreEnd.toISOString().split('T')[0])}
+                <strong>Kaishi finish date:</strong> ${kaishiRemaining <= 0 ? 'Completed' : formatDate(kaishiEnd)}<br>
+                <strong>Core 6k finish date:</strong> ${coreRemaining <= 0 ? 'Completed' : formatDate(coreEnd)}
             `;
         }
 
@@ -452,9 +472,10 @@
         });
 
         function openSettings() {
-            document.getElementById('kaishi-done').value = settings.kaishiDone;
+            document.getElementById('base-date').value = settings.baseDate;
+            document.getElementById('kaishi-base-done').value = settings.kaishiBaseDone;
             document.getElementById('kaishi-daily').value = settings.kaishiDaily;
-            document.getElementById('core-done').value = settings.coreDone;
+            document.getElementById('core-base-done').value = settings.coreBaseDone;
             document.getElementById('core-daily').value = settings.coreDaily;
             document.getElementById('settings-dialog').showModal();
         }
