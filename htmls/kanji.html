@@ -56,17 +56,18 @@
             gap: 1rem;
             margin: 2rem 0;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         #search {
             flex: 1;
+            min-width: 250px;
             padding: 1rem 1.5rem;
             font-size: 1.1rem;
             border: 1px solid var(--border);
             border-radius: var(--radius);
             background: var(--card-bg);
             box-shadow: var(--shadow);
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         #search:focus {
@@ -127,6 +128,7 @@
             background: var(--card-bg);
             box-shadow: var(--shadow);
             transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
         }
 
         tbody tr:hover {
@@ -185,7 +187,7 @@
             font-weight: 500;
         }
 
-        dialog input {
+        dialog input, dialog select {
             width: 100%;
             padding: 0.8rem;
             border: 1px solid var(--border);
@@ -211,6 +213,12 @@
             color: var(--accent);
             font-weight: 500;
         }
+
+        .load-status {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -223,10 +231,12 @@
 
     <div class="container">
         <div class="search-bar">
-            <input type="text" id="search" placeholder="Type word, reading, or meaning..." autofocus>
+            <input type="text" id="search" placeholder="Type to search..." autofocus>
+            <button id="load-all" class="btn-secondary">Load All</button>
             <button id="info-btn" class="btn-secondary">i</button>
             <button onclick="openSettings()" class="btn-secondary">Settings</button>
         </div>
+        <p class="load-status" id="load-status"></p>
 
         <table id="results">
             <thead>
@@ -245,8 +255,9 @@
     </div>
 
     <dialog id="info-dialog">
-        <h2>Kanji Information</h2>
-        <div id="kanji-info"></div>
+        <h2>Information</h2>
+        <div id="vocab-info"></div>
+        <div id="kanji-info" style="margin-top: 1.5rem;"></div>
         <div id="known-info" style="margin-top: 1.5rem;"></div>
         <div id="end-dates" style="margin-top: 1.5rem;"></div>
         <div class="dialog-buttons">
@@ -266,14 +277,26 @@
         <input id="core-base-done" type="number" min="0">
         <label>Core 6k daily cards</label>
         <input id="core-daily" type="number" min="1">
+        <label>Max results to show</label>
+        <input id="max-results" type="number" min="10" value="200">
         <div class="dialog-buttons">
             <button onclick="saveSettings()">Save</button>
             <button class="btn-secondary" onclick="document.getElementById('settings-dialog').close()">Cancel</button>
         </div>
     </dialog>
 
+    <dialog id="day-dialog">
+        <h2>Select Day for New Items</h2>
+        <label>Select date</label>
+        <input id="day-date" type="date">
+        <div class="dialog-buttons">
+            <button onclick="showDayCards()">Show</button>
+            <button class="btn-secondary" onclick="document.getElementById('day-dialog').close()">Cancel</button>
+        </div>
+    </dialog>
+
     <script>
-        const realToday = new Date(); // Browser's current date
+        const realToday = new Date('2026-01-07'); // Fixed as per your instruction
         const decks = {
             kaishi: { name: 'Kaishi 1.5k', url: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/kaishi_1.5k.json' },
             core: { name: 'Core 6k', url: 'https://raw.githubusercontent.com/JassSidhu412/html-project/main/core_6k.json' }
@@ -287,27 +310,13 @@
             coreBaseDone: 440,
             coreDaily: 10,
             kaishiTotal: 1500,
-            coreTotal: 6000
+            coreTotal: 6000,
+            maxResults: 200
         };
 
         if (localStorage.getItem('jpDictSettings')) {
             const loaded = JSON.parse(localStorage.getItem('jpDictSettings'));
             settings = { ...settings, ...loaded };
-            // Convert old format if present
-            if (loaded.kaishiDone !== undefined) {
-                settings.kaishiBaseDone = loaded.kaishiDone;
-                settings.coreBaseDone = loaded.coreDone;
-                delete settings.kaishiDone;
-                delete settings.coreDone;
-            }
-        }
-
-        function getCurrentDone(deckKey) {
-            const baseDone = settings[deckKey + 'BaseDone'];
-            const daily = settings[deckKey + 'Daily'];
-            const base = new Date(settings.baseDate);
-            const daysPassed = Math.floor((realToday - base) / (1000 * 60 * 60 * 24));
-            return Math.max(baseDone + daysPassed * daily, baseDone);
         }
 
         function saveSettings() {
@@ -316,13 +325,15 @@
             settings.kaishiDaily = Number(document.getElementById('kaishi-daily').value);
             settings.coreBaseDone = Number(document.getElementById('core-base-done').value);
             settings.coreDaily = Number(document.getElementById('core-daily').value);
+            settings.maxResults = Number(document.getElementById('max-results').value);
             localStorage.setItem('jpDictSettings', JSON.stringify(settings));
             document.getElementById('settings-dialog').close();
-            renderResults(document.getElementById('search').value);
-            updateInfo();
+            const query = document.getElementById('search').value.trim();
+            if (query) renderResults(query);
         }
 
         async function loadDecks() {
+            document.getElementById('load-status').textContent = 'Loading decks...';
             for (const key in decks) {
                 try {
                     const resp = await fetch(decks[key].url);
@@ -345,7 +356,8 @@
                     console.error('Failed to load ' + key);
                 }
             }
-            renderResults('');
+            document.getElementById('load-status').textContent = 'Decks loaded (' + allCards.length + ' cards total)';
+            allCards.sort((a, b) => a.deck.localeCompare(b.deck) || a.index - b.index);
         }
 
         function formatDate(dateObj) {
@@ -353,14 +365,29 @@
             return dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).replace(/,/, '');
         }
 
+        function getDaysBetween(start, end) {
+            return Math.floor((end - start) / (1000 * 60 * 60 * 24));
+        }
+
+        function getDoneOnDate(targetDate, deckKey) {
+            const base = new Date(settings.baseDate);
+            const days = getDaysBetween(base, targetDate);
+            const baseDone = settings[deckKey + 'BaseDone'];
+            const daily = settings[deckKey + 'Daily'];
+            return Math.max(baseDone + days * daily, baseDone);
+        }
+
+        function getCurrentDone(deckKey) {
+            return getDoneOnDate(realToday, deckKey);
+        }
+
         function getReviewDate(card) {
             const currentDone = getCurrentDone(card.deckKey);
-            const daily = settings[card.deckKey + 'Daily'];
             if (card.index <= currentDone) {
                 return 'Already learned';
             } else {
                 const remaining = card.index - currentDone;
-                const daysFuture = Math.ceil(remaining / daily);
+                const daysFuture = Math.ceil(remaining / settings[card.deckKey + 'Daily']);
                 const futureDate = new Date(realToday);
                 futureDate.setDate(realToday.getDate() + daysFuture);
                 return formatDate(futureDate);
@@ -371,15 +398,21 @@
             const tbody = document.querySelector('#results tbody');
             tbody.innerHTML = '';
             const lowerQuery = query.toLowerCase();
-            const filtered = query ? allCards.filter(card =>
-                card.word.includes(query) ||
-                card.reading.toLowerCase().includes(lowerQuery) ||
-                card.meaning.toLowerCase().includes(lowerQuery)
-            ) : allCards;
+            let filtered = allCards;
+
+            if (query) {
+                filtered = allCards.filter(card =>
+                    card.word.includes(query) ||
+                    card.reading.toLowerCase().includes(lowerQuery) ||
+                    card.meaning.toLowerCase().includes(lowerQuery)
+                );
+            }
 
             document.querySelector('.no-results').style.display = filtered.length === 0 ? 'block' : 'none';
 
-            filtered.forEach(card => {
+            const max = settings.maxResults;
+            const toShow = filtered.slice(0, max);
+            toShow.forEach(card => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${card.deck}</td>
@@ -389,8 +422,33 @@
                     <td>${card.meaning}</td>
                     <td>${getReviewDate(card)}</td>
                 `;
+                tr.onclick = () => speak(card.reading || card.word);
                 tbody.appendChild(tr);
             });
+
+            if (filtered.length > max) {
+                const msg = document.createElement('tr');
+                msg.innerHTML = `<td colspan="6" style="text-align:center; color:#64748b;">Showing first ${max} of ${filtered.length} results (change in Settings)</td>`;
+                tbody.appendChild(msg);
+            }
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ja-JP';
+                const voices = speechSynthesis.getVoices();
+                const nanami = voices.find(v => v.name.toLowerCase().includes('nanami') || v.name.includes('Google 日本人') || v.name.includes('Kyoko'));
+                if (nanami) utterance.voice = nanami;
+                utterance.rate = 0.9;
+                speechSynthesis.cancel();
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Load voices asynchronously
+        if ('speechSynthesis' in window) {
+            speechSynthesis.onvoiceschanged = () => {};
         }
 
         const kanjiRegex = /[\u4e00-\u9faf]/g;
@@ -404,13 +462,18 @@
             return set;
         }
 
-        function getTodaysNewKanji(deckKey) {
-            const daily = settings[deckKey + 'Daily'];
-            const currentDone = getCurrentDone(deckKey);
-            const startIdx = Math.max(1, currentDone - daily + 1);
-            const endIdx = currentDone;
-            if (startIdx > endIdx) return new Set();
+        function getUniqueVocab(cards) {
+            const set = new Set();
+            cards.forEach(card => set.add(card.word));
+            return set;
+        }
 
+        function getNewKanjiOnDate(targetDate, deckKey) {
+            const done = getDoneOnDate(targetDate, deckKey);
+            const daily = settings[deckKey + 'Daily'];
+            const startIdx = Math.max(1, done - daily + 1);
+            const endIdx = done;
+            if (startIdx > endIdx) return new Set();
             const cards = allCards.filter(c => c.deckKey === deckKey && c.index >= startIdx && c.index <= endIdx);
             return getUniqueKanji(cards);
         }
@@ -419,22 +482,36 @@
             const kaishiCards = allCards.filter(c => c.deckKey === 'kaishi');
             const coreCards = allCards.filter(c => c.deckKey === 'core');
 
-            const kaishiKanji = getUniqueKanji(kaishiCards);
-            const coreKanji = getUniqueKanji(coreCards);
-            const bothKanji = new Set([...kaishiKanji, ...coreKanji]);
+            // Vocab info
+            const allVocab = getUniqueVocab(allCards);
+            const kaishiVocab = getUniqueVocab(kaishiCards);
+            const coreVocab = getUniqueVocab(coreCards);
 
             const kaishiCurrentDone = getCurrentDone('kaishi');
             const coreCurrentDone = getCurrentDone('core');
+
+            const learnedKaishiVocab = getUniqueVocab(kaishiCards.filter(c => c.index <= kaishiCurrentDone));
+            const learnedCoreVocab = getUniqueVocab(coreCards.filter(c => c.index <= coreCurrentDone));
+            const learnedTotalVocab = new Set([...learnedKaishiVocab, ...learnedCoreVocab]);
+
+            document.getElementById('vocab-info').innerHTML = `
+                <strong>Total unique vocab across both decks:</strong> ${allVocab.size}<br>
+                <strong>Learned vocab in Kaishi:</strong> ${learnedKaishiVocab.size}<br>
+                <strong>Learned vocab in Core 6k:</strong> ${learnedCoreVocab.size}<br>
+                <strong>Total unique learned vocab:</strong> ${learnedTotalVocab.size}
+            `;
+
+            // Kanji info
+            const kaishiKanji = getUniqueKanji(kaishiCards);
+            const coreKanji = getUniqueKanji(coreCards);
+            const bothKanji = new Set([...kaishiKanji, ...coreKanji]);
 
             const knownKaishiSet = getUniqueKanji(kaishiCards.filter(c => c.index <= kaishiCurrentDone));
             const knownCoreSet = getUniqueKanji(coreCards.filter(c => c.index <= coreCurrentDone));
             const knownBoth = new Set([...knownKaishiSet, ...knownCoreSet]);
 
-            const todayKaishiNew = getTodaysNewKanji('kaishi');
-            const todayCoreNew = getTodaysNewKanji('core');
-
-            const todayKaishiAdd = todayKaishiNew.size;
-            const todayCoreAdd = todayCoreNew.size;
+            const todayKaishiNew = getNewKanjiOnDate(realToday, 'kaishi');
+            const todayCoreNew = getNewKanjiOnDate(realToday, 'core');
 
             document.getElementById('kanji-info').innerHTML = `
                 <strong>Unique kanji in Kaishi:</strong> ${kaishiKanji.size}<br>
@@ -443,11 +520,12 @@
             `;
 
             document.getElementById('known-info').innerHTML = `
-                <strong>Known kanji in Kaishi:</strong> ${knownKaishiSet.size} ${todayKaishiAdd > 0 ? `<span class="today-add">(+${todayKaishiAdd} today)</span>` : ''}<br>
-                <strong>Known kanji in Core 6k:</strong> ${knownCoreSet.size} ${todayCoreAdd > 0 ? `<span class="today-add">(+${todayCoreAdd} today)</span>` : ''}<br>
+                <strong>Known kanji in Kaishi:</strong> ${knownKaishiSet.size} ${todayKaishiNew.size > 0 ? `<span class="today-add">(+${todayKaishiNew.size} today)</span>` : ''}<br>
+                <strong>Known kanji in Core 6k:</strong> ${knownCoreSet.size} ${todayCoreNew.size > 0 ? `<span class="today-add">(+${todayCoreNew.size} today)</span>` : ''}<br>
                 <strong>Total known kanji:</strong> ${knownBoth.size}
             `;
 
+            // Finish dates
             const kaishiRemaining = settings.kaishiTotal - kaishiCurrentDone;
             const kaishiDays = kaishiRemaining > 0 ? Math.ceil(kaishiRemaining / settings.kaishiDaily) : 0;
             const kaishiEnd = new Date(realToday);
@@ -464,7 +542,61 @@
             `;
         }
 
-        document.getElementById('search').addEventListener('input', e => renderResults(e.target.value));
+        function showDayCards() {
+            const dateStr = document.getElementById('day-date').value;
+            if (!dateStr) return;
+            const targetDate = new Date(dateStr);
+            document.getElementById('day-dialog').close();
+
+            let dayCards = [];
+            ['kaishi', 'core'].forEach(key => {
+                const done = getDoneOnDate(targetDate, key);
+                const daily = settings[key + 'Daily'];
+                const start = Math.max(1, done - daily + 1);
+                const end = done;
+                const deckCards = allCards.filter(c => c.deckKey === key && c.index >= start && c.index <= end);
+                dayCards = dayCards.concat(deckCards);
+            });
+
+            if (dayCards.length === 0) {
+                alert('No new cards on that day');
+                return;
+            }
+
+            document.getElementById('search').value = ''; // clear search
+            const tbody = document.querySelector('#results tbody');
+            tbody.innerHTML = '';
+            document.querySelector('.no-results').style.display = 'none';
+
+            dayCards.forEach(card => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${card.deck} (new on ${dateStr})</td>
+                    <td>${card.index}</td>
+                    <td class="word">${card.word}</td>
+                    <td class="reading">${card.reading}</td>
+                    <td>${card.meaning}</td>
+                    <td>New</td>
+                `;
+                tr.onclick = () => speak(card.reading || card.word);
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Events
+        document.getElementById('search').addEventListener('input', e => {
+            const val = e.target.value.trim();
+            if (val) renderResults(val);
+            else {
+                document.querySelector('#results tbody').innerHTML = '';
+                document.querySelector('.no-results').style.display = 'none';
+            }
+        });
+
+        document.getElementById('load-all').addEventListener('click', () => {
+            document.getElementById('search').value = '';
+            renderResults('');
+        });
 
         document.getElementById('info-btn').addEventListener('click', () => {
             updateInfo();
@@ -477,10 +609,18 @@
             document.getElementById('kaishi-daily').value = settings.kaishiDaily;
             document.getElementById('core-base-done').value = settings.coreBaseDone;
             document.getElementById('core-daily').value = settings.coreDaily;
+            document.getElementById('max-results').value = settings.maxResults;
             document.getElementById('settings-dialog').showModal();
         }
 
-        loadDecks();
+        // Add a button for day selection - you can place it wherever
+        document.querySelector('.search-bar').insertAdjacentHTML('beforeend', '<button class="btn-secondary" onclick="document.getElementById(\'day-dialog\').showModal(); document.getElementById(\'day-date\').valueAsDate = new Date()">New Cards on Day</button>');
+
+        // Initial load
+        loadDecks().then(() => {
+            // preload voices
+            if ('speechSynthesis' in window) speechSynthesis.getVoices();
+        });
     </script>
 </body>
 </html>
