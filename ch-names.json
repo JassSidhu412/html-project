@@ -1,0 +1,631 @@
+[
+  {
+    "name": "モトイ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "ヤマト",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "うずまきナルト",
+    "kana": "うずまきナルト",
+    "series": "Naruto"
+  },
+  {
+    "name": "マイト・ガイ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "干柿鬼鮫",
+    "kana": "ほしがき キサメ",
+    "series": "Naruto"
+  },
+  {
+    "name": "キラービー",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "山城アオバ",
+    "kana": "やましろアオバ",
+    "series": "Naruto"
+  },
+  {
+    "name": "美瑠",
+    "kana": "みる",
+    "series": "Naruto"
+  },
+  {
+    "name": "鬼鮫",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "アオバ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "鮫肌",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "ビー",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "ガイ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "小南",
+    "kana": "こなん",
+    "series": "Naruto"
+  },
+  {
+    "name": "弥彦",
+    "kana": "やひこ",
+    "series": "Naruto"
+  },
+  {
+    "name": "長門",
+    "kana": "ながと",
+    "series": "Naruto"
+  },
+  {
+    "name": "自来也",
+    "kana": "じらいや",
+    "series": "Naruto"
+  },
+  {
+    "name": "ガマケン",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "ペイン",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "フカサク",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "シマ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "大ガマ仙人",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "五代目火影",
+    "kana": "ごだいめほかげ",
+    "series": "Naruto"
+  },
+  {
+    "name": "綱手",
+    "kana": "ツナデ",
+    "series": "Naruto"
+  },
+  {
+    "name": "シズネ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "リュウスイ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "ゲロ寅",
+    "kana": "とら",
+    "series": "Naruto"
+  },
+  {
+    "name": "うちはマダラ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "うちはイタチ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "うちはサスケ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "サスケ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "薬師カブト",
+    "kana": "やくしカブト",
+    "series": "Naruto"
+  },
+  {
+    "name": "白ゼツ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "黒ゼツ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "イタチ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "ナルト",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "カブト",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "ロック・リー",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "日向ネジ",
+    "kana": "ひゅうがネジ",
+    "series": "Naruto"
+  },
+  {
+    "name": "ヒナタ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "サクラ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "はたけカカシ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "カカシ",
+    "kana": "",
+    "series": "Naruto"
+  },
+  {
+    "name": "竈門炭治郎",
+    "kana": "かまど たんじろう",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "竈門禰豆子",
+    "kana": "かまど ねずこ",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "我妻善逸",
+    "kana": "あがつま ぜんいつ",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "嘴平伊之助",
+    "kana": "はしびら いのすけ",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "宇髄天元",
+    "kana": "うずい てんげん",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "まきを",
+    "kana": "",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "須磨",
+    "kana": "すま",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "雛鶴",
+    "kana": "ひなつる",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "堕姫",
+    "kana": "だき",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "妓夫太郎",
+    "kana": "ぎゅうたろう",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "煉獄杏寿郎",
+    "kana": "れんごく きょうじゅろう",
+    "series": "Kimetsu no Yaiba"
+  },
+  {
+    "name": "ゲンブ",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "パピ",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "ピイナ",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "のび太",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "ドラえもん",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "しずか",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "ジャイアン",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "スネ夫",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "ロコロコ",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "ママ",
+    "kana": "",
+    "series": "Doraemon"
+  },
+  {
+    "name": "神様",
+    "kana": "",
+    "series": "Kimi no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo"
+  },
+  {
+    "name": "愛城恋太郎",
+    "kana": "あいじょうれんたろう",
+    "series": "Kimi no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo"
+  },
+  {
+    "name": "羽香里",
+    "kana": "はかり",
+    "series": "Kimi no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo"
+  },
+  {
+    "name": "ソフィ",
+    "kana": "そふぃ",
+    "series": "Isekai One Turn Kill Nee-san"
+  },
+  {
+    "name": "軍場朝陽",
+    "kana": "くばあさひ",
+    "series": "Isekai One Turn Kill Nee-san"
+  },
+  {
+    "name": "軍場真夜",
+    "kana": "くばまや",
+    "series": "Isekai One Turn Kill Nee-san"
+  },
+  {
+    "name": "キルマリア",
+    "kana": "",
+    "series": "Isekai One Turn Kill Nee-san"
+  },
+  {
+    "name": "ターニャ",
+    "kana": "たーにゃ",
+    "series": "Isekai One Turn Kill Nee-san"
+  },
+  {
+    "name": "レイス",
+    "kana": "れいす",
+    "series": "Isekai One Turn Kill Nee-san"
+  },
+  {
+    "name": "ミッドナイト卿",
+    "kana": "みっどないときょう",
+    "series": "Isekai One Turn Kill Nee-san"
+  },
+  {
+    "name": "ノル・スタルジア",
+    "kana": "のる・すたるじあ",
+    "series": "Ore dake Haireru Kakushi Dungeon"
+  },
+  {
+    "name": "オリヴィア",
+    "kana": "おりう゛ぃあ",
+    "series": "Ore dake Haireru Kakushi Dungeon"
+  },
+  {
+    "name": "アリス",
+    "kana": "ありす",
+    "series": "Ore dake Haireru Kakushi Dungeon"
+  },
+  {
+    "name": "理事長",
+    "kana": "りじちょう",
+    "series": "Ore dake Haireru Kakushi Dungeon"
+  },
+  {
+    "name": "ルーク",
+    "kana": "",
+    "series": "Let This Grieving Soul Retire"
+  },
+  {
+    "name": "リィズ",
+    "kana": "",
+    "series": "Let This Grieving Soul Retire"
+  },
+  {
+    "name": "シトリー",
+    "kana": "",
+    "series": "Let This Grieving Soul Retire"
+  },
+  {
+    "name": "ルシア",
+    "kana": "",
+    "series": "Let This Grieving Soul Retire"
+  },
+  {
+    "name": "アンセム",
+    "kana": "",
+    "series": "Let This Grieving Soul Retire"
+  },
+  {
+    "name": "クライ",
+    "kana": "",
+    "series": "Let This Grieving Soul Retire"
+  },
+  {
+    "name": "ギルベルト",
+    "kana": "",
+    "series": "Let This Grieving Soul Retire"
+  },
+  {
+    "name": "ネメシス",
+    "kana": "ねめしす",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Nemesis"
+  },
+  {
+    "name": "リト",
+    "kana": "りと",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Rito Yuuki"
+  },
+  {
+    "name": "ヤミ",
+    "kana": "やみ",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Golden Darkness"
+  },
+  {
+    "name": "ララ",
+    "kana": "らら",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Lala Satalin Deviluke"
+  },
+  {
+    "name": "モモ",
+    "kana": "もも",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Momo Belia Deviluke"
+  },
+  {
+    "name": "ナナ",
+    "kana": "なな",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Nana Astar Deviluke"
+  },
+  {
+    "name": "メア",
+    "kana": "めあ",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Mea Kurosaki"
+  },
+  {
+    "name": "美柑",
+    "kana": "みかん",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Mikan Yuuki"
+  },
+  {
+    "name": "春菜",
+    "kana": "はるな",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Haruna Sairenji"
+  },
+  {
+    "name": "お静",
+    "kana": "おしず",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Oshizu"
+  },
+  {
+    "name": "サチ",
+    "kana": "さち",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Sachi"
+  },
+  {
+    "name": "マミ",
+    "kana": "まみ",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Mami"
+  },
+  {
+    "name": "ギド・ルシオン・デビルーク",
+    "kana": "ぎど・るしおん・でびるーく",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Gid Lucion Deviluke"
+  },
+  {
+    "name": "セリーヌ",
+    "kana": "せりーぬ",
+    "series": "To LOVE-Ru Darkness",
+    "eng": "Celine"
+  },
+  {
+    "name": "アルフレッド",
+    "kana": "",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Alfred Urnea Ernes Belfast"
+  },
+  {
+    "name": "冬夜",
+    "kana": "とうや",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Touya Mochizuki"
+  },
+  {
+    "name": "ユミナ",
+    "kana": "",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Yumina Urnea Belfast"
+  },
+  {
+    "name": "エルゼ",
+    "kana": "",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Elze Silhoueska"
+  },
+  {
+    "name": "リーン",
+    "kana": "",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Leen"
+  },
+  {
+    "name": "八重",
+    "kana": "やえ",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Yae Kokonoe"
+  },
+  {
+    "name": "スゥシィ",
+    "kana": "",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Sushie Urnea Ortlinde"
+  },
+  {
+    "name": "琥珀",
+    "kana": "",
+    "series": "Isekai wa Smartphone to Tomo ni.",
+    "eng": "Kohaku"
+  },
+  {
+    "name": "恋",
+    "kana": "れん",
+    "series": "Mato Seihei no Slave",
+    "eng": "Ren Yamashiro"
+  },
+  {
+    "name": "優希",
+    "kana": "ゆうき",
+    "series": "Mato Seihei no Slave",
+    "eng": "Yuuki Wakura"
+  },
+  {
+    "name": "京香",
+    "kana": "きょうか",
+    "series": "Mato Seihei no Slave",
+    "eng": "Kyouka Uzen"
+  },
+  {
+    "name": "天花",
+    "kana": "てんか",
+    "series": "Mato Seihei no Slave",
+    "eng": "Tenka Izumo"
+  },
+  {
+    "name": "銀奈",
+    "kana": "ぎんな",
+    "series": "Mato Seihei no Slave",
+    "eng": "Ginna Bizen"
+  },
+  {
+    "name": "朱々",
+    "kana": "しゅしゅ",
+    "series": "Mato Seihei no Slave",
+    "eng": "Shushu Suruga"
+  },
+  {
+    "name": "寧",
+    "kana": "ねい",
+    "series": "Mato Seihei no Slave",
+    "eng": "Nei Ookawamura"
+  },
+  {
+    "name": "日万凛",
+    "kana": "ひまり",
+    "series": "Mato Seihei no Slave",
+    "eng": "Himari Azuma"
+  },
+  {
+    "name": "サハラ",
+    "kana": "",
+    "series": "Mato Seihei no Slave",
+    "eng": "Sahara Wakasa"
+  },
+  {
+    "name": "八千穂",
+    "kana": "やちほ",
+    "series": "Mato Seihei no Slave",
+    "eng": "Yachiho Azuma"
+  },
+  {
+    "name": "夜雲",
+    "kana": "やくも",
+    "series": "Mato Seihei no Slave",
+    "eng": "Yakumo Ezo"
+  },
+  {
+    "name": "恋",
+    "kana": "れん",
+    "series": "Mato Seihei no Slave",
+    "eng": "Ren Yamashiro"
+  }
+]
