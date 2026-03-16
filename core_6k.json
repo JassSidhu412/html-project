@@ -40,7 +40,8 @@
     "reading": "よっつ"
   },
   {
-    "word": "四 (× yon)",
+    "word": "四",
+    "hint": "× yon",
     "meaning": "four",
     "reading": "し"
   },
@@ -50,7 +51,8 @@
     "reading": "これ"
   },
   {
-    "word": "四 (×し)",
+    "word": "四",
+    "hint": "×し",
     "meaning": "four",
     "reading": "よん"
   },
@@ -75,7 +77,8 @@
     "reading": "ろく"
   },
   {
-    "word": "七 (×しち)",
+    "word": "七",
+    "hint": "×しち",
     "meaning": "seven",
     "reading": "なな"
   },
@@ -130,12 +133,14 @@
     "reading": "まん"
   },
   {
-    "word": "円 (× currency)",
+    "word": "円",
+    "hint": "× currency",
     "meaning": "circle",
     "reading": "えん"
   },
   {
-    "word": "円 (× circle)",
+    "word": "円",
+    "hint": "× circle",
     "meaning": "yen",
     "reading": "えん"
   },
@@ -2100,7 +2105,8 @@
     "reading": "せんげつ"
   },
   {
-    "word": "やる ( x do)",
+    "word": "やる",
+    "hint": "x do",
     "meaning": "give (to an inferior)",
     "reading": "やる"
   },
@@ -2135,12 +2141,14 @@
     "reading": "おこなう"
   },
   {
-    "word": "行き ( x ゆ )",
+    "word": "行き",
+    "hint": "x ゆ",
     "meaning": "going",
     "reading": "いき"
   },
   {
-    "word": "行き ( x い )",
+    "word": "行き",
+    "hint": "x い",
     "meaning": "going",
     "reading": "ゆき"
   },
@@ -2195,7 +2203,8 @@
     "reading": "おおく"
   },
   {
-    "word": "上がる (x get stage fright)",
+    "word": "上がる",
+    "hint": "x get stage fright",
     "meaning": "go up, rise",
     "reading": "あがる"
   },
@@ -2440,12 +2449,14 @@
     "reading": "まいにち"
   },
   {
-    "word": "毎年 (x nen)",
+    "word": "毎年",
+    "hint": "x nen",
     "meaning": "every year",
     "reading": "まいとし"
   },
   {
-    "word": "毎年 (x toshi)",
+    "word": "毎年",
+    "hint": "x toshi",
     "meaning": "every year",
     "reading": "まいねん"
   },
