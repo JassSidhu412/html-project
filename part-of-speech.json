@@ -1,0 +1,232 @@
+[
+  {
+    "jap": "サ変接続",
+    "eng": "SA-variable verb stem / suru-verb connecting form",
+    "notes": "Used for noun + suru verbs in conjunctive forms"
+  },
+  {
+    "jap": "ナイ形容詞語幹",
+    "eng": "Negative i-adjective stem",
+    "notes": "Stem before negative auxiliary -nai (e.g. 高くな-)"
+  },
+  {
+    "jap": "フィラー",
+    "eng": "Filler",
+    "notes": "Conversational fillers like あの〜, えっと, まあ"
+  },
+  {
+    "jap": "一般",
+    "eng": "General / common",
+    "notes": "Default / most frequent subcategory for many POS"
+  },
+  {
+    "jap": "並立助詞",
+    "eng": "Parallel / listing particle",
+    "notes": "と、や、とか、に (in enumeration)"
+  },
+  {
+    "jap": "人名",
+    "eng": "Personal name",
+    "notes": "Given names and full personal names"
+  },
+  {
+    "jap": "代名詞",
+    "eng": "Pronoun",
+    "notes": ""
+  },
+  {
+    "jap": "係助詞",
+    "eng": "Binding / kakari particle",
+    "notes": "は、も、こそ、しか、さえ、だって etc."
+  },
+  {
+    "jap": "副助詞",
+    "eng": "Adverbial particle",
+    "notes": "くらい、ほど、だけ、ばかり、など、も (degree/quantity)"
+  },
+  {
+    "jap": "副詞",
+    "eng": "Adverb",
+    "notes": ""
+  },
+  {
+    "jap": "副詞可能",
+    "eng": "Adverbial noun",
+    "notes": "Nouns that can function adverbially (e.g. 全部, 少し)"
+  },
+  {
+    "jap": "助動詞",
+    "eng": "Auxiliary verb",
+    "notes": ""
+  },
+  {
+    "jap": "助数詞",
+    "eng": "Counter / numeral classifier",
+    "notes": "e.g. 個、本、枚、回"
+  },
+  {
+    "jap": "助詞",
+    "eng": "Particle",
+    "notes": "General particle category"
+  },
+  {
+    "jap": "助詞類接続",
+    "eng": "Particle-like connecting form",
+    "notes": "Forms that behave like particles in connection"
+  },
+  {
+    "jap": "動詞",
+    "eng": "Verb",
+    "notes": "Main verb POS (when no subcategory)"
+  },
+  {
+    "jap": "動詞接続",
+    "eng": "Verb conjunctive / connecting form",
+    "notes": "Ren'yōkei used in compounds"
+  },
+  {
+    "jap": "動詞非自立的",
+    "eng": "Non-independent verb",
+    "notes": "Dependent verbs / auxiliaries"
+  },
+  {
+    "jap": "名",
+    "eng": "Name",
+    "notes": "Short subcategory sometimes used for names"
+  },
+  {
+    "jap": "名詞",
+    "eng": "Noun",
+    "notes": "Main noun POS"
+  },
+  {
+    "jap": "名詞接続",
+    "eng": "Noun connecting form",
+    "notes": "For noun compounds / prefixes/suffixes"
+  },
+  {
+    "jap": "固有名詞",
+    "eng": "Proper noun",
+    "notes": ""
+  },
+  {
+    "jap": "国",
+    "eng": "Country name",
+    "notes": "Subcategory of proper noun"
+  },
+  {
+    "jap": "地域",
+    "eng": "Region / place name",
+    "notes": "Subcategory of proper noun"
+  },
+  {
+    "jap": "姓",
+    "eng": "Family name / surname",
+    "notes": ""
+  },
+  {
+    "jap": "引用",
+    "eng": "Quotation / citation",
+    "notes": "Strings used in quotations"
+  },
+  {
+    "jap": "形容動詞語幹",
+    "eng": "Na-adjective stem",
+    "notes": "Stem of adjectival nouns (形容動詞)"
+  },
+  {
+    "jap": "形容詞",
+    "eng": "i-Adjective",
+    "notes": "True adjective (高い、きれい)"
+  },
+  {
+    "jap": "形容詞接続",
+    "eng": "Adjective conjunctive form",
+    "notes": "Ren'yōkei of i-adjectives"
+  },
+  {
+    "jap": "感動詞",
+    "eng": "Interjection",
+    "notes": ""
+  },
+  {
+    "jap": "接尾",
+    "eng": "Suffix",
+    "notes": "General suffix (often under 名詞)"
+  },
+  {
+    "jap": "接続助詞",
+    "eng": "Conjunctive particle",
+    "notes": "て、で、ば、たら、ながら、と etc."
+  },
+  {
+    "jap": "接続詞",
+    "eng": "Conjunction",
+    "notes": ""
+  },
+  {
+    "jap": "接続詞的",
+    "eng": "Conjunction-like",
+    "notes": "Behaves like conjunction"
+  },
+  {
+    "jap": "接頭詞",
+    "eng": "Prefix",
+    "notes": "General prefix (often under 名詞)"
+  },
+  {
+    "jap": "数",
+    "eng": "Numeral",
+    "notes": "Numbers (一、二、三…)"
+  },
+  {
+    "jap": "数接続",
+    "eng": "Numeral connecting form",
+    "notes": "For numbers in compounds"
+  },
+  {
+    "jap": "格助詞",
+    "eng": "Case particle",
+    "notes": "が、を、に、へ、と、で、から、より etc."
+  },
+  {
+    "jap": "特殊",
+    "eng": "Special",
+    "notes": "Special forms of verbs, auxiliaries, particles"
+  },
+  {
+    "jap": "終助詞",
+    "eng": "Sentence-final particle",
+    "notes": "よ、ね、わ、ぜ、ぞ、な、かしら"
+  },
+  {
+    "jap": "組織",
+    "eng": "Organization name",
+    "notes": "Subcategory of proper noun"
+  },
+  {
+    "jap": "縮約",
+    "eng": "Contraction",
+    "notes": "Contracted forms like じゃ、んで、てる"
+  },
+  {
+    "jap": "自立",
+    "eng": "Independent",
+    "notes": "Content word (自立語)"
+  },
+  {
+    "jap": "連体詞",
+    "eng": "Adnominal / prenominal adjective",
+    "notes": "この、その、どんな、ある、いかなる etc."
+  },
+  {
+    "jap": "連語",
+    "eng": "Compound phrase / collocation",
+    "notes": "Idiomatic multi-word expressions"
+  },
+  {
+    "jap": "非自立",
+    "eng": "Non-independent / dependent",
+    "notes": "Function word / 付属語"
+  }
+]
