@@ -1,0 +1,2891 @@
+[
+  {
+    "Strokes": 1,
+    "Radical": "⼀",
+    "Position": "",
+    "Meaning": "one, horizontal stroke",
+    "Reading": "いち",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 1,
+    "Radical": "⼁",
+    "Position": "",
+    "Meaning": "vertical stroke",
+    "Reading": "たてぼう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 1,
+    "Radical": "⼂",
+    "Position": "",
+    "Meaning": "dot",
+    "Reading": "てん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 1,
+    "Radical": "⼃",
+    "Position": "",
+    "Meaning": "diagonal sweeping stroke",
+    "Reading": "の",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 1,
+    "Radical": "",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "diagonal sweeping stroke",
+    "Reading": "のかんむり",
+    "Notes": "a variant of ⼃（の）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 1,
+    "Radical": "⼄",
+    "Position": "",
+    "Meaning": "the second",
+    "Reading": "おつ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 1,
+    "Radical": "⺃",
+    "Position": "",
+    "Meaning": "the second",
+    "Reading": "おつ",
+    "Notes": "a variant of ⼄（おつ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 1,
+    "Radical": "⼅",
+    "Position": "",
+    "Meaning": "vertical stroke with a hook",
+    "Reading": "はねぼう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼆",
+    "Position": "",
+    "Meaning": "two",
+    "Reading": "に",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼇",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "lid, top",
+    "Reading": "なべぶた",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼈",
+    "Position": "",
+    "Meaning": "person",
+    "Reading": "ひと",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⺅",
+    "Position": "へん Radical on the left",
+    "Meaning": "person",
+    "Reading": "にんべん",
+    "Notes": "a variant of ⼈（ひと）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 2,
+    "Radical": "𠆢",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "person",
+    "Reading": "ひとやね",
+    "Notes": "a variant of ⼈（ひと）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼉",
+    "Position": "あし Radical on the bottom",
+    "Meaning": "human legs",
+    "Reading": "ひとあし",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼊",
+    "Position": "",
+    "Meaning": "to enter",
+    "Reading": "いる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼋",
+    "Position": "",
+    "Meaning": "eight",
+    "Reading": "はち",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "",
+    "Position": "",
+    "Meaning": "eight",
+    "Reading": "はちがしら",
+    "Notes": "a variant of ⼋（はち）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼌",
+    "Position": "けいがまえ Radical which encloses the kanji",
+    "Meaning": "to enclose",
+    "Reading": "けいがまえ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼍",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "cover, crown",
+    "Reading": "わかんむり",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼎",
+    "Position": "へん Radical on the left",
+    "Meaning": "ice",
+    "Reading": "にすい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼏",
+    "Position": "つくり Radical on the right",
+    "Meaning": "table",
+    "Reading": "きにょう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⺇",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "wind",
+    "Reading": "かぜかんむり",
+    "Notes": "a variant of ⼏（きにょう）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼐",
+    "Position": "にょう Radical which wraps around the bottom",
+    "Meaning": "container, open box",
+    "Reading": "かんにょう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼑",
+    "Position": "",
+    "Meaning": "knife, sword",
+    "Reading": "かたな",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⺉",
+    "Position": "つくり Radical on the right",
+    "Meaning": "knife, sword",
+    "Reading": "りっとう",
+    "Notes": "a variant of ⼑（かたな）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼒",
+    "Position": "",
+    "Meaning": "power",
+    "Reading": "ちから",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼓",
+    "Position": "つつみがまえ Radical which encloses the kanji",
+    "Meaning": "to wrap",
+    "Reading": "つつみがまえ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼔",
+    "Position": "つくり Radical on the right",
+    "Meaning": "spoon",
+    "Reading": "さじ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼕",
+    "Position": "はこがまえ Radical which encloses the kanji",
+    "Meaning": "box",
+    "Reading": "はこがまえ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼖",
+    "Position": "はこがまえ Radical which encloses the kanji",
+    "Meaning": "to conceal, hide",
+    "Reading": "かくしがまえ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼗",
+    "Position": "",
+    "Meaning": "ten",
+    "Reading": "じゅう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼘",
+    "Position": "",
+    "Meaning": "oracle",
+    "Reading": "ぼく",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼙",
+    "Position": "つくり Radical on the right",
+    "Meaning": "stamp, seal",
+    "Reading": "ふしづくり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼚",
+    "Position": "たれ Radical which ‘hangs down’",
+    "Meaning": "cliff",
+    "Reading": "がんだれ",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼛",
+    "Position": "",
+    "Meaning": "private, Katakana Mu",
+    "Reading": "む",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 2,
+    "Radical": "⼜",
+    "Position": "",
+    "Meaning": "again, right hand",
+    "Reading": "また",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼝",
+    "Position": "",
+    "Meaning": "mouth",
+    "Reading": "くち",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "mouth",
+    "Reading": "くちへん",
+    "Notes": "a variant of ⼝（くち）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼞",
+    "Position": "くにがまえ Radical which encloses the kanji",
+    "Meaning": "border, territorial boundaries",
+    "Reading": "くにがまえ",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼟",
+    "Position": "",
+    "Meaning": "earth",
+    "Reading": "つち",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "earth",
+    "Reading": "つちへん",
+    "Notes": "a variant of ⼟（つち）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼠",
+    "Position": "",
+    "Meaning": "man, scholar, samurai",
+    "Reading": "さむらい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "man, scholar, samurai",
+    "Reading": "さむらいかんむり",
+    "Notes": "a variant of ⼠（さむらい）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼡",
+    "Position": "",
+    "Meaning": "to follow",
+    "Reading": "のまた",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼢",
+    "Position": "あし Radical on the bottom",
+    "Meaning": "to go slowly",
+    "Reading": "なつあし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼣",
+    "Position": "",
+    "Meaning": "evening",
+    "Reading": "ゆうべ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼤",
+    "Position": "",
+    "Meaning": "large, big",
+    "Reading": "だい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼥",
+    "Position": "",
+    "Meaning": "woman",
+    "Reading": "おんな",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "woman",
+    "Reading": "おんなへん",
+    "Notes": "a variant of ⼥（おんな）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼦",
+    "Position": "",
+    "Meaning": "child, son",
+    "Reading": "こ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "child, son",
+    "Reading": "こへん",
+    "Notes": "a variant of ⼦（こ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼧",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "roof, house",
+    "Reading": "うかんむり",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼨",
+    "Position": "",
+    "Meaning": "inch, (2.25 cm)",
+    "Reading": "すん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "つくり Radical on the right",
+    "Meaning": "inch, (2.25 cm)",
+    "Reading": "すんづくり",
+    "Notes": "a variant of ⼨（すん）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼩",
+    "Position": "",
+    "Meaning": "small",
+    "Reading": "しょう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺌",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "small",
+    "Reading": "しょうかんむり",
+    "Notes": "a variant of ⼩（しょう）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺐",
+    "Position": "つくり Radical on the right",
+    "Meaning": "lame leg",
+    "Reading": "だいのまげあし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼫",
+    "Position": "たれ Radical which ‘hangs down’",
+    "Meaning": "corpse, awning",
+    "Reading": "しかばね",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼬",
+    "Position": "",
+    "Meaning": "sprout",
+    "Reading": "くさのめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼭",
+    "Position": "",
+    "Meaning": "mountain",
+    "Reading": "やま",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "mountain",
+    "Reading": "やまへん",
+    "Notes": "a variant of ⼭（やま）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "mountain",
+    "Reading": "やまかんむり",
+    "Notes": "a variant of ⼭（やま）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼮",
+    "Position": "",
+    "Meaning": "winding river",
+    "Reading": "まがりがわ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "川",
+    "Position": "",
+    "Meaning": "river",
+    "Reading": "さんぼんがわ",
+    "Notes": "a variant of ⼮（まがりがわ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼯",
+    "Position": "",
+    "Meaning": "work, carpenter, skill",
+    "Reading": "たくみ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "work, carpenter, skill",
+    "Reading": "たくみへん",
+    "Notes": "a variant of ⼯（たくみ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼰",
+    "Position": "",
+    "Meaning": "self",
+    "Reading": "おのれ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼱",
+    "Position": "",
+    "Meaning": "cloth",
+    "Reading": "はば",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "cloth",
+    "Reading": "はばへん",
+    "Notes": "a variant of ⼱（はば）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼲",
+    "Position": "",
+    "Meaning": "to dry, shield",
+    "Reading": "かん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺓",
+    "Position": "",
+    "Meaning": "young, slight",
+    "Reading": "いとがしら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼴",
+    "Position": "たれ Radical which ‘hangs down’",
+    "Meaning": "slanting roof",
+    "Reading": "まだれ",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼵",
+    "Position": "にょう Radical which wraps around the bottom",
+    "Meaning": "to move, stretch",
+    "Reading": "えんにょう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼶",
+    "Position": "あし Radical on the bottom",
+    "Meaning": "folded hands",
+    "Reading": "にじゅうあし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼷",
+    "Position": "",
+    "Meaning": "javelin",
+    "Reading": "いぐるみ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼸",
+    "Position": "",
+    "Meaning": "bow （in archery）",
+    "Reading": "ゆみ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "bow （in archery）",
+    "Reading": "ゆみへん",
+    "Notes": "a variant of ⼸（ゆみ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼹",
+    "Position": "",
+    "Meaning": "pig’s head",
+    "Reading": "けいがしら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺕",
+    "Position": "",
+    "Meaning": "pig’s head",
+    "Reading": "けいがしら",
+    "Notes": "a variant of ⼹（けいがしら）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺔",
+    "Position": "",
+    "Meaning": "pig’s head",
+    "Reading": "けいがしら",
+    "Notes": "a variant of ⼹（けいがしら）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼺",
+    "Position": "つくり Radical on the right",
+    "Meaning": "hair-style, light rays",
+    "Reading": "さんづくり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⼻",
+    "Position": "へん Radical on the left",
+    "Meaning": "step, stride, street, to go",
+    "Reading": "ぎょうにんべん",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺾",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "grass",
+    "Reading": "くさかんむり",
+    "Notes": "a variant of ⾋（くさ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⻌",
+    "Position": "にょう Radical which wraps around the bottom",
+    "Meaning": "road, walk, to advance",
+    "Reading": "しんにょう",
+    "Notes": "a variant of ⾡（しんにょう）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⻏",
+    "Position": "つくり Radical on the right",
+    "Meaning": "village, country, city",
+    "Reading": "おおざと",
+    "Notes": "a variant of ⾢（むら）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⻖",
+    "Position": "へん Radical on the left",
+    "Meaning": "hill, mound",
+    "Reading": "こざとへん",
+    "Notes": "a variant of ⾩（こざと）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺍",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "Katakana Tsu",
+    "Reading": "つ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺖",
+    "Position": "へん Radical on the left",
+    "Meaning": "heart, mind, spirit",
+    "Reading": "りっしんべん",
+    "Notes": "a variant of ⼼（こころ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺘",
+    "Position": "へん Radical on the left",
+    "Meaning": "hand",
+    "Reading": "てへん",
+    "Notes": "a variant of ⼿（て）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺡",
+    "Position": "へん Radical on the left",
+    "Meaning": "water",
+    "Reading": "さんずい",
+    "Notes": "a variant of ⽔（みず）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 3,
+    "Radical": "⺨",
+    "Position": "へん Radical on the left",
+    "Meaning": "beast",
+    "Reading": "けものへん",
+    "Notes": "a variant of ⽝（いぬ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⼼",
+    "Position": "",
+    "Meaning": "heart, mind, spirit",
+    "Reading": "こころ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⺗",
+    "Position": "あし Radical on the bottom",
+    "Meaning": "heart, mind, spirit",
+    "Reading": "したごころ",
+    "Notes": "a variant of ⼼（こころ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⼽",
+    "Position": "",
+    "Meaning": "spear, weapon",
+    "Reading": "ほこ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⼾",
+    "Position": "",
+    "Meaning": "door",
+    "Reading": "と",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "たれ Radical which ‘hangs down’",
+    "Meaning": "door",
+    "Reading": "とだれ",
+    "Notes": "a variant of ⼾（と）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⼿",
+    "Position": "",
+    "Meaning": "hand",
+    "Reading": "て",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽀",
+    "Position": "",
+    "Meaning": "branch",
+    "Reading": "しにょう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽁",
+    "Position": "つくり Radical on the right",
+    "Meaning": "activity, to strike, hit",
+    "Reading": "ぼくづくり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⺙",
+    "Position": "つくり Radical on the right",
+    "Meaning": "activity, to strike, hit",
+    "Reading": "ぼくづくり",
+    "Notes": "a variant of ⽁（ぼくづくり）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽂",
+    "Position": "",
+    "Meaning": "literature, letters",
+    "Reading": "ぶん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽃",
+    "Position": "つくり Radical on the right",
+    "Meaning": "big dipper, ladle, 18 liters",
+    "Reading": "ますづくり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽄",
+    "Position": "つくり Radical on the right",
+    "Meaning": "axe",
+    "Reading": "おのづくり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽅",
+    "Position": "",
+    "Meaning": "direction, flag",
+    "Reading": "ほう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "direction, flag",
+    "Reading": "ほうへん",
+    "Notes": "a variant of ⽅（ほう）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽆",
+    "Position": "",
+    "Meaning": "not",
+    "Reading": "むにょう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽇",
+    "Position": "",
+    "Meaning": "sun, day, time",
+    "Reading": "ひ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "sun, day, time",
+    "Reading": "ひへん",
+    "Notes": "a variant of ⽇（ひ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽈",
+    "Position": "",
+    "Meaning": "to say",
+    "Reading": "ひらび",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽉",
+    "Position": "",
+    "Meaning": "moon, month, period",
+    "Reading": "つき",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⺝",
+    "Position": "へん Radical on the left",
+    "Meaning": "moon, month, period",
+    "Reading": "つきへん",
+    "Notes": "a variant of ⽉（つき）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "",
+    "Meaning": "meat, flesh",
+    "Reading": "にくづき",
+    "Notes": "a variant of ⾁（にく）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽊",
+    "Position": "",
+    "Meaning": "tree, wood",
+    "Reading": "き",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "tree, wood",
+    "Reading": "きへん",
+    "Notes": "a variant of ⽊（き）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽋",
+    "Position": "",
+    "Meaning": "to lack, yawn",
+    "Reading": "あくび",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽌",
+    "Position": "",
+    "Meaning": "to stop",
+    "Reading": "とめる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽍",
+    "Position": "",
+    "Meaning": "death & dying, to decompose",
+    "Reading": "がつ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "death & dying, to decompose",
+    "Reading": "がつへん",
+    "Notes": "a variant of ⽍（がつ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽎",
+    "Position": "つくり Radical on the right",
+    "Meaning": "lance shaft, action",
+    "Reading": "るまた",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽏",
+    "Position": "",
+    "Meaning": "not, mother",
+    "Reading": "なかれ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽐",
+    "Position": "",
+    "Meaning": "to compare",
+    "Reading": "くらべる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽑",
+    "Position": "",
+    "Meaning": "hair",
+    "Reading": "け",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽒",
+    "Position": "",
+    "Meaning": "family, clan",
+    "Reading": "うじ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽓",
+    "Position": "きがまえ Radical which encloses the kanji",
+    "Meaning": "steam, air",
+    "Reading": "きがまえ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽔",
+    "Position": "",
+    "Meaning": "water",
+    "Reading": "みず",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽕",
+    "Position": "",
+    "Meaning": "fire",
+    "Reading": "ひ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "fire",
+    "Reading": "ひへん",
+    "Notes": "a variant of ⽕（ひ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⺣",
+    "Position": "あし Radical on the bottom",
+    "Meaning": "fire",
+    "Reading": "れっか",
+    "Notes": "a variant of ⽕（ひ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽖",
+    "Position": "",
+    "Meaning": "claw, nail",
+    "Reading": "つめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⺤",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "claw, nail",
+    "Reading": "つめかんむり",
+    "Notes": "a variant of ⽖（つめ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "爫",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "claw, nail",
+    "Reading": "つめかんむり",
+    "Notes": "a variant of ⽖（つめ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽗",
+    "Position": "",
+    "Meaning": "father",
+    "Reading": "ちち",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽘",
+    "Position": "",
+    "Meaning": "to mix",
+    "Reading": "こう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽙",
+    "Position": "へん Radical on the left",
+    "Meaning": "split wood",
+    "Reading": "しょうへん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽚",
+    "Position": "",
+    "Meaning": "split wood",
+    "Reading": "かた",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "split wood",
+    "Reading": "かたへん",
+    "Notes": "a variant of ⽚（かた）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "",
+    "Meaning": "fang, canine tooth",
+    "Reading": "きば",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽜",
+    "Position": "",
+    "Meaning": "cow",
+    "Reading": "うし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "cow",
+    "Reading": "うしへん",
+    "Notes": "a variant of ⽜（うし）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⽝",
+    "Position": "",
+    "Meaning": "dog",
+    "Reading": "いぬ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "jewelry, jeweled king",
+    "Reading": "おうへん",
+    "Notes": "a variant of ⽟（たま）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⺭",
+    "Position": "へん Radical on the left",
+    "Meaning": "altar, festival, religious service",
+    "Reading": "しめすへん",
+    "Notes": "a variant of ⽰（しめす）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 4,
+    "Radical": "㓁",
+    "Position": "",
+    "Meaning": "net",
+    "Reading": "あみがしら",
+    "Notes": "a variant of ⽹（あみ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 4,
+    "Radical": "⺹",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "old, old-age",
+    "Reading": "おいかんむり",
+    "Notes": "a variant of ⽼（おいかんむり）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽞",
+    "Position": "",
+    "Meaning": "darkness",
+    "Reading": "げん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽟",
+    "Position": "",
+    "Meaning": "jewelry",
+    "Reading": "たま",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "",
+    "Meaning": "melon",
+    "Reading": "うり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽡",
+    "Position": "",
+    "Meaning": "tile",
+    "Reading": "かわら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽢",
+    "Position": "",
+    "Meaning": "sweet",
+    "Reading": "あまい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽣",
+    "Position": "",
+    "Meaning": "birth, to be born, live",
+    "Reading": "うまれる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽤",
+    "Position": "",
+    "Meaning": "to use",
+    "Reading": "もちいる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽥",
+    "Position": "",
+    "Meaning": "rice paddy",
+    "Reading": "た",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "rice paddy",
+    "Reading": "たへん",
+    "Notes": "a variant of ⽥（た）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽦",
+    "Position": "",
+    "Meaning": "bolt of cloth",
+    "Reading": "ひき",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⺪",
+    "Position": "へん Radical on the left",
+    "Meaning": "bolt of cloth",
+    "Reading": "ひきへん",
+    "Notes": "a variant of ⽦（ひき）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽧",
+    "Position": "たれ Radical which ‘hangs down’",
+    "Meaning": "sickness",
+    "Reading": "やまいだれ",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽨",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "outspread legs, departure",
+    "Reading": "はつがしら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽩",
+    "Position": "",
+    "Meaning": "white",
+    "Reading": "しろ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "white",
+    "Reading": "はくへん",
+    "Notes": "a variant of ⽩（しろ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽪",
+    "Position": "",
+    "Meaning": "skin, hide",
+    "Reading": "けがわ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽫",
+    "Position": "",
+    "Meaning": "plate, bowl",
+    "Reading": "さら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽬",
+    "Position": "",
+    "Meaning": "eye",
+    "Reading": "め",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "eye",
+    "Reading": "めへん",
+    "Notes": "a variant of ⽬（め）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "eye",
+    "Reading": "よこめ",
+    "Notes": "a variant of ⽬（め）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽭",
+    "Position": "",
+    "Meaning": "halberd",
+    "Reading": "ほこ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "halberd",
+    "Reading": "ほこへん",
+    "Notes": "a variant of ⽭（ほこ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽮",
+    "Position": "",
+    "Meaning": "arrow",
+    "Reading": "や",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "arrow",
+    "Reading": "やへん",
+    "Notes": "a variant of ⽮（や）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽯",
+    "Position": "",
+    "Meaning": "stone",
+    "Reading": "いし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "stone",
+    "Reading": "いしへん",
+    "Notes": "a variant of ⽯（いし）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽰",
+    "Position": "",
+    "Meaning": "altar, festival, religious service",
+    "Reading": "しめす",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽱",
+    "Position": "",
+    "Meaning": "footprint",
+    "Reading": "じゅうのあし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽲",
+    "Position": "へん Radical on the left",
+    "Meaning": "grain",
+    "Reading": "のぎへん",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽳",
+    "Position": "",
+    "Meaning": "hole, cave",
+    "Reading": "あな",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "hole, cave",
+    "Reading": "あなかんむり",
+    "Notes": "a variant of ⽳（あな）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⽴",
+    "Position": "",
+    "Meaning": "to stand",
+    "Reading": "たつ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "to stand",
+    "Reading": "たつへん",
+    "Notes": "a variant of ⽴（たつ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "",
+    "Meaning": "fang, canine tooth",
+    "Reading": "きば",
+    "Notes": "a variant of （きば）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "fang, canine tooth",
+    "Reading": "きばへん",
+    "Notes": "a variant of ⽛（きば）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "氺",
+    "Position": "",
+    "Meaning": "water",
+    "Reading": "したみず",
+    "Notes": "a variant of ⽔（みず）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⺫",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "net",
+    "Reading": "あみがしら",
+    "Notes": "a variant of ⽹（あみ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "𦉰",
+    "Position": "",
+    "Meaning": "net",
+    "Reading": "あみがしら",
+    "Notes": "a variant of ⽹（あみ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⻂",
+    "Position": "へん Radical on the left",
+    "Meaning": "clothing",
+    "Reading": "ころもへん",
+    "Notes": "a variant of ⾐（ころも）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 5,
+    "Radical": "⺛",
+    "Position": "",
+    "Meaning": "not",
+    "Reading": "むにょう",
+    "Notes": "a variant of ⽆（むにょう）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽵",
+    "Position": "",
+    "Meaning": "bamboo",
+    "Reading": "たけ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⺮",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "bamboo",
+    "Reading": "たけかんむり",
+    "Notes": "a variant of ⽵（たけ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽶",
+    "Position": "",
+    "Meaning": "rice",
+    "Reading": "こめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "rice",
+    "Reading": "こめへん",
+    "Notes": "a variant of ⽶（こめ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽷",
+    "Position": "",
+    "Meaning": "thread",
+    "Reading": "いと",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "thread",
+    "Reading": "いとへん",
+    "Notes": "a variant of ⽷（いと）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽸",
+    "Position": "",
+    "Meaning": "earthen jar",
+    "Reading": "みずがめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽹",
+    "Position": "",
+    "Meaning": "net",
+    "Reading": "あみめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽺",
+    "Position": "",
+    "Meaning": "sheep",
+    "Reading": "ひつじ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⺷",
+    "Position": "",
+    "Meaning": "sheep",
+    "Reading": "ひつじ",
+    "Notes": "a variant of ⽺（ひつじ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "羽",
+    "Position": "",
+    "Meaning": "feather, wing",
+    "Reading": "はね",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽻",
+    "Position": "",
+    "Meaning": "feather, wing",
+    "Reading": "はね",
+    "Notes": "a variant of 羽（はね）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽼",
+    "Position": "",
+    "Meaning": "old, old-age",
+    "Reading": "おいかんむり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽽",
+    "Position": "",
+    "Meaning": "and also",
+    "Reading": "しこうして",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽾",
+    "Position": "へん Radical on the left",
+    "Meaning": "plow",
+    "Reading": "らいすき",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽿",
+    "Position": "",
+    "Meaning": "ear",
+    "Reading": "みみ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "ear",
+    "Reading": "みみへん",
+    "Notes": "a variant of ⽿（みみ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾀",
+    "Position": "",
+    "Meaning": "writing brush",
+    "Reading": "ふでづくり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾁",
+    "Position": "",
+    "Meaning": "flesh, meat",
+    "Reading": "にく",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾂",
+    "Position": "",
+    "Meaning": "retainer, minister",
+    "Reading": "しん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾃",
+    "Position": "",
+    "Meaning": "self",
+    "Reading": "みずから",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾄",
+    "Position": "",
+    "Meaning": "to arrive, reach",
+    "Reading": "いたる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "to arrive, reach",
+    "Reading": "いたるへん",
+    "Notes": "a variant of ⾄（いたる）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾅",
+    "Position": "",
+    "Meaning": "mortar, quern",
+    "Reading": "うす",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾆",
+    "Position": "",
+    "Meaning": "tongue",
+    "Reading": "した",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾇",
+    "Position": "",
+    "Meaning": "contrary, to err",
+    "Reading": "まいあし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾈",
+    "Position": "",
+    "Meaning": "ship, boat",
+    "Reading": "ふね",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "ship, boat",
+    "Reading": "ふねへん",
+    "Notes": "a variant of ⾈（ふね）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾉",
+    "Position": "",
+    "Meaning": "boundary",
+    "Reading": "こん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾊",
+    "Position": "",
+    "Meaning": "color",
+    "Reading": "いろ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾋",
+    "Position": "",
+    "Meaning": "grass, plant",
+    "Reading": "くさ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾌",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "tiger",
+    "Reading": "とらがしら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾍",
+    "Position": "",
+    "Meaning": "worm, insect, bug",
+    "Reading": "むし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "worm, insect, bug",
+    "Reading": "むしへん",
+    "Notes": "a variant of ⾍（むし）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾎",
+    "Position": "",
+    "Meaning": "blood",
+    "Reading": "ち",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾏",
+    "Position": "ぎょうがまえ Radical which encloses the kanji",
+    "Meaning": "to go",
+    "Reading": "ぎょうがまえ",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾐",
+    "Position": "",
+    "Meaning": "clothing",
+    "Reading": "ころも",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⾑",
+    "Position": "",
+    "Meaning": "cover, west",
+    "Reading": "にし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⻃",
+    "Position": "",
+    "Meaning": "cover, west",
+    "Reading": "にし",
+    "Notes": "a variant of ⾑（にし）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 6,
+    "Radical": "⽠",
+    "Position": "",
+    "Meaning": "melon",
+    "Reading": "うり",
+    "Notes": "a variant of ⽠（うり）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾒",
+    "Position": "",
+    "Meaning": "to see",
+    "Reading": "みる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾓",
+    "Position": "",
+    "Meaning": "horn, corner",
+    "Reading": "つの",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "horn, corner",
+    "Reading": "つのへん",
+    "Notes": "a variant of ⾓（つの）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾔",
+    "Position": "",
+    "Meaning": "words, to speak, say",
+    "Reading": "げん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "words, to speak, say",
+    "Reading": "ごんべん",
+    "Notes": "a variant of ⾔（げん）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾕",
+    "Position": "",
+    "Meaning": "valley",
+    "Reading": "たに",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "valley",
+    "Reading": "たにへん",
+    "Notes": "a variant of ⾕（たに）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾖",
+    "Position": "",
+    "Meaning": "bean",
+    "Reading": "まめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "bean",
+    "Reading": "まめへん",
+    "Notes": "a variant of ⾖（まめ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾗",
+    "Position": "",
+    "Meaning": "pig",
+    "Reading": "いのこ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾘",
+    "Position": "へん Radical on the left",
+    "Meaning": "badger",
+    "Reading": "むじなへん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾙",
+    "Position": "",
+    "Meaning": "shell, property, wealth",
+    "Reading": "かい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "shell, property, wealth",
+    "Reading": "かいへん",
+    "Notes": "a variant of ⾙（かい）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾚",
+    "Position": "",
+    "Meaning": "red",
+    "Reading": "あか",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾛",
+    "Position": "",
+    "Meaning": "to run",
+    "Reading": "はしる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "にょう Radical which wraps around the bottom",
+    "Meaning": "to run",
+    "Reading": "そうにょう",
+    "Notes": "a variant of ⾛（はしる）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾜",
+    "Position": "",
+    "Meaning": "foot, leg",
+    "Reading": "あし",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⻊",
+    "Position": "へん Radical on the left",
+    "Meaning": "foot, leg",
+    "Reading": "あしへん",
+    "Notes": "a variant of ⾜（あし）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾝",
+    "Position": "",
+    "Meaning": "body",
+    "Reading": "み",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "body",
+    "Reading": "みへん",
+    "Notes": "a variant of ⾝（み）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾞",
+    "Position": "",
+    "Meaning": "vehicle, wheel, car",
+    "Reading": "くるま",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "vehicle, wheel, car",
+    "Reading": "くるまへん",
+    "Notes": "a variant of ⾞（くるま）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾟",
+    "Position": "",
+    "Meaning": "bitter",
+    "Reading": "からい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾠",
+    "Position": "",
+    "Meaning": "Fifth zodiac sign, 7–9 A.M.",
+    "Reading": "しんのたつ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾡",
+    "Position": "",
+    "Meaning": "to advance, move ahead",
+    "Reading": "しんにょう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾢",
+    "Position": "",
+    "Meaning": "community",
+    "Reading": "むら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾣",
+    "Position": "",
+    "Meaning": "sake jar, bird",
+    "Reading": "ひよみのとり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "sake jar, bird",
+    "Reading": "とりへん",
+    "Notes": "a variant of ⾣（ひよみのとり）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾤",
+    "Position": "",
+    "Meaning": "to separate",
+    "Reading": "のごめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "to separate",
+    "Reading": "のごめへん",
+    "Notes": "a variant of ⾤（のごめ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾥",
+    "Position": "",
+    "Meaning": "village, (3.93 km)",
+    "Reading": "さと",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "village, (3.93 km)",
+    "Reading": "さとへん",
+    "Notes": "a variant of ⾥（さと）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⾂",
+    "Position": "",
+    "Meaning": "retainer, minister",
+    "Reading": "しん",
+    "Notes": "a variant of ⾂（しん）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "",
+    "Position": "",
+    "Meaning": "contrary, to err",
+    "Reading": "まいあし",
+    "Notes": "a variant of ⾇（まいあし）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 7,
+    "Radical": "⻨",
+    "Position": "",
+    "Meaning": "wheat",
+    "Reading": "むぎ",
+    "Notes": "a variant of ⿆（むぎ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾦",
+    "Position": "",
+    "Meaning": "metal, gold, mineral",
+    "Reading": "かね",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "metal, gold, mineral",
+    "Reading": "かねへん",
+    "Notes": "a variant of ⾦（かね）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⻑",
+    "Position": "",
+    "Meaning": "long",
+    "Reading": "ながい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾨",
+    "Position": "もんがまえ Radical which encloses the kanji",
+    "Meaning": "gate, door",
+    "Reading": "もんがまえ",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾩",
+    "Position": "",
+    "Meaning": "hill",
+    "Reading": "こざと",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾪",
+    "Position": "つくり Radical on the right",
+    "Meaning": "to capture",
+    "Reading": "れいづくり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾫",
+    "Position": "",
+    "Meaning": "small bird",
+    "Reading": "ふるとり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾬",
+    "Position": "",
+    "Meaning": "rain",
+    "Reading": "あめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⻗",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "rain",
+    "Reading": "あめかんむり",
+    "Notes": "a variant of ⾬（あめ）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾭",
+    "Position": "",
+    "Meaning": "blue, green",
+    "Reading": "あお",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⻘",
+    "Position": "",
+    "Meaning": "blue, green",
+    "Reading": "あお",
+    "Notes": "a variant of ⾭（あお）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⾮",
+    "Position": "",
+    "Meaning": "wrong, non-",
+    "Reading": "あらず",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⻟",
+    "Position": "へん Radical on the left",
+    "Meaning": "food, to eat",
+    "Reading": "しょくへん",
+    "Notes": "a variant of ⾷（しょく）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 8,
+    "Radical": "⻫",
+    "Position": "",
+    "Meaning": "alike",
+    "Reading": "せい",
+    "Notes": "a variant of ⿑（せい）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾯",
+    "Position": "",
+    "Meaning": "face, surface",
+    "Reading": "めん",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾰",
+    "Position": "",
+    "Meaning": "leather",
+    "Reading": "つくりがわ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "",
+    "Position": "",
+    "Meaning": "leather",
+    "Reading": "なめしがわ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾲",
+    "Position": "",
+    "Meaning": "leek",
+    "Reading": "にら",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾳",
+    "Position": "",
+    "Meaning": "sound, noise",
+    "Reading": "おと",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾴",
+    "Position": "つくり Radical on the right",
+    "Meaning": "head, page",
+    "Reading": "おおがい",
+    "Notes": "",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾵",
+    "Position": "",
+    "Meaning": "wind",
+    "Reading": "かぜ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾶",
+    "Position": "",
+    "Meaning": "to fly",
+    "Reading": "とぶ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾷",
+    "Position": "",
+    "Meaning": "food, to eat",
+    "Reading": "しょく",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾸",
+    "Position": "",
+    "Meaning": "head",
+    "Reading": "くび",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 9,
+    "Radical": "⾹",
+    "Position": "",
+    "Meaning": "scent",
+    "Reading": "かおり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⾺",
+    "Position": "",
+    "Meaning": "horse",
+    "Reading": "うま",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "horse",
+    "Reading": "うまへん",
+    "Notes": "a variant of ⾺（うま）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⾻",
+    "Position": "",
+    "Meaning": "bone",
+    "Reading": "ほね",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "bone",
+    "Reading": "ほねへん",
+    "Notes": "a variant of ⾻（ほね）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⾼",
+    "Position": "",
+    "Meaning": "high",
+    "Reading": "たかい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⾽",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "long hair",
+    "Reading": "かみかんむり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⾾",
+    "Position": "もんがまえ Radical which encloses the kanji",
+    "Meaning": "fighting",
+    "Reading": "たたかいがまえ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⾿",
+    "Position": "",
+    "Meaning": "herbs",
+    "Reading": "においざけ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⿀",
+    "Position": "",
+    "Meaning": "tripod",
+    "Reading": "れき",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⿁",
+    "Position": "",
+    "Meaning": "demon",
+    "Reading": "おに",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 10,
+    "Radical": "⾱",
+    "Position": "",
+    "Meaning": "leather",
+    "Reading": "なめしがわ",
+    "Notes": "a variant of （なめしがわ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⿂",
+    "Position": "",
+    "Meaning": "fish",
+    "Reading": "うお",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "",
+    "Position": "へん Radical on the left",
+    "Meaning": "fish",
+    "Reading": "うおへん",
+    "Notes": "a variant of ⿂（うお）",
+    "Importance": "Important"
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⿃",
+    "Position": "",
+    "Meaning": "bird",
+    "Reading": "とり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⿄",
+    "Position": "",
+    "Meaning": "salt",
+    "Reading": "しお",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⿅",
+    "Position": "",
+    "Meaning": "deer",
+    "Reading": "しか",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⿆",
+    "Position": "",
+    "Meaning": "wheat",
+    "Reading": "むぎ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⿇",
+    "Position": "",
+    "Meaning": "hemp",
+    "Reading": "あさ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "",
+    "Position": "かんむり Radical on the top",
+    "Meaning": "hemp",
+    "Reading": "あさかんむり",
+    "Notes": "a variant of ⿇（あさ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⻩",
+    "Position": "",
+    "Meaning": "yellow",
+    "Reading": "き",
+    "Notes": "a variant of ⿈（き）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "黒",
+    "Position": "",
+    "Meaning": "black",
+    "Reading": "くろ",
+    "Notes": "a variant of ⿊（くろ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 11,
+    "Radical": "⻲",
+    "Position": "",
+    "Meaning": "turtle",
+    "Reading": "かめ",
+    "Notes": "a variant of ⿔（かめ）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 12,
+    "Radical": "⿈",
+    "Position": "",
+    "Meaning": "yellow",
+    "Reading": "き",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 12,
+    "Radical": "⿉",
+    "Position": "",
+    "Meaning": "millet",
+    "Reading": "きび",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 12,
+    "Radical": "⿊",
+    "Position": "",
+    "Meaning": "black",
+    "Reading": "くろ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 12,
+    "Radical": "⿋",
+    "Position": "",
+    "Meaning": "embroider",
+    "Reading": "ぬいとり",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 12,
+    "Radical": "⻭",
+    "Position": "",
+    "Meaning": "tooth",
+    "Reading": "は",
+    "Notes": "a variant of ⿒（は）",
+    "Importance": ""
+  },
+  {
+    "Strokes": 13,
+    "Radical": "⿌",
+    "Position": "",
+    "Meaning": "frog",
+    "Reading": "かえる",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 13,
+    "Radical": "⿍",
+    "Position": "",
+    "Meaning": "tripod",
+    "Reading": "かなえ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 13,
+    "Radical": "⿎",
+    "Position": "",
+    "Meaning": "drum",
+    "Reading": "つづみ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 13,
+    "Radical": "⿏",
+    "Position": "",
+    "Meaning": "rat, mouse",
+    "Reading": "ねずみ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 14,
+    "Radical": "⿐",
+    "Position": "",
+    "Meaning": "nose",
+    "Reading": "はな",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 14,
+    "Radical": "⿑",
+    "Position": "",
+    "Meaning": "alike",
+    "Reading": "せい",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 15,
+    "Radical": "⿒",
+    "Position": "",
+    "Meaning": "tooth",
+    "Reading": "は",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 16,
+    "Radical": "⿓",
+    "Position": "",
+    "Meaning": "dragon",
+    "Reading": "りゅう",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 16,
+    "Radical": "⿔",
+    "Position": "",
+    "Meaning": "turtle",
+    "Reading": "かめ",
+    "Notes": "",
+    "Importance": ""
+  },
+  {
+    "Strokes": 17,
+    "Radical": "⿕",
+    "Position": "",
+    "Meaning": "flute",
+    "Reading": "やく",
+    "Notes": "",
+    "Importance": ""
+  }
+]
